@@ -1,5 +1,10 @@
 "use strict";
 
+if("scrollRestoration" in history)history.scrollRestoration="manual";
+if(location.hash)history.replaceState(null,"",`${location.pathname}${location.search}`);
+scrollTo(0,0);
+addEventListener("pageshow",()=>scrollTo(0,0));
+
 const siteFeatures = Object.freeze({
   showreel:{enabled:false,items:[]},events:{enabled:false,items:[]},impact:{enabled:false,items:[]},
   testimonials:{enabled:false,items:[]},partners:{enabled:false,items:[]}
