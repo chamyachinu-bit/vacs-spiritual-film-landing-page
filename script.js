@@ -44,7 +44,7 @@ function showTrustee(index,shouldScroll=false){
   detail.innerHTML=`<div class="trustee-detail-copy"><p class="eyebrow">Trustee profile</p><p class="trustee-count">${String(activeTrustee+1).padStart(2,"0")} <span>/ ${String(trustees.length).padStart(2,"0")}</span></p><h3>${person.name}</h3><p class="trustee-role">${person.role}</p><p>${person.profile}</p>${person.quote?`<blockquote>“${person.quote}”</blockquote>`:""}</div><div class="trustee-controls"><button type="button" data-direction="-1" aria-label="Previous trustee">←</button><button type="button" data-direction="1" aria-label="Next trustee">→</button></div>`;
   detail.classList.add("profile-enter");
   detail.querySelectorAll("[data-direction]").forEach(button=>button.addEventListener("click",()=>{showTrustee(activeTrustee+Number(button.dataset.direction));restartTrusteeSlideshow()}));
-  if(shouldScroll)detail.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"center"});
+  if(shouldScroll&&matchMedia("(max-width: 900px)").matches)detail.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"center"});
 }
 function restartTrusteeSlideshow(){clearInterval(trusteeTimer);if(!matchMedia("(prefers-reduced-motion: reduce)").matches)trusteeTimer=setInterval(()=>showTrustee(activeTrustee+1),6500)}
 showTrustee(0);restartTrusteeSlideshow();
