@@ -84,5 +84,11 @@ blockquote{font-family:"Cormorant Garamond",var(--serif);font-weight:500}
 .trustee-showcase .trustee-detail h3{font-size:clamp(2.65rem,4.6vw,4.7rem)}
 .trustee-showcase .trustee-detail blockquote{font-size:1.12rem}
 @media(max-width:900px){.trustee-showcase{grid-template-columns:1fr;gap:30px}.trustee-showcase .trustee-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.trustee-showcase .trustee-card:last-child:nth-child(odd){grid-column:auto;width:100%}.trustee-showcase .trustee-detail{position:relative;top:auto;min-height:480px}}
-@media(max-width:640px){.trustee-showcase .trustee-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.trustee-showcase .trustee-card:last-child:nth-child(odd){grid-column:1/-1;width:calc(50% - 7px)}.trustee-showcase .trustee-detail{min-height:520px}}
-@media(max-width:390px){.trustee-showcase .trustee-grid{grid-template-columns:1fr}.trustee-showcase .trustee-card:last-child:nth-child(odd){grid-column:auto;width:100%}}
+@media(max-width:640px){
+  .trustee-showcase{gap:22px}
+  .trustee-showcase .trustee-grid{display:flex;gap:14px;margin-inline:-16px;padding:6px 16px 18px;overflow-x:auto;overscroll-behavior-inline:contain;scroll-snap-type:x mandatory;scrollbar-width:none}
+  .trustee-showcase .trustee-grid::-webkit-scrollbar{display:none}
+  .trustee-showcase .trustee-card,.trustee-showcase .trustee-card:last-child:nth-child(odd){flex:0 0 min(72vw,280px);width:auto;scroll-snap-align:center}
+  .trustee-showcase .trustee-detail{min-height:520px;border-radius:0 72px 0 0}
+  .trustee-showcase .trustee-detail h3{font-size:clamp(2.35rem,11vw,3.25rem)}
+}

@@ -40,6 +40,8 @@ function showTrustee(index,shouldScroll=false){
   activeTrustee=(index+trustees.length)%trustees.length;
   const person=trustees[activeTrustee];
   trusteeGrid.querySelectorAll("button").forEach((item,itemIndex)=>{item.classList.toggle("active",itemIndex===activeTrustee);item.setAttribute("aria-current",itemIndex===activeTrustee?"true":"false")});
+  const activePortrait=trusteeGrid.querySelector('[aria-current="true"]');
+  if(activePortrait&&matchMedia("(max-width: 640px)").matches)trusteeGrid.scrollTo({left:activePortrait.offsetLeft-(trusteeGrid.clientWidth-activePortrait.offsetWidth)/2,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
   detail.classList.remove("profile-enter");void detail.offsetWidth;
   detail.innerHTML=`<div class="trustee-detail-copy"><p class="eyebrow">Trustee profile</p><p class="trustee-count">${String(activeTrustee+1).padStart(2,"0")} <span>/ ${String(trustees.length).padStart(2,"0")}</span></p><h3>${person.name}</h3><p class="trustee-role">${person.role}</p><p>${person.profile}</p>${person.quote?`<blockquote>“${person.quote}”</blockquote>`:""}</div><div class="trustee-controls"><button type="button" data-direction="-1" aria-label="Previous trustee">←</button><button type="button" data-direction="1" aria-label="Next trustee">→</button></div>`;
   detail.classList.add("profile-enter");
