@@ -94,6 +94,33 @@ blockquote{font-family:"Cormorant Garamond",var(--serif);font-weight:500}
   .trustee-showcase .trustee-detail h3{font-size:clamp(2.35rem,11vw,3.25rem)}
 }
 
+/* Image-led trustee balance: larger ribbon, compact supporting biography. */
+.trustee-showcase .trustee-grid{height:455px;margin-inline:-48px}
+.trustee-showcase .trustee-card,.trustee-showcase .trustee-card:last-child:nth-child(odd){top:4px;width:clamp(170px,18vw,225px);height:350px}
+.trustee-showcase .trustee-photo,.trustee-showcase .trustee-card.active:after{border-radius:28px!important}
+.trustee-showcase .trustee-card{border-radius:28px}
+.trustee-showcase .trustee-detail{width:min(940px,100%);margin-top:-18px;padding:30px 42px 76px;text-align:left}
+.trustee-showcase .trustee-detail-copy{display:grid;grid-template-columns:minmax(210px,.7fr) minmax(0,1.3fr);gap:clamp(28px,5vw,68px);align-items:start;max-width:none}
+.trustee-showcase .trustee-detail h3{font-size:clamp(2rem,3.2vw,3rem)}
+.trustee-showcase .trustee-detail p{font-size:.88rem;line-height:1.65}
+.trustee-showcase .trustee-detail .trustee-role{margin-bottom:0}
+.trustee-biography>p{margin-bottom:0}
+.trustee-biography details{margin-top:14px;border-top:1px solid rgba(255,248,241,.16);padding-top:11px}
+.trustee-biography summary{width:max-content;color:var(--gold);cursor:pointer;font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.trustee-biography blockquote{margin:14px 0 0;padding:10px 0 0 18px;font-size:1rem}
+@media(max-width:900px){.trustee-showcase .trustee-grid{height:400px;margin-inline:-28px}.trustee-showcase .trustee-card,.trustee-showcase .trustee-card:last-child:nth-child(odd){width:175px;height:300px}.trustee-showcase .trustee-detail{margin-top:-10px}.trustee-showcase .trustee-detail-copy{grid-template-columns:minmax(190px,.7fr) minmax(0,1.3fr)}}
+@media(max-width:640px){
+  .trustee-showcase .trustee-grid{height:345px;margin-inline:-16px}
+  .trustee-showcase .trustee-card,.trustee-showcase .trustee-card:last-child:nth-child(odd){top:2px;width:152px;height:270px}
+  .trustee-showcase .trustee-photo,.trustee-showcase .trustee-card.active:after{border-radius:22px!important}
+  .trustee-showcase .trustee-card{border-radius:22px}
+  .trustee-showcase .trustee-detail{margin-top:-8px;padding:27px 22px 80px}
+  .trustee-showcase .trustee-detail-copy{display:block}
+  .trustee-showcase .trustee-detail h3{font-size:2.35rem}
+  .trustee-showcase .trustee-detail .trustee-role{margin-bottom:18px}
+  .trustee-showcase .trustee-detail p{font-size:.86rem;line-height:1.6}
+}
+
 /* Member placeholders: intentionally neutral until approved portraits and names arrive. */
 .members{background-image:linear-gradient(rgba(255,248,241,.88),rgba(255,248,241,.88)),url("assets/extracted/paper-texture.webp");background-size:auto,1000px auto;background-blend-mode:normal,multiply}
 .member-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(18px,2.5vw,30px)}

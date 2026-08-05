@@ -17,5 +17,6 @@ Reference: user-supplied curved portrait ribbon screenshot.
 - P1 issues: none.
 - P2 issues: none.
 - P3 follow-up: subtle perspective strength may be tuned later if desired.
+- Latest responsive pass: larger portrait share, rounded card containers, and single-sentence default biographies verified on mobile.
 
 Final result: passed.
