@@ -21,3 +21,5 @@ The supplied VACS Brand Guidelines PDF is the visual authority.
 Playfair Display is used for editorial headings, Inter for body/interface text, and Noto Serif Devanagari for bilingual values. The official full logo with tagline is primary. Logo artwork must not be recolored, rotated, stretched, shadowed or placed on visually noisy backgrounds.
 
 Motion is restrained: 140-240ms for controls, approximately 680ms for one-time scroll reveals, and slower transform-only movement for the hero atmosphere. Reduced-motion users receive static layouts and short opacity feedback.
+
+The page-load opening is the sole cinematic exception. It uses the official logo, supplied lotus linework and paper texture for a ceremonial three-second entrance, followed by a split-curtain reveal. It is silent, skippable and reduced to a sub-300ms fade for visitors who request reduced motion. Do not add another competing entrance animation, autoplay sound or video loader.

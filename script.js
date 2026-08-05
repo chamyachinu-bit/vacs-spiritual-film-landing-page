@@ -1,5 +1,27 @@
 "use strict";
 
+const siteFeatures = Object.freeze({
+  showreel:{enabled:false,items:[]},events:{enabled:false,items:[]},impact:{enabled:false,items:[]},
+  testimonials:{enabled:false,items:[]},partners:{enabled:false,items:[]}
+});
+
+const opening=document.querySelector("#cinematic-opening"),openingEnter=document.querySelector("#opening-enter");
+let openingTimer,openingFailSafe,openingClosed=false;
+function closeOpening(){
+  if(openingClosed||!opening)return;
+  openingClosed=true;clearTimeout(openingTimer);clearTimeout(openingFailSafe);
+  opening.classList.add("is-leaving");document.body.classList.remove("opening-active");opening.setAttribute("aria-hidden","true");
+  const finish=event=>{if(event&&!event.target.classList.contains("opening-curtain"))return;opening.hidden=true;opening.removeEventListener("transitionend",finish);document.querySelector(".hero")?.classList.add("opening-complete")};
+  opening.addEventListener("transitionend",finish);setTimeout(finish,1500);
+}
+if(opening){
+  document.body.classList.add("opening-active");requestAnimationFrame(()=>opening.classList.add("is-ready"));
+  openingEnter.addEventListener("click",closeOpening);opening.addEventListener("keydown",event=>{if(event.key==="Escape"){event.preventDefault();closeOpening()}});
+  openingTimer=setTimeout(closeOpening,3000);openingFailSafe=setTimeout(closeOpening,6000);
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches){clearTimeout(openingTimer);openingTimer=setTimeout(closeOpening,260)}
+  openingEnter.focus({preventScroll:true});
+}
+
 const offerings = [
   {name:"Arohan Class",icon:"spiritual-growth.png",text:"Ease mental stress and emotional turmoil while gaining deeper clarity about life and its purpose. Guided self-reflection and self-study strengthen the inner self, build resilience and expand awareness."},
   {name:"Heartful Listening",icon:"guidance-support.png",text:"A confidential, judgement-free space where trained listeners receive your expression. Speaking openly helps declutter the mind, restore clarity and release emotional baggage."},
@@ -47,6 +69,7 @@ function showTrustee(index,shouldScroll=false){
   detail.querySelector("img").src+="?pdf=2";
   detail.classList.add("profile-enter");
   detail.querySelectorAll("[data-direction]").forEach(button=>button.addEventListener("click",()=>{showTrustee(activeTrustee+Number(button.dataset.direction));restartTrusteeSlideshow()}));
+  if(matchMedia("(max-width: 640px)").matches)trusteeGrid.querySelector(".active")?.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"nearest",inline:"center"});
   if(shouldScroll&&matchMedia("(max-width: 900px)").matches)detail.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"center"});
 }
 function restartTrusteeSlideshow(){clearInterval(trusteeTimer);if(!matchMedia("(prefers-reduced-motion: reduce)").matches)trusteeTimer=setInterval(()=>showTrustee(activeTrustee+1),6500)}
@@ -65,8 +88,9 @@ const sections=[...document.querySelectorAll("main section[id]")],navAnchors=[..
 const activeObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){navAnchors.forEach(link=>link.classList.toggle("active",link.hash===`#${entry.target.id}`))}}),{rootMargin:"-30% 0px -62%"});sections.forEach(section=>activeObserver.observe(section));
 
 let ticking=false;
-function paintScroll(){const max=document.documentElement.scrollHeight-innerHeight;document.querySelector("#scroll-progress").style.width=`${max?scrollY/max*100:0}%`;if(!matchMedia("(prefers-reduced-motion: reduce)").matches&&innerWidth>800){document.querySelectorAll(".parallax").forEach(item=>item.style.transform=`translate3d(0,${scrollY*Number(item.dataset.rate)}px,0)`)}ticking=false}
+function paintScroll(){const max=document.documentElement.scrollHeight-innerHeight;document.querySelector("#scroll-progress").style.width=`${max?scrollY/max*100:0}%`;document.querySelector(".site-header")?.classList.toggle("is-scrolled",scrollY>24);if(!matchMedia("(prefers-reduced-motion: reduce)").matches&&innerWidth>800){document.querySelectorAll(".parallax").forEach(item=>item.style.transform=`translate3d(0,${scrollY*Number(item.dataset.rate)}px,0)`)}ticking=false}
 addEventListener("scroll",()=>{if(!ticking){requestAnimationFrame(paintScroll);ticking=true}},{passive:true});paintScroll();
+document.addEventListener("visibilitychange",()=>{document.body.classList.toggle("page-hidden",document.hidden);if(document.hidden)clearInterval(trusteeTimer);else restartTrusteeSlideshow()});
 
 const dialog=document.querySelector("#intent-dialog"),form=document.querySelector("#intent-form"),intentFields=document.querySelector("#intent-fields"),closeDialog=document.querySelector(".dialog-close");let lastTrigger=null;
 document.querySelectorAll(".form-trigger").forEach(trigger=>trigger.addEventListener("click",()=>openForm(trigger.dataset.intent,trigger)));

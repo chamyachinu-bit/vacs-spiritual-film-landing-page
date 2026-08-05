@@ -31,4 +31,8 @@ window.VACS_FORM_CONFIG = Object.freeze({
 });
 ```
 
+## Activating future sections
+
+The showreel, events, impact, testimonials and partner structures remain inside a hidden container in `index.html`. Approved content should first be added to the corresponding entry in `siteFeatures` in `script.js`; only then should the feature be enabled and rendered. Never use provisional statistics, attributed quotations or partner marks in production.
+
 The Apps Script endpoint must accept browser form-data POST requests and return a successful 2xx response with appropriate CORS behaviour. Keep `enabled: false` until that endpoint has been tested.

@@ -22,3 +22,11 @@ Open `http://localhost:8080`. Opening `index.html` directly also works, but a lo
 - `legacy/` - notes about the preserved Claude Design exports
 
 The site has no runtime packages or framework dependency.
+
+## Cinematic opening
+
+Every full page load begins with a silent, approximately three-second brand entrance. Visitors can choose **Enter** immediately; Escape also continues to the site. The sequence has a six-second fail-safe and becomes a short opacity fade when reduced motion is requested.
+
+## Future programming
+
+Showreel, events, impact, testimonials and partner areas are intentionally hidden until approved content exists. Their feature flags and empty data arrays are centralized in `siteFeatures` at the top of `script.js`; do not enable a feature until its real content and assets have been supplied.
