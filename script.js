@@ -90,28 +90,15 @@ menu.querySelectorAll("a").forEach(link=>link.addEventListener("click",()=>{menu
 const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("visible");revealObserver.unobserve(entry.target)}}),{threshold:.12,rootMargin:"0px 0px -45px"});
 document.querySelectorAll(".reveal,.bloom-decor").forEach(element=>revealObserver.observe(element));
 const sections=[...document.querySelectorAll("main section[id]")],navAnchors=[...document.querySelectorAll(".nav-links>a")];
-const activeObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){navAnchors.forEach(link=>link.classList.toggle("active",link.hash===`#${entry.target.id}`));setFloatingLotus(entry.target)}}),{rootMargin:"-30% 0px -62%"});sections.forEach(section=>activeObserver.observe(section));
-
-const scrollLotuses=[...document.querySelectorAll(".scroll-lotus")],filmPassages=[...document.querySelectorAll(".film-passage")],floatingLotus=document.querySelector("#lotus-scroll-overlay");
-const lotusCorners=["corner-top-right","corner-bottom-left","corner-top-left","corner-bottom-right"];
-let floatingLotusSection="",floatingLotusTimer;
-function setFloatingLotus(section){
-  if(!floatingLotus||section.id===floatingLotusSection)return;
-  floatingLotusSection=section.id;clearTimeout(floatingLotusTimer);floatingLotus.classList.add("is-switching");
-  floatingLotusTimer=setTimeout(()=>{floatingLotus.classList.remove(...lotusCorners);floatingLotus.classList.add(lotusCorners[sections.indexOf(section)%lotusCorners.length],"is-active");requestAnimationFrame(()=>floatingLotus.classList.remove("is-switching"))},190)
-}
-let motionMetrics={lotuses:[],passages:[],reelStart:0,reelEnd:0};
-function measureMotion(){const pageY=scrollY;motionMetrics={lotuses:scrollLotuses.map(item=>({item,top:item.getBoundingClientRect().top+pageY})),passages:filmPassages.map(item=>({track:item.querySelector(".film-track"),top:item.getBoundingClientRect().top+pageY})),reelStart:document.querySelector("#about").getBoundingClientRect().top+pageY,reelEnd:document.querySelector("#members").getBoundingClientRect().top+pageY-innerHeight*.35}}
-addEventListener("load",measureMotion,{once:true});addEventListener("resize",()=>requestAnimationFrame(measureMotion),{passive:true});measureMotion();
+const sectionFlowers=[...document.querySelectorAll(".section-flower")];
+function setSectionFlowers(section){sectionFlowers.forEach(flower=>flower.classList.toggle("is-visible",flower.dataset.flowerSection===section.id))}
+const activeObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){navAnchors.forEach(link=>link.classList.toggle("active",link.hash===`#${entry.target.id}`));setSectionFlowers(entry.target)}}),{rootMargin:"-30% 0px -62%"});sections.forEach(section=>activeObserver.observe(section));
 let ticking=false;
 function paintScroll(){
-  const max=document.documentElement.scrollHeight-innerHeight,reduced=matchMedia("(prefers-reduced-motion: reduce)").matches,mobile=innerWidth<=800,motionScale=mobile?.5:1;
+  const max=document.documentElement.scrollHeight-innerHeight,reduced=matchMedia("(prefers-reduced-motion: reduce)").matches,mobile=innerWidth<=800;
   document.querySelector("#scroll-progress").style.width=`${max?scrollY/max*100:0}%`;document.querySelector(".site-header")?.classList.toggle("is-scrolled",scrollY>24);
   if(!reduced){
     if(!mobile)document.querySelectorAll(".parallax").forEach(item=>item.style.transform=`translate3d(0,${scrollY*Number(item.dataset.rate)}px,0)`);
-    motionMetrics.lotuses.forEach(({item,top})=>{const local=(scrollY+innerHeight*.5-top)*motionScale;item.style.transform=`translate3d(0,${local*Number(item.dataset.driftRate)}px,0) rotate(${local*Number(item.dataset.rotateRate)}deg)`});
-    motionMetrics.passages.forEach(({track,top},index)=>{const travel=Math.max(-34,Math.min(34,(scrollY+innerHeight-top)*.025*motionScale));track.style.transform=`translate3d(calc(-50% + ${index%2?travel:-travel}px),-50%,0) rotate(${index%2?.65:-1.1}deg)`});
-    if(floatingLotus)floatingLotus.querySelector("img").style.transform=`rotate(${scrollY*.055}deg)`
   }
   ticking=false
 }

@@ -354,3 +354,20 @@ body{background-color:var(--cream);background-image:linear-gradient(rgba(255,248
 @media(prefers-reduced-motion:reduce){
   .lotus-scroll-overlay{display:block}.lotus-scroll-overlay img{transform:none!important}.film-track{clip-path:inset(0);transition:opacity .2s ease}.scroll-lotus{opacity:var(--lotus-opacity,.06);transform:none!important;scale:1;transition:opacity .2s ease}
 }
+
+/* Pinned section flowers: separate pairs fade in place and never travel across the viewport. */
+.section-flower-layer{position:fixed;inset:0;z-index:24;overflow:hidden;pointer-events:none;user-select:none}
+.section-flower{position:absolute;width:clamp(260px,24vw,380px);height:auto;opacity:0;transform-origin:center;filter:drop-shadow(0 10px 28px rgba(239,90,42,.2));transition:opacity .68s ease;animation:pinnedFlowerRotate 30s linear infinite;animation-play-state:paused;will-change:transform,opacity}
+.section-flower.is-visible{opacity:.34;animation-play-state:running}
+.section-flower.flower-reverse{animation-direction:reverse;animation-duration:36s}
+.section-flower.flower-line,.section-flower.flower-outline{filter:sepia(1) saturate(3) hue-rotate(338deg) drop-shadow(0 8px 24px rgba(247,153,54,.18))}
+.section-flower.flower-line.is-visible,.section-flower.flower-outline.is-visible{opacity:.25}
+.section-flower.flower-magenta.is-visible{opacity:.3;filter:drop-shadow(0 10px 26px rgba(223,33,114,.2))}
+.flower-top-right{right:clamp(-190px,-12vw,-125px);top:12%}.flower-bottom-left{left:clamp(-190px,-12vw,-125px);bottom:5%}.flower-top-left{left:clamp(-190px,-12vw,-125px);top:12%}.flower-bottom-right{right:clamp(-190px,-12vw,-125px);bottom:5%}
+.page-hidden .section-flower{animation-play-state:paused!important}
+@keyframes pinnedFlowerRotate{to{transform:rotate(360deg)}}
+@media(max-width:800px){
+  .section-flower{width:190px}.section-flower.is-visible{opacity:.24}.section-flower.flower-line.is-visible,.section-flower.flower-outline.is-visible{opacity:.18}.section-flower.flower-magenta.is-visible{opacity:.22}
+  .flower-top-right{right:-98px;top:16%}.flower-bottom-left{left:-98px;bottom:8%}.flower-top-left{left:-98px;top:16%}.flower-bottom-right{right:-98px;bottom:8%}
+}
+@media(prefers-reduced-motion:reduce){.section-flower{animation:none;transition:opacity .2s ease}}
