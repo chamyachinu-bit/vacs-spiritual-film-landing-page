@@ -1,15 +1,15 @@
 "use strict";
 
 const offerings = [
-  {name:"VACS Arohan Class",icon:"spiritual-growth.png",text:"Ease mental stress and emotional turmoil while gaining deeper clarity about life and its purpose. Guided self-reflection and self-study strengthen the inner self, build resilience and expand awareness."},
+  {name:"Arohan Class",icon:"spiritual-growth.png",text:"Ease mental stress and emotional turmoil while gaining deeper clarity about life and its purpose. Guided self-reflection and self-study strengthen the inner self, build resilience and expand awareness."},
   {name:"Heartful Listening",icon:"guidance-support.png",text:"A confidential, judgement-free space where trained listeners receive your expression. Speaking openly helps declutter the mind, restore clarity and release emotional baggage."},
   {name:"Heart-Centred Yog",icon:"inner-awareness.png",text:"Mindful movement, conscious breathing and meditation techniques help members of the industry slow down, release tension and deepen their connection with the present moment."},
   {name:"Skills Training",icon:"creative-expression.png",text:"Immersive sessions and masterclasses led by accomplished professionals build confidence, craft and competence across a diverse range of creative disciplines."},
   {name:"Values-Based Stories",icon:"storytelling.png",text:"A platform for like-hearted artists to collaborate on plays, short films and performances that awaken hearts and nurture a compassionate, values-driven society."},
   {name:"Fellowship Programme",icon:"community.png",text:"Inspiration and support for emerging artists to remain motivated through competition and uncertainty while continuing to create and express their talent."},
-  {name:"VACS Events",icon:"film-media.png",text:"Screenings, discussions and gatherings that create opportunities to connect over the true essence of art, remain grounded and strengthen human values."},
-  {name:"VACS Awards",icon:"cultural-roots.png",text:"Recognition for artists and groups whose meaningful work reflects excellence, inspires society and contributes positively to our shared cultural fabric."},
-  {name:"VACS Collaborations",icon:"emotional-harmony.png",text:"Purpose-led partnerships with artists, organisations and institutions to create programmes and cultural work aligned with wellbeing, values and transformation."}
+  {name:"Events",icon:"film-media.png",text:"Screenings, discussions and gatherings that create opportunities to connect over the true essence of art, remain grounded and strengthen human values."},
+  {name:"Awards",icon:"cultural-roots.png",text:"Recognition for artists and groups whose meaningful work reflects excellence, inspires society and contributes positively to our shared cultural fabric."},
+  {name:"Collaborations",icon:"emotional-harmony.png",text:"Purpose-led partnerships with artists, organisations and institutions to create programmes and cultural work aligned with wellbeing, values and transformation."}
 ];
 
 const trustees = [
@@ -24,9 +24,9 @@ const trustees = [
 
 const formDefinitions = {
   member:{title:"Become a member",description:"Tell us about your journey in the film and entertainment fraternity.",fields:[{name:"industry_role",label:"Industry role",type:"text"},{name:"experience",label:"Years of experience",type:"text"},{name:"areas_of_interest",label:"Areas of interest",type:"text"}]},
-  volunteer:{title:"Volunteer with VACS",description:"Share how you would like to offer your time and skills.",fields:[{name:"skills",label:"Skills",type:"text"},{name:"availability",label:"Availability",type:"text"},{name:"preferred_contribution",label:"Preferred contribution",type:"text"}]},
-  collaborate:{title:"Collaborate with VACS",description:"Introduce your organisation or creative proposal.",fields:[{name:"organization",label:"Organisation",type:"text"},{name:"collaboration_type",label:"Collaboration type",type:"text"},{name:"proposal_summary",label:"Proposal summary",type:"textarea"}]},
-  support:{title:"Support VACS",description:"Tell us how you would like to support the mission.",fields:[{name:"support_type",label:"Type of support",type:"text"},{name:"preferred_contact_method",label:"Preferred contact method",type:"select",options:["Email","Phone","WhatsApp"]}]}
+  volunteer:{title:"Volunteer with us",description:"Share how you would like to offer your time and skills.",fields:[{name:"skills",label:"Skills",type:"text"},{name:"availability",label:"Availability",type:"text"},{name:"preferred_contribution",label:"Preferred contribution",type:"text"}]},
+  collaborate:{title:"Collaborate with us",description:"Introduce your organisation or creative proposal.",fields:[{name:"organization",label:"Organisation",type:"text"},{name:"collaboration_type",label:"Collaboration type",type:"text"},{name:"proposal_summary",label:"Proposal summary",type:"textarea"}]},
+  support:{title:"Support the mission",description:"Tell us how you would like to support the mission.",fields:[{name:"support_type",label:"Type of support",type:"text"},{name:"preferred_contact_method",label:"Preferred contact method",type:"select",options:["Email","Phone","WhatsApp"]}]}
 };
 
 const offeringGrid=document.querySelector("#offering-grid");
@@ -72,4 +72,8 @@ function dismissDialog(){dialog.close();document.body.classList.remove("dialog-o
 closeDialog.addEventListener("click",dismissDialog);dialog.addEventListener("click",event=>{if(event.target===dialog)dismissDialog()});dialog.addEventListener("close",()=>document.body.classList.remove("dialog-open"));
 form.addEventListener("submit",async event=>{event.preventDefault();const config=window.VACS_FORM_CONFIG||{};if(!config.enabled||!config.endpoint)return;if(!form.reportValidity())return;const submit=form.querySelector(".form-submit");submit.disabled=true;submit.textContent="Sending…";try{const response=await fetch(config.endpoint,{method:config.method||"POST",body:new FormData(form)});if(!response.ok)throw new Error("Submission failed");submit.textContent="Enquiry sent"}catch{submit.disabled=false;submit.textContent="Try again"}});
 const config=window.VACS_FORM_CONFIG||{};if(config.enabled&&config.endpoint){const submit=form.querySelector(".form-submit");submit.disabled=false;submit.textContent="Send enquiry"}
+
+// Keep the public-facing brand name in the approved long form; the acronym remains only in technical configuration.
+const dialogEyebrow=document.querySelector("#intent-dialog .eyebrow");if(dialogEyebrow)dialogEyebrow.textContent="Connect with us";
+const consentCopy=document.querySelector("#intent-form .consent span");if(consentCopy)consentCopy.textContent="I consent to being contacted about this enquiry.";
 document.querySelector("#year").textContent=new Date().getFullYear();
