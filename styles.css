@@ -130,3 +130,33 @@ body{background-color:var(--cream);background-image:linear-gradient(rgba(255,248
 .connect{background-image:linear-gradient(150deg,rgba(42,27,24,.96),rgba(68,36,29,.94)),url("assets/extracted/card-paper-texture.webp");background-size:auto,800px auto;background-blend-mode:normal,soft-light}
 @media(max-width:640px){body{background-size:auto,760px auto}.about:after{width:34vw;opacity:.14}.purpose,.trustees{background-size:auto,760px auto}.guiding-light,.trustee-detail,.connect{background-size:auto,620px auto}}
 .portrait-inset-extracted{object-position:24% top;background:#fff}
+
+/* Cinematic trustee ribbon based on the selected curved-gallery reference. */
+.trustee-showcase{display:block}
+.trustee-showcase .trustee-grid{position:relative;display:block;height:390px;margin:0 -28px;overflow:hidden;perspective:1400px;border:0}
+.trustee-showcase .trustee-card,.trustee-showcase .trustee-card:last-child:nth-child(odd){position:absolute;left:50%;top:10px;width:clamp(142px,15.5vw,190px);height:300px;transform:translateX(calc(-50% + var(--arc-x))) translateY(var(--arc-y)) rotateY(var(--arc-turn)) scale(var(--arc-scale));transform-origin:center bottom;opacity:var(--arc-opacity);transition:transform .7s var(--ease-out),opacity .5s ease,filter .4s ease;will-change:transform}
+.trustee-showcase .trustee-photo{display:block;height:100%;aspect-ratio:auto;border-radius:14px!important;box-shadow:0 22px 55px rgba(65,34,24,.18)}
+.trustee-showcase .trustee-card.active{outline:0;filter:saturate(1.06)}
+.trustee-showcase .trustee-card.active:after{border-radius:14px}
+.trustee-showcase .trustee-card:not(.active){filter:saturate(.74)}
+.trustee-showcase .trustee-meta{padding:62px 14px 15px}
+.trustee-showcase .trustee-meta h3{font-size:1rem}
+.trustee-showcase .trustee-detail{position:relative;top:auto;width:min(820px,100%);min-height:0;margin:4px auto 0;padding:clamp(40px,6vw,70px);text-align:center}
+.trustee-showcase .trustee-detail-copy{max-width:690px;margin:auto}
+.trustee-showcase .trustee-detail blockquote{margin-inline:auto;text-align:left}
+.trustee-showcase .trustee-controls{left:50%;right:auto;bottom:20px;transform:translateX(-50%)}
+@media(max-width:900px){.trustee-showcase .trustee-grid{height:340px;margin-inline:-20px}.trustee-showcase .trustee-card,.trustee-showcase .trustee-card:last-child:nth-child(odd){width:150px;height:255px}.trustee-showcase .trustee-detail{min-height:0}}
+@media(max-width:640px){
+  .trustee-showcase{gap:0}
+  .trustee-showcase .trustee-grid{position:relative;display:block;height:292px;margin-inline:-16px;padding:0;overflow:hidden;border:0;perspective:1000px}
+  .trustee-showcase .trustee-card,.trustee-showcase .trustee-card:last-child:nth-child(odd){display:block;position:absolute;left:50%;top:5px;width:128px;height:220px;min-width:0;background:var(--night);border:0;overflow:hidden;transform:translateX(calc(-50% + var(--arc-x))) translateY(calc(var(--arc-y) * .55)) rotateY(var(--arc-turn)) scale(var(--arc-scale));opacity:var(--arc-opacity)}
+  .trustee-showcase .trustee-card:nth-child(odd){border-right:0}
+  .trustee-showcase .trustee-photo{display:block;height:100%;border-radius:12px!important}
+  .trustee-showcase .trustee-meta{position:absolute;padding:50px 10px 12px;background:linear-gradient(180deg,transparent,rgba(31,23,20,.94));text-align:left}
+  .trustee-showcase .trustee-meta h3{color:var(--cream);font-size:.8rem;text-shadow:0 1px 10px rgba(0,0,0,.35)}
+  .trustee-showcase .trustee-card.active .trustee-meta h3{color:var(--gold)}
+  .trustee-showcase .trustee-detail{margin-inline:-16px;padding:38px 22px 94px;text-align:left}
+  .trustee-detail-portrait{display:none}
+  .trustee-showcase .trustee-detail-copy{margin:0}
+  .trustee-showcase .trustee-detail blockquote{margin-inline:0}
+}
