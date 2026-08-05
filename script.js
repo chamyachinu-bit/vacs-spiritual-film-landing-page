@@ -10,7 +10,7 @@ const siteFeatures = Object.freeze({
   testimonials:{enabled:false,items:[]},partners:{enabled:false,items:[]}
 });
 
-const opening=document.querySelector("#cinematic-opening"),openingEnter=document.querySelector("#opening-enter");
+const opening=document.querySelector("#cinematic-opening");
 let openingTimer,openingFailSafe,openingClosed=false;
 function closeOpening(){
   if(openingClosed||!opening)return;
@@ -21,10 +21,10 @@ function closeOpening(){
 }
 if(opening){
   document.body.classList.add("opening-active");requestAnimationFrame(()=>opening.classList.add("is-ready"));
-  openingEnter.addEventListener("click",closeOpening);opening.addEventListener("keydown",event=>{if(event.key==="Escape"){event.preventDefault();closeOpening()}});
+  opening.addEventListener("keydown",event=>{if(event.key==="Escape"){event.preventDefault();closeOpening()}});
   openingTimer=setTimeout(closeOpening,3800);openingFailSafe=setTimeout(closeOpening,7000);
   if(matchMedia("(prefers-reduced-motion: reduce)").matches){clearTimeout(openingTimer);openingTimer=setTimeout(closeOpening,260)}
-  openingEnter.focus({preventScroll:true});
+  opening.setAttribute("tabindex","-1");opening.focus({preventScroll:true});
 }
 
 const offerings = [

@@ -25,7 +25,7 @@ The site has no runtime packages or framework dependency.
 
 ## Cinematic opening
 
-Every full page load begins with a silent, approximately four-second floral-aperture entrance. Visitors can choose **Enter** immediately; Escape also continues to the site. The generated floral halo gathers around the official logo, receives one soft glimmer, then zooms and dissolves into the hero. The sequence has a seven-second fail-safe and becomes a short opacity fade when reduced motion is requested.
+Every full page load begins with a silent, approximately four-second floral-aperture entrance. It continues automatically; Escape skips directly to the site. The generated floral halo gathers around the official logo, receives one soft glimmer, then zooms and dissolves into the hero. The sequence has a seven-second fail-safe and becomes a short opacity fade when reduced motion is requested.
 
 ## Future programming
 
