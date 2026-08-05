@@ -180,6 +180,16 @@ body.opening-active .hero-logo,body.opening-active .hero-halo,body.opening-activ
 @media(max-width:900px){.member-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:640px){.members{background-size:auto,760px auto}.member-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 12px}.member-placeholder h3{font-size:.95rem}.member-photo img{width:46%}}
 
+/* Compact member portraits: simple square image tiles with permanently readable names. */
+.member-grid{width:min(920px,100%);margin-inline:auto;gap:14px}
+.member-placeholder{position:relative;aspect-ratio:1;overflow:hidden;background:var(--night);text-align:left}
+.member-photo{position:absolute;inset:0;aspect-ratio:1;border:0;background:linear-gradient(145deg,rgba(255,255,255,.88),rgba(247,153,54,.12))}
+.member-photo:after{content:"";position:absolute;inset:42% 0 0;background:linear-gradient(180deg,transparent,rgba(31,23,20,.82));pointer-events:none}
+.member-photo img{width:38%;height:auto;opacity:.42;filter:saturate(.55)}
+.member-placeholder h3{position:absolute;z-index:2;left:16px;right:16px;bottom:14px;margin:0;color:var(--cream);font-family:var(--sans);font-size:.78rem;font-weight:500;letter-spacing:.06em;text-shadow:0 1px 12px rgba(0,0,0,.4)}
+@media(max-width:900px){.member-grid{width:min(680px,100%);grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:640px){.member-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.member-placeholder h3{left:12px;right:12px;bottom:11px;font-size:.7rem}.member-photo img{width:42%}}
+
 /* Remove decorative numbering; hierarchy comes from typography and imagery. */
 .connect-card>span,.trustee-count{display:none}
 .connect-card h3{margin-top:10px}
