@@ -61,26 +61,25 @@ offerings.forEach((item,index)=>{const article=document.createElement("article")
 
 const trusteeGrid=document.querySelector("#trustee-grid");
 const detail=document.querySelector("#trustee-detail");
-let activeTrustee=0,trusteeTimer;
+let activeTrustee=0;
 trustees.forEach((person,index)=>{const button=document.createElement("button");button.className="trustee-card reveal";button.type="button";button.setAttribute("aria-controls","trustee-detail");button.setAttribute("aria-label",`View ${person.name}'s trustee profile`);button.style.setProperty("--delay",`${(index%4)*55}ms`);button.innerHTML=`<span class="trustee-photo"><img src="assets/images/${person.image}" width="900" height="1200" loading="lazy" alt="${person.name}"></span><span class="trustee-meta"><h3>${person.name}</h3><p>${person.role}</p></span>`;button.addEventListener("click",()=>showTrustee(index,true));trusteeGrid.append(button)});
 trusteeGrid.querySelectorAll("img").forEach(image=>image.src+=image.src.includes("?")?"&pdf=2":"?pdf=2");
 function showTrustee(index,shouldScroll=false){
+  const movement=index===activeTrustee?0:index>activeTrustee?1:-1;
   activeTrustee=(index+trustees.length)%trustees.length;
   const person=trustees[activeTrustee];
   const profileIntro=person.profile,profileMore="";
   trusteeGrid.querySelectorAll("button").forEach((item,itemIndex)=>{const half=Math.floor(trustees.length/2);const offset=((itemIndex-activeTrustee+trustees.length+half)%trustees.length)-half;const distance=Math.abs(offset);item.classList.toggle("active",itemIndex===activeTrustee);item.setAttribute("aria-current",itemIndex===activeTrustee?"true":"false");item.style.setProperty("--arc-x",`${offset*88}%`);item.style.setProperty("--arc-y",`${distance*24}px`);item.style.setProperty("--arc-turn",`${offset*-9}deg`);item.style.setProperty("--arc-scale",String(1-distance*.075));item.style.setProperty("--arc-opacity",String(1-distance*.16));item.style.zIndex=String(10-distance)});
   detail.classList.remove("profile-enter");void detail.offsetWidth;
+  detail.dataset.direction=movement<0?"previous":"next";
   detail.innerHTML=`<figure class="trustee-detail-portrait"><img src="assets/images/${person.image}" width="900" height="1200" alt="${person.name}"></figure><div class="trustee-detail-copy"><div class="trustee-identity"><h3>${person.name}</h3><p class="trustee-role">${person.role}</p></div><div class="trustee-biography"><p>${profileIntro}</p>${profileMore||person.quote?`<details><summary>Read full profile</summary>${profileMore?`<p>${profileMore}</p>`:""}${person.quote?`<blockquote>“${person.quote}”</blockquote>`:""}</details>`:""}</div></div><div class="trustee-controls"><button type="button" data-direction="-1" aria-label="Previous trustee">←</button><button type="button" data-direction="1" aria-label="Next trustee">→</button></div>`;
   detail.querySelector("img").src+="?pdf=2";
   detail.querySelector("details")?.setAttribute("open","");
   detail.classList.add("profile-enter");
-  detail.querySelectorAll("[data-direction]").forEach(button=>button.addEventListener("click",()=>{showTrustee(activeTrustee+Number(button.dataset.direction));restartTrusteeSlideshow()}));
-  if(matchMedia("(max-width: 640px)").matches)trusteeGrid.querySelector(".active")?.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"nearest",inline:"center"});
+  detail.querySelectorAll("[data-direction]").forEach(button=>button.addEventListener("click",()=>showTrustee(activeTrustee+Number(button.dataset.direction))));
   if(shouldScroll&&matchMedia("(max-width: 900px)").matches)detail.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"center"});
 }
-function restartTrusteeSlideshow(){clearInterval(trusteeTimer);if(!matchMedia("(prefers-reduced-motion: reduce)").matches)trusteeTimer=setInterval(()=>showTrustee(activeTrustee+1),6500)}
-showTrustee(0);restartTrusteeSlideshow();
-[trusteeGrid,detail].forEach(area=>{area.addEventListener("mouseenter",()=>clearInterval(trusteeTimer));area.addEventListener("mouseleave",restartTrusteeSlideshow);area.addEventListener("focusin",()=>clearInterval(trusteeTimer));area.addEventListener("focusout",event=>{if(!area.contains(event.relatedTarget))restartTrusteeSlideshow()})});
+showTrustee(0);
 
 document.querySelectorAll(".value-button").forEach(button=>button.addEventListener("click",()=>{document.querySelectorAll(".value-button").forEach(item=>item.classList.remove("active"));button.classList.add("active");const title=document.querySelector("#active-value-name");title.style.opacity="0";title.style.transform="translateY(5px)";setTimeout(()=>{title.innerHTML=`${button.dataset.devanagari} <span>${button.dataset.name}</span>`;document.querySelector("#active-value-meaning").textContent=button.dataset.meaning;title.style.opacity="1";title.style.transform="none"},150)}));
 
@@ -96,7 +95,7 @@ const activeObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{i
 let ticking=false;
 function paintScroll(){const max=document.documentElement.scrollHeight-innerHeight;document.querySelector("#scroll-progress").style.width=`${max?scrollY/max*100:0}%`;document.querySelector(".site-header")?.classList.toggle("is-scrolled",scrollY>24);if(!matchMedia("(prefers-reduced-motion: reduce)").matches&&innerWidth>800){document.querySelectorAll(".parallax").forEach(item=>item.style.transform=`translate3d(0,${scrollY*Number(item.dataset.rate)}px,0)`)}ticking=false}
 addEventListener("scroll",()=>{if(!ticking){requestAnimationFrame(paintScroll);ticking=true}},{passive:true});paintScroll();
-document.addEventListener("visibilitychange",()=>{document.body.classList.toggle("page-hidden",document.hidden);if(document.hidden)clearInterval(trusteeTimer);else restartTrusteeSlideshow()});
+document.addEventListener("visibilitychange",()=>document.body.classList.toggle("page-hidden",document.hidden));
 
 const dialog=document.querySelector("#intent-dialog"),form=document.querySelector("#intent-form"),intentFields=document.querySelector("#intent-fields"),closeDialog=document.querySelector(".dialog-close");let lastTrigger=null;
 document.querySelectorAll(".form-trigger").forEach(trigger=>trigger.addEventListener("click",()=>openForm(trigger.dataset.intent,trigger)));
