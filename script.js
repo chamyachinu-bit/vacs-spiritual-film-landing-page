@@ -36,12 +36,14 @@ const trusteeGrid=document.querySelector("#trustee-grid");
 const detail=document.querySelector("#trustee-detail");
 let activeTrustee=0,trusteeTimer;
 trustees.forEach((person,index)=>{const button=document.createElement("button");button.className="trustee-card reveal";button.type="button";button.setAttribute("aria-controls","trustee-detail");button.setAttribute("aria-label",`View ${person.name}'s trustee profile`);button.style.setProperty("--delay",`${(index%4)*55}ms`);button.innerHTML=`<span class="trustee-photo"><img src="assets/images/${person.image}" width="900" height="1200" loading="lazy" alt="${person.name}"></span><span class="trustee-meta"><h3>${person.name}</h3><p>${person.role}</p></span>`;button.addEventListener("click",()=>showTrustee(index,true));trusteeGrid.append(button)});
+trusteeGrid.querySelectorAll("img").forEach(image=>image.src+=image.src.includes("?")?"&pdf=2":"?pdf=2");
 function showTrustee(index,shouldScroll=false){
   activeTrustee=(index+trustees.length)%trustees.length;
   const person=trustees[activeTrustee];
   trusteeGrid.querySelectorAll("button").forEach((item,itemIndex)=>{item.classList.toggle("active",itemIndex===activeTrustee);item.setAttribute("aria-current",itemIndex===activeTrustee?"true":"false")});
   detail.classList.remove("profile-enter");void detail.offsetWidth;
   detail.innerHTML=`<figure class="trustee-detail-portrait"><img src="assets/images/${person.image}" width="900" height="1200" alt="${person.name}"></figure><div class="trustee-detail-copy"><p class="eyebrow">Trustee profile</p><h3>${person.name}</h3><p class="trustee-role">${person.role}</p><p>${person.profile}</p>${person.quote?`<blockquote>“${person.quote}”</blockquote>`:""}</div><div class="trustee-controls"><button type="button" data-direction="-1" aria-label="Previous trustee">←</button><button type="button" data-direction="1" aria-label="Next trustee">→</button></div>`;
+  detail.querySelector("img").src+="?pdf=2";
   detail.classList.add("profile-enter");
   detail.querySelectorAll("[data-direction]").forEach(button=>button.addEventListener("click",()=>{showTrustee(activeTrustee+Number(button.dataset.direction));restartTrusteeSlideshow()}));
   if(shouldScroll&&matchMedia("(max-width: 900px)").matches)detail.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"center"});

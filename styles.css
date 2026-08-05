@@ -117,3 +117,16 @@ blockquote{font-family:"Cormorant Garamond",var(--serif);font-weight:500}
   .trustee-controls{left:22px;bottom:24px}
 }
 @media(prefers-reduced-motion:reduce){.trustee-card.active:after{animation:none}}
+
+/* Materials extracted directly from the supplied PDFs: paper, watercolor and visiting-card stock. */
+body{background-color:var(--cream);background-image:linear-gradient(rgba(255,248,241,.9),rgba(255,248,241,.9)),url("assets/extracted/paper-texture.webp");background-size:auto,1100px auto;background-blend-mode:normal,multiply}
+.about{isolation:isolate;overflow:hidden}
+.about:after{content:"";position:absolute;z-index:0;left:0;top:0;bottom:0;width:min(27vw,380px);background:url("assets/extracted/orange-watercolor-accent.webp") left center/cover no-repeat;mix-blend-mode:multiply;opacity:.22;pointer-events:none}
+.about>.shell{position:relative;z-index:1}
+.purpose{background-image:linear-gradient(rgba(255,248,241,.86),rgba(253,240,227,.88) 50%,rgba(255,248,241,.9)),url("assets/extracted/paper-texture.webp");background-size:auto,1000px auto;background-blend-mode:normal,multiply}
+.trustees{background-image:linear-gradient(rgba(253,241,230,.91),rgba(253,241,230,.91)),url("assets/extracted/paper-texture.webp");background-size:auto,1050px auto;background-blend-mode:normal,multiply}
+.guiding-light{background-image:linear-gradient(150deg,rgba(42,27,24,.95),rgba(59,33,28,.94)),url("assets/extracted/card-paper-texture.webp");background-size:auto,780px auto;background-blend-mode:normal,soft-light}
+.trustee-detail{background-image:linear-gradient(135deg,rgba(42,27,24,.96),rgba(67,39,31,.94)),url("assets/extracted/card-paper-texture.webp");background-size:auto,720px auto;background-blend-mode:normal,soft-light}
+.connect{background-image:linear-gradient(150deg,rgba(42,27,24,.96),rgba(68,36,29,.94)),url("assets/extracted/card-paper-texture.webp");background-size:auto,800px auto;background-blend-mode:normal,soft-light}
+@media(max-width:640px){body{background-size:auto,760px auto}.about:after{width:34vw;opacity:.14}.purpose,.trustees{background-size:auto,760px auto}.guiding-light,.trustee-detail,.connect{background-size:auto,620px auto}}
+.portrait-inset-extracted{object-position:24% top;background:#fff}
