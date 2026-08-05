@@ -322,3 +322,35 @@ body{background-color:var(--cream);background-image:linear-gradient(rgba(255,248
   .trustee-detail.profile-enter .trustee-detail-copy{animation-delay:25ms}
 }
 @media(prefers-reduced-motion:reduce){.trustee-detail.profile-enter .trustee-detail-portrait,.trustee-detail.profile-enter .trustee-detail-copy{animation:none}}
+
+/* Film and lotus motion system — decorative, brand-sourced and transform-only. */
+.motion-decor{pointer-events:none;user-select:none}
+.film-reel-overlay{position:fixed;z-index:24;right:-38px;top:43%;width:128px;height:128px;opacity:0;visibility:hidden;transform:translate3d(20px,-50%,0);transition:opacity .35s ease,visibility 0s .35s;will-change:transform,opacity}
+.film-reel-overlay.is-active{opacity:.16;visibility:visible;transition-delay:0s}
+.film-reel-overlay img{position:relative;z-index:2;width:100%;height:100%;object-fit:contain;filter:sepia(1) saturate(3.2) hue-rotate(338deg)}
+.film-reel-overlay span{position:absolute;z-index:1;right:73px;top:61px;width:120px;height:18px;border-block:2px solid var(--orange);opacity:.75}
+.film-reel-overlay span:after{content:"";position:absolute;inset:3px 0;background:repeating-linear-gradient(90deg,var(--orange) 0 9px,transparent 9px 16px);opacity:.55}
+.film-passage{position:relative;z-index:3;height:122px;margin:-23px 0;overflow:hidden;background:linear-gradient(90deg,transparent,rgba(247,153,54,.04) 20%,rgba(223,33,114,.035) 75%,transparent)}
+.film-track{position:absolute;left:50%;top:50%;display:flex;align-items:center;gap:10px;width:max-content;padding:14px 18px;border-block:7px solid var(--orange);background:linear-gradient(rgba(255,248,241,.92),rgba(255,248,241,.92));box-shadow:0 12px 32px rgba(96,56,19,.07);clip-path:inset(0 100% 0 0);transform:translate3d(-50%,-50%,0) rotate(-1.1deg);transition:clip-path 1.15s var(--ease-out)}
+.film-passage.visible .film-track{clip-path:inset(0)}
+.film-track:before,.film-track:after{content:"";position:absolute;left:0;right:0;height:4px;background:repeating-linear-gradient(90deg,transparent 0 7px,var(--cream) 7px 17px,transparent 17px 23px)}
+.film-track:before{top:-6px}.film-track:after{bottom:-6px}
+.film-track i{display:block;width:clamp(120px,14vw,190px);height:58px;border:1px solid rgba(96,56,19,.18);background:linear-gradient(135deg,rgba(247,153,54,.08),rgba(223,33,114,.045));box-shadow:inset 0 0 0 5px rgba(255,255,255,.46)}
+.film-passage-primary .film-track{min-width:125vw}.film-passage-secondary{height:88px;margin:-14px 0}.film-passage-secondary .film-track{min-width:106vw;padding-block:10px;border-block-width:4px;opacity:.62;transform:translate3d(-50%,-50%,0) rotate(.65deg)}
+.film-passage-secondary .film-track i{width:clamp(105px,12vw,155px);height:40px}
+.scroll-lotus{position:absolute;z-index:0;display:block;opacity:0;transform:scale(.92);transition:opacity .8s ease,scale 1.15s var(--ease-out);will-change:transform,opacity}
+.scroll-lotus.visible{opacity:var(--lotus-opacity,.09);scale:1}
+.lotus-values{right:-115px;top:18%;width:min(34vw,470px);--lotus-opacity:.105}
+.lotus-offerings{left:-88px;top:35%;width:min(25vw,340px);--lotus-opacity:.075}
+.lotus-trustees{right:-55px;top:5%;width:min(22vw,290px);--lotus-opacity:.08;filter:sepia(1) saturate(2.5) hue-rotate(342deg)}
+.purpose>.shell,.offerings>.shell,.trustees>.shell{position:relative;z-index:2}
+@media(max-width:800px){
+  .film-reel-overlay{display:none}
+  .film-passage{height:84px;margin:-12px 0}.film-passage-secondary{height:62px;margin:-7px 0}
+  .film-track{gap:7px;padding:9px 12px;border-block-width:4px;transform:translate3d(-50%,-50%,0) rotate(-.7deg)}
+  .film-track i{width:105px;height:38px}.film-passage-secondary .film-track i{width:88px;height:30px}
+  .lotus-values{right:-70px;width:52vw;--lotus-opacity:.07}.lotus-offerings{left:-48px;width:42vw;--lotus-opacity:.052}.lotus-trustees{right:-34px;width:38vw;--lotus-opacity:.055}
+}
+@media(prefers-reduced-motion:reduce){
+  .film-reel-overlay{display:none}.film-track{clip-path:inset(0);transition:opacity .2s ease}.scroll-lotus{opacity:var(--lotus-opacity,.06);transform:none!important;scale:1;transition:opacity .2s ease}
+}

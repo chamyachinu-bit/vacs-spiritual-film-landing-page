@@ -23,3 +23,7 @@ Playfair Display is used for editorial headings, Inter for body/interface text, 
 Motion is restrained: 140-240ms for controls, approximately 680ms for one-time scroll reveals, and slower transform-only movement for the hero atmosphere. Reduced-motion users receive static layouts and short opacity feedback.
 
 The page-load opening is the sole cinematic exception. It uses the official logo, supplied lotus linework and paper texture for a ceremonial three-second entrance, followed by a split-curtain reveal. It is silent, skippable and reduced to a sub-300ms fade for visitors who request reduced motion. Do not add another competing entrance animation, autoplay sound or video loader.
+
+## Film and lotus motion
+
+The editorial motion system uses one primary film passage between About and Dadashreeji, one restrained passage before Members, and a translucent reel visible only from About through Offerings. Three supplied lotus marks sit behind Values, Offerings and Trustees. Scroll ratios remain intentionally slow: reel rotation `0.09`, lotus rotation approximately `0.02–0.035`, and lotus vertical drift below `0.01`. Mobile uses half these rates and hides the fixed reel. Reduced-motion mode keeps the artwork static.
