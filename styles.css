@@ -35,10 +35,11 @@
 /* Trustees: a continuously active editorial profile slideshow. */
 .trustee-card.active{outline:3px solid var(--orange);outline-offset:4px;transform:translateY(-5px)}
 .trustee-card.active .trustee-photo img{filter:saturate(1);transform:scale(1.025)}
-.trustee-card.active:after{content:"Active profile";position:absolute;z-index:3;top:12px;right:12px;padding:7px 9px;background:var(--orange);color:#fff;font-size:.55rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.trustee-card.active:after{content:"";position:absolute;z-index:3;inset:0;border:1px solid rgba(247,153,54,.95);box-shadow:inset 0 0 22px rgba(247,153,54,.22),0 0 18px rgba(247,153,54,.24);pointer-events:none;animation:goldenGlimmer 2.8s ease-in-out infinite}
+@keyframes goldenGlimmer{0%,100%{opacity:.55;box-shadow:inset 0 0 14px rgba(247,153,54,.14),0 0 10px rgba(247,153,54,.14)}50%{opacity:1;box-shadow:inset 0 0 28px rgba(247,153,54,.3),0 0 24px rgba(247,153,54,.3)}}
 .trustee-detail{position:relative;min-height:420px;margin-top:42px;padding:clamp(32px,6vw,72px);overflow:hidden;background:linear-gradient(135deg,var(--night),#43271f);border:0;color:var(--cream);box-shadow:var(--shadow)}
 .trustee-detail:before{content:"";position:absolute;width:360px;aspect-ratio:1;right:-120px;bottom:-190px;border:1px solid rgba(247,153,54,.22);border-radius:50%}
-.trustee-detail-copy{position:relative;z-index:1;max-width:820px}
+.trustee-detail-copy{position:relative;z-index:1;max-width:820px}.trustee-detail-portrait{display:none;margin:0}
 .trustee-detail .eyebrow{color:var(--gold)}
 .trustee-detail h3{margin:8px 0 4px;color:var(--cream);font-size:clamp(2.25rem,5vw,4.6rem)}
 .trustee-detail p{color:rgba(255,248,241,.72)}
@@ -92,3 +93,27 @@ blockquote{font-family:"Cormorant Garamond",var(--serif);font-weight:500}
   .trustee-showcase .trustee-detail{min-height:520px;border-radius:0 72px 0 0}
   .trustee-showcase .trustee-detail h3{font-size:clamp(2.35rem,11vw,3.25rem)}
 }
+
+/* Remove decorative numbering; hierarchy comes from typography and imagery. */
+.connect-card>span,.trustee-count{display:none}
+.connect-card h3{margin-top:10px}
+
+/* Mobile trustees: a name index paired with one full editorial portrait and story. */
+@media(max-width:640px){
+  .trustee-showcase .trustee-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:0;padding:0;overflow:visible;scroll-snap-type:none;border-top:1px solid rgba(96,56,19,.18)}
+  .trustee-showcase .trustee-card,.trustee-showcase .trustee-card:last-child:nth-child(odd){width:100%;min-width:0;background:transparent;border:0;border-bottom:1px solid rgba(96,56,19,.18);overflow:visible;transform:none;scroll-snap-align:none}
+  .trustee-showcase .trustee-card:nth-child(odd){border-right:1px solid rgba(96,56,19,.18)}
+  .trustee-showcase .trustee-photo{display:none}
+  .trustee-showcase .trustee-meta{position:static;padding:15px 12px;background:none;color:var(--ink);text-align:center}
+  .trustee-showcase .trustee-meta h3{color:var(--ink);text-shadow:none;font-size:.92rem;transition:color 180ms ease,text-shadow 180ms ease}
+  .trustee-showcase .trustee-meta p{display:none}
+  .trustee-showcase .trustee-card.active{outline:0}
+  .trustee-showcase .trustee-card.active:after{display:none}
+  .trustee-showcase .trustee-card.active .trustee-meta h3{color:#b66b16;text-shadow:0 0 16px rgba(247,153,54,.45)}
+  .trustee-showcase .trustee-detail{min-height:0;margin-inline:-16px;padding:0 22px 94px;border-radius:0;box-shadow:none}
+  .trustee-detail-portrait{display:block;margin:0 -22px 30px;overflow:hidden}
+  .trustee-detail-portrait img{width:100%;height:min(112vw,470px);object-fit:cover;object-position:center top;filter:saturate(.9)}
+  .trustee-showcase .trustee-detail h3{font-size:clamp(2.35rem,11vw,3.25rem)}
+  .trustee-controls{left:22px;bottom:24px}
+}
+@media(prefers-reduced-motion:reduce){.trustee-card.active:after{animation:none}}
