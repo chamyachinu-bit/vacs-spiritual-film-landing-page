@@ -67,11 +67,12 @@ trusteeGrid.querySelectorAll("img").forEach(image=>image.src+=image.src.includes
 function showTrustee(index,shouldScroll=false){
   activeTrustee=(index+trustees.length)%trustees.length;
   const person=trustees[activeTrustee];
-  const profileParts=person.profile.split(". "),profileIntro=`${profileParts.shift()}.`,profileMore=profileParts.join(". ");
+  const profileIntro=person.profile,profileMore="";
   trusteeGrid.querySelectorAll("button").forEach((item,itemIndex)=>{const half=Math.floor(trustees.length/2);const offset=((itemIndex-activeTrustee+trustees.length+half)%trustees.length)-half;const distance=Math.abs(offset);item.classList.toggle("active",itemIndex===activeTrustee);item.setAttribute("aria-current",itemIndex===activeTrustee?"true":"false");item.style.setProperty("--arc-x",`${offset*88}%`);item.style.setProperty("--arc-y",`${distance*24}px`);item.style.setProperty("--arc-turn",`${offset*-9}deg`);item.style.setProperty("--arc-scale",String(1-distance*.075));item.style.setProperty("--arc-opacity",String(1-distance*.16));item.style.zIndex=String(10-distance)});
   detail.classList.remove("profile-enter");void detail.offsetWidth;
   detail.innerHTML=`<figure class="trustee-detail-portrait"><img src="assets/images/${person.image}" width="900" height="1200" alt="${person.name}"></figure><div class="trustee-detail-copy"><div class="trustee-identity"><h3>${person.name}</h3><p class="trustee-role">${person.role}</p></div><div class="trustee-biography"><p>${profileIntro}</p>${profileMore||person.quote?`<details><summary>Read full profile</summary>${profileMore?`<p>${profileMore}</p>`:""}${person.quote?`<blockquote>“${person.quote}”</blockquote>`:""}</details>`:""}</div></div><div class="trustee-controls"><button type="button" data-direction="-1" aria-label="Previous trustee">←</button><button type="button" data-direction="1" aria-label="Next trustee">→</button></div>`;
   detail.querySelector("img").src+="?pdf=2";
+  detail.querySelector("details")?.setAttribute("open","");
   detail.classList.add("profile-enter");
   detail.querySelectorAll("[data-direction]").forEach(button=>button.addEventListener("click",()=>{showTrustee(activeTrustee+Number(button.dataset.direction));restartTrusteeSlideshow()}));
   if(matchMedia("(max-width: 640px)").matches)trusteeGrid.querySelector(".active")?.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"nearest",inline:"center"});
