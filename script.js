@@ -16,13 +16,13 @@ function closeOpening(){
   if(openingClosed||!opening)return;
   openingClosed=true;clearTimeout(openingTimer);clearTimeout(openingFailSafe);
   opening.classList.add("is-leaving");document.body.classList.remove("opening-active");opening.setAttribute("aria-hidden","true");
-  const finish=event=>{if(event&&!event.target.classList.contains("opening-curtain"))return;opening.hidden=true;opening.removeEventListener("transitionend",finish);document.querySelector(".hero")?.classList.add("opening-complete")};
-  opening.addEventListener("transitionend",finish);setTimeout(finish,1500);
+  const finish=()=>{opening.hidden=true;document.querySelector(".hero")?.classList.add("opening-complete")};
+  setTimeout(finish,1250);
 }
 if(opening){
   document.body.classList.add("opening-active");requestAnimationFrame(()=>opening.classList.add("is-ready"));
   openingEnter.addEventListener("click",closeOpening);opening.addEventListener("keydown",event=>{if(event.key==="Escape"){event.preventDefault();closeOpening()}});
-  openingTimer=setTimeout(closeOpening,3000);openingFailSafe=setTimeout(closeOpening,6000);
+  openingTimer=setTimeout(closeOpening,3800);openingFailSafe=setTimeout(closeOpening,7000);
   if(matchMedia("(prefers-reduced-motion: reduce)").matches){clearTimeout(openingTimer);openingTimer=setTimeout(closeOpening,260)}
   openingEnter.focus({preventScroll:true});
 }
@@ -81,7 +81,7 @@ function showTrustee(index,shouldScroll=false){
 }
 showTrustee(0);
 
-document.querySelectorAll(".value-button").forEach(button=>button.addEventListener("click",()=>{document.querySelectorAll(".value-button").forEach(item=>item.classList.remove("active"));button.classList.add("active");const title=document.querySelector("#active-value-name");title.style.opacity="0";title.style.transform="translateY(5px)";setTimeout(()=>{title.innerHTML=`${button.dataset.devanagari} <span>${button.dataset.name}</span>`;document.querySelector("#active-value-meaning").textContent=button.dataset.meaning;title.style.opacity="1";title.style.transform="none"},150)}));
+document.querySelectorAll(".value-button").forEach(button=>button.addEventListener("click",()=>{document.querySelectorAll(".value-button").forEach(item=>item.classList.remove("active"));button.classList.add("active");const title=document.querySelector("#active-value-name"),art=document.querySelector("#active-value-art");title.style.opacity="0";title.style.transform="translateY(5px)";art.classList.add("is-changing");setTimeout(()=>{title.innerHTML=`${button.dataset.devanagari} <span>${button.dataset.name}</span>`;document.querySelector("#active-value-meaning").textContent=button.dataset.meaning;art.src=`assets/values/${button.dataset.image}`;title.style.opacity="1";title.style.transform="none";art.classList.remove("is-changing")},180)}));
 
 const menu=document.querySelector("#nav-links"),menuButton=document.querySelector(".menu-toggle");
 menuButton.addEventListener("click",()=>{const open=menu.classList.toggle("open");menuButton.setAttribute("aria-expanded",String(open))});

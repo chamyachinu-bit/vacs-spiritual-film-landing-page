@@ -22,8 +22,10 @@ Playfair Display is used for editorial headings, Inter for body/interface text, 
 
 Motion is restrained: 140-240ms for controls, approximately 680ms for one-time scroll reveals, and slower transform-only movement for the hero atmosphere. Reduced-motion users receive static layouts and short opacity feedback.
 
-The page-load opening is the sole cinematic exception. It uses the official logo, supplied lotus linework and paper texture for a ceremonial three-second entrance, followed by a split-curtain reveal. It is silent, skippable and reduced to a sub-300ms fade for visitors who request reduced motion. Do not add another competing entrance animation, autoplay sound or video loader.
+The page-load opening is the sole cinematic exception. It uses the official logo, supplied lotus linework, paper texture and the generated `opening-floral-halo.webp` for an approximately four-second floral-aperture entrance. The flowers resolve around the logo, a single soft glimmer crosses the mark, and the complete stage zooms and dissolves into the hero without a split curtain. It is silent, immediately skippable and reduced to a sub-300ms fade for visitors who request reduced motion. Do not add another competing entrance animation, autoplay sound or video loader.
 
 ## Film and lotus motion
 
-The decorative motion system uses independent pairs of supplied flower and lotus artwork for About, Dadashreeji, Values, Offerings, Members and Connect. Each pair is permanently pinned half outside two opposite viewport corners; section changes only crossfade visibility and never move artwork between corners. The Trustees and Hero sections intentionally receive no fixed flower pair because their own lotus imagery is already sufficient. Rotation is slow, continuous and opposite between paired flowers. Mobile uses smaller, lower-opacity artwork, while reduced-motion mode preserves only the crossfades. Film-strip dividers are not used.
+The decorative motion system uses exactly two supplied lotus blooms pinned half outside opposite viewport corners. They rotate slowly in opposite directions throughout the page, pause in background tabs, become smaller and quieter on mobile, and remain static under reduced-motion preferences. Film-strip dividers are not used.
+
+The Seven Enduring Values panel uses the seven approved watercolor illustrations in `assets/values/`. The active illustration crossfades when a value is selected; these images must remain paired with their matching bilingual value names.
