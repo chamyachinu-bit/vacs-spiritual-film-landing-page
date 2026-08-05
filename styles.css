@@ -94,6 +94,16 @@ blockquote{font-family:"Cormorant Garamond",var(--serif);font-weight:500}
   .trustee-showcase .trustee-detail h3{font-size:clamp(2.35rem,11vw,3.25rem)}
 }
 
+/* Member placeholders: intentionally neutral until approved portraits and names arrive. */
+.members{background-image:linear-gradient(rgba(255,248,241,.88),rgba(255,248,241,.88)),url("assets/extracted/paper-texture.webp");background-size:auto,1000px auto;background-blend-mode:normal,multiply}
+.member-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(18px,2.5vw,30px)}
+.member-placeholder{min-width:0;text-align:center}
+.member-photo{display:grid;place-items:center;aspect-ratio:4/5;overflow:hidden;border:1px solid rgba(96,56,19,.14);background:linear-gradient(145deg,rgba(255,255,255,.76),rgba(247,153,54,.08))}
+.member-photo img{width:42%;height:auto;opacity:.46;filter:saturate(.65)}
+.member-placeholder h3{margin-top:15px;font-size:1.1rem;color:var(--secondary)}
+@media(max-width:900px){.member-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:640px){.members{background-size:auto,760px auto}.member-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 12px}.member-placeholder h3{font-size:.95rem}.member-photo img{width:46%}}
+
 /* Remove decorative numbering; hierarchy comes from typography and imagery. */
 .connect-card>span,.trustee-count{display:none}
 .connect-card h3{margin-top:10px}
