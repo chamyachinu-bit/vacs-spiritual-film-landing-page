@@ -326,9 +326,11 @@ body{background-color:var(--cream);background-image:linear-gradient(rgba(255,248
 
 /* Film and lotus motion system — decorative, brand-sourced and transform-only. */
 .motion-decor{pointer-events:none;user-select:none}
-.lotus-scroll-overlay{position:fixed;z-index:24;right:-46px;top:43%;width:152px;height:152px;opacity:0;visibility:hidden;transform:translate3d(20px,-50%,0);transition:opacity .35s ease,visibility 0s .35s;will-change:transform,opacity}
+.lotus-scroll-overlay{position:fixed;z-index:24;width:clamp(190px,17vw,260px);height:clamp(190px,17vw,260px);opacity:0;visibility:hidden;transform:scale(.94);transition:opacity .42s ease,transform .55s var(--ease-out),visibility 0s .42s;will-change:transform,opacity}
 .lotus-scroll-overlay:before{content:"";position:absolute;inset:12%;border-radius:50%;background:radial-gradient(circle,rgba(247,153,54,.24),rgba(223,33,114,.08) 50%,transparent 72%);filter:blur(8px)}
-.lotus-scroll-overlay.is-active{opacity:.32;visibility:visible;transition-delay:0s}
+.lotus-scroll-overlay.is-active{opacity:.28;visibility:visible;transform:scale(1);transition-delay:0s}
+.lotus-scroll-overlay.is-switching{opacity:0;transform:scale(.96);transition-duration:.18s}
+.lotus-scroll-overlay.corner-top-right{right:-72px;top:15%}.lotus-scroll-overlay.corner-bottom-left{left:-72px;bottom:7%}.lotus-scroll-overlay.corner-top-left{left:-72px;top:15%}.lotus-scroll-overlay.corner-bottom-right{right:-72px;bottom:7%}
 .lotus-scroll-overlay img{position:relative;z-index:2;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 8px 18px rgba(239,90,42,.16))}
 .film-passage{position:relative;z-index:3;height:74px;margin:-12px 0;overflow:hidden;background:linear-gradient(90deg,transparent,rgba(247,153,54,.04) 20%,rgba(223,33,114,.035) 75%,transparent)}
 .film-track{position:absolute;left:50%;top:50%;display:flex;align-items:center;gap:10px;width:max-content;padding:14px 18px;border-block:7px solid var(--orange);background:linear-gradient(rgba(255,248,241,.92),rgba(255,248,241,.92));box-shadow:0 12px 32px rgba(96,56,19,.07);clip-path:inset(0 100% 0 0);transform:translate3d(-50%,-50%,0) rotate(-1.1deg);transition:clip-path 1.15s var(--ease-out)}
@@ -343,11 +345,11 @@ body{background-color:var(--cream);background-image:linear-gradient(rgba(255,248
 .lotus-trustees{right:-55px;top:5%;width:min(22vw,290px);--lotus-opacity:.08;filter:sepia(1) saturate(2.5) hue-rotate(342deg)}
 .purpose>.shell,.offerings>.shell,.trustees>.shell{position:relative;z-index:2}
 @media(max-width:800px){
-  .lotus-scroll-overlay{display:none}
+  .lotus-scroll-overlay{display:block;width:145px;height:145px}.lotus-scroll-overlay.corner-top-right{right:-48px;top:18%}.lotus-scroll-overlay.corner-bottom-left{left:-48px;bottom:9%}.lotus-scroll-overlay.corner-top-left{left:-48px;top:18%}.lotus-scroll-overlay.corner-bottom-right{right:-48px;bottom:9%}.lotus-scroll-overlay.is-active{opacity:.2}
   .film-passage{height:54px;margin:-8px 0}.film-passage-secondary{height:38px;margin:-5px 0}
   .film-track{gap:7px;padding:9px 12px;border-block-width:4px;transform:translate3d(-50%,-50%,0) rotate(-.7deg)}
   .lotus-values{right:-70px;width:52vw;--lotus-opacity:.07}.lotus-offerings{left:-48px;width:42vw;--lotus-opacity:.052}.lotus-trustees{right:-34px;width:38vw;--lotus-opacity:.055}
 }
 @media(prefers-reduced-motion:reduce){
-  .lotus-scroll-overlay{display:none}.film-track{clip-path:inset(0);transition:opacity .2s ease}.scroll-lotus{opacity:var(--lotus-opacity,.06);transform:none!important;scale:1;transition:opacity .2s ease}
+  .lotus-scroll-overlay{display:block}.lotus-scroll-overlay img{transform:none!important}.film-track{clip-path:inset(0);transition:opacity .2s ease}.scroll-lotus{opacity:var(--lotus-opacity,.06);transform:none!important;scale:1;transition:opacity .2s ease}
 }
