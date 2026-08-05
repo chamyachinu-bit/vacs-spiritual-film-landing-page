@@ -90,9 +90,7 @@ menu.querySelectorAll("a").forEach(link=>link.addEventListener("click",()=>{menu
 const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("visible");revealObserver.unobserve(entry.target)}}),{threshold:.12,rootMargin:"0px 0px -45px"});
 document.querySelectorAll(".reveal,.bloom-decor").forEach(element=>revealObserver.observe(element));
 const sections=[...document.querySelectorAll("main section[id]")],navAnchors=[...document.querySelectorAll(".nav-links>a")];
-const sectionFlowers=[...document.querySelectorAll(".section-flower")];
-function setSectionFlowers(section){sectionFlowers.forEach(flower=>flower.classList.toggle("is-visible",flower.dataset.flowerSection===section.id))}
-const activeObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){navAnchors.forEach(link=>link.classList.toggle("active",link.hash===`#${entry.target.id}`));setSectionFlowers(entry.target)}}),{rootMargin:"-30% 0px -62%"});sections.forEach(section=>activeObserver.observe(section));
+const activeObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting)navAnchors.forEach(link=>link.classList.toggle("active",link.hash===`#${entry.target.id}`))}),{rootMargin:"-30% 0px -62%"});sections.forEach(section=>activeObserver.observe(section));
 let ticking=false;
 function paintScroll(){
   const max=document.documentElement.scrollHeight-innerHeight,reduced=matchMedia("(prefers-reduced-motion: reduce)").matches,mobile=innerWidth<=800;
