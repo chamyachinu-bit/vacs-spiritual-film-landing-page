@@ -26,4 +26,4 @@ The page-load opening is the sole cinematic exception. It uses the official logo
 
 ## Film and lotus motion
 
-The editorial motion system uses one primary film passage between About and Dadashreeji, one restrained passage before Members, and a translucent reel visible only from About through Offerings. Three supplied lotus marks sit behind Values, Offerings and Trustees. Scroll ratios remain intentionally slow: reel rotation `0.09`, lotus rotation approximately `0.02–0.035`, and lotus vertical drift below `0.01`. Mobile uses half these rates and hides the fixed reel. Reduced-motion mode keeps the artwork static.
+The editorial motion system uses one primary film passage between About and Dadashreeji, one restrained passage before Members, and a coloured lotus overlay visible only from About through Offerings. Three additional supplied lotus marks sit behind Values, Offerings and Trustees. Scroll ratios remain intentionally slow: floating lotus rotation `0.055`, background lotus rotation approximately `0.02–0.035`, and lotus vertical drift below `0.01`. Mobile uses half these rates and hides the fixed overlay. Reduced-motion mode keeps the artwork static.

@@ -92,7 +92,7 @@ document.querySelectorAll(".reveal,.bloom-decor").forEach(element=>revealObserve
 const sections=[...document.querySelectorAll("main section[id]")],navAnchors=[...document.querySelectorAll(".nav-links>a")];
 const activeObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){navAnchors.forEach(link=>link.classList.toggle("active",link.hash===`#${entry.target.id}`))}}),{rootMargin:"-30% 0px -62%"});sections.forEach(section=>activeObserver.observe(section));
 
-const scrollLotuses=[...document.querySelectorAll(".scroll-lotus")],filmPassages=[...document.querySelectorAll(".film-passage")],filmReel=document.querySelector("#film-reel-overlay");
+const scrollLotuses=[...document.querySelectorAll(".scroll-lotus")],filmPassages=[...document.querySelectorAll(".film-passage")],floatingLotus=document.querySelector("#lotus-scroll-overlay");
 let motionMetrics={lotuses:[],passages:[],reelStart:0,reelEnd:0};
 function measureMotion(){const pageY=scrollY;motionMetrics={lotuses:scrollLotuses.map(item=>({item,top:item.getBoundingClientRect().top+pageY})),passages:filmPassages.map(item=>({track:item.querySelector(".film-track"),top:item.getBoundingClientRect().top+pageY})),reelStart:document.querySelector("#about").getBoundingClientRect().top+pageY,reelEnd:document.querySelector("#members").getBoundingClientRect().top+pageY-innerHeight*.35}}
 addEventListener("load",measureMotion,{once:true});addEventListener("resize",()=>requestAnimationFrame(measureMotion),{passive:true});measureMotion();
@@ -104,7 +104,7 @@ function paintScroll(){
     if(!mobile)document.querySelectorAll(".parallax").forEach(item=>item.style.transform=`translate3d(0,${scrollY*Number(item.dataset.rate)}px,0)`);
     motionMetrics.lotuses.forEach(({item,top})=>{const local=(scrollY+innerHeight*.5-top)*motionScale;item.style.transform=`translate3d(0,${local*Number(item.dataset.driftRate)}px,0) rotate(${local*Number(item.dataset.rotateRate)}deg)`});
     motionMetrics.passages.forEach(({track,top},index)=>{const travel=Math.max(-34,Math.min(34,(scrollY+innerHeight-top)*.025*motionScale));track.style.transform=`translate3d(calc(-50% + ${index%2?travel:-travel}px),-50%,0) rotate(${index%2?.65:-1.1}deg)`});
-    if(filmReel){const active=!mobile&&scrollY>=motionMetrics.reelStart-innerHeight*.45&&scrollY<=motionMetrics.reelEnd;filmReel.classList.toggle("is-active",active);filmReel.querySelector("img").style.transform=`rotate(${scrollY*.09}deg)`}
+    if(floatingLotus){const active=!mobile&&scrollY>=motionMetrics.reelStart-innerHeight*.45&&scrollY<=motionMetrics.reelEnd;floatingLotus.classList.toggle("is-active",active);floatingLotus.querySelector("img").style.transform=`rotate(${scrollY*.055}deg)`}
   }
   ticking=false
 }
