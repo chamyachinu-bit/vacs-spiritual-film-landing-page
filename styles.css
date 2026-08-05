@@ -61,3 +61,13 @@
 
 /* Reusable ornament extracted from the approved vector master. */
 .offerings .section-heading:after,.trustees .section-heading:after{content:"";display:block;width:150px;height:50px;margin:22px auto -12px;background:url("assets/brand/divider-lotus-magenta.svg") center/contain no-repeat}
+
+/* Brand-manual visual language: quiet patterned edges and editorial quotation type. */
+blockquote{font-family:"Cormorant Garamond",var(--serif);font-weight:500}
+.purpose,.offerings,.trustees,.connect{isolation:isolate;overflow:hidden}
+.purpose:before{content:"";position:absolute;z-index:0;right:-24px;top:11%;width:165px;height:230px;background:url("assets/brand/pattern-lotus-outline.svg") center/cover no-repeat;opacity:.12}
+.offerings:before{content:"";position:absolute;z-index:0;left:-35px;bottom:6%;width:185px;height:185px;background:url("assets/brand/pattern-lotus-magenta.svg") center/cover no-repeat;opacity:.07}
+.trustees:before{content:"";position:absolute;z-index:0;right:-28px;bottom:4%;width:170px;height:195px;background:url("assets/brand/pattern-woven-orange.svg") center/cover no-repeat;opacity:.075}
+.connect:before{content:"";position:absolute;left:50%;top:34px;width:190px;height:70px;transform:translateX(-50%);background:url("assets/brand/divider-rosettes.svg") center/contain no-repeat;filter:brightness(0) invert(1);opacity:.18}
+.purpose>.shell,.offerings>.shell,.trustees>.shell,.connect>.shell{position:relative;z-index:1}
+@media(max-width:640px){.purpose:before{width:115px;height:160px;opacity:.08}.offerings:before,.trustees:before{display:none}.connect:before{top:20px;width:145px}}
