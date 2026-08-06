@@ -575,17 +575,14 @@ h1{line-height:1.18;letter-spacing:-.032em}
 @media(max-width:700px){.trustee-showcase{display:block!important}.trustee-showcase .trustee-grid{grid-template-columns:repeat(3,1fr)!important;gap:10px!important}.trustee-showcase .trustee-card,.trustee-showcase .trustee-card:last-child:nth-child(odd){height:auto!important;width:100%!important;aspect-ratio:3/4}.trustee-showcase .trustee-meta h3{font-size:.82rem!important}.trustee-showcase .trustee-detail{display:flex!important;flex-direction:column;gap:18px;margin-inline:-16px!important;width:auto!important;padding:0 18px 72px!important}.trustee-showcase .trustee-detail-portrait{width:100%;height:240px;margin:0!important;flex:none}.trustee-showcase .trustee-detail-portrait img{min-height:0!important;max-height:none!important;height:100%}.trustee-showcase .trustee-detail-copy{align-items:flex-start!important}.trustee-showcase .trustee-detail h3{font-size:clamp(1.7rem,8vw,2.2rem)!important}.trustee-showcase .trustee-biography>p{font-size:.78rem!important}.trustee-showcase .trustee-biography blockquote{font-size:.78rem!important}}
 @media(max-width:480px){.trustee-showcase .trustee-grid{grid-template-columns:repeat(2,1fr)!important;gap:9px!important}.trustee-showcase .trustee-meta h3{font-size:.78rem!important}.trustee-showcase .trustee-meta p{font-size:.58rem!important}}
 
-/* ── Trustee detail: universal fixed-height panel so every profile occupies
-      the same space; biography zone scrolls when text is longer. ── */
-.trustee-showcase .trustee-detail{height:clamp(460px,58vh,540px)!important;min-height:0!important;align-items:stretch!important}
+/* ── Trustee detail: auto height so all text always fully visible; portrait
+      stretches to match whatever height the biography column needs. ── */
+.trustee-showcase .trustee-detail{height:auto!important;min-height:clamp(420px,52vh,520px)!important;align-items:stretch!important}
 .trustee-showcase .trustee-detail-portrait{align-self:stretch!important}
-.trustee-showcase .trustee-detail-portrait img{height:100%!important;min-height:0!important;max-height:none!important;object-position:center 15%}
-.trustee-showcase .trustee-detail-copy{overflow:hidden!important;justify-content:flex-start!important}
+.trustee-showcase .trustee-detail-portrait img{height:100%!important;min-height:clamp(420px,52vh,520px)!important;max-height:none!important;object-position:center 15%}
+.trustee-showcase .trustee-detail-copy{overflow:visible!important;justify-content:flex-start!important}
 .trustee-showcase .trustee-identity{flex:none}
-.trustee-showcase .trustee-biography{flex:1;overflow-y:auto;padding-right:6px;scrollbar-width:thin;scrollbar-color:rgba(247,153,54,.28) transparent}
-.trustee-showcase .trustee-biography::-webkit-scrollbar{width:4px}
-.trustee-showcase .trustee-biography::-webkit-scrollbar-track{background:transparent}
-.trustee-showcase .trustee-biography::-webkit-scrollbar-thumb{background:rgba(247,153,54,.35);border-radius:2px}
+.trustee-showcase .trustee-biography{overflow:visible;padding-right:0}
 
 /* Per-trustee portrait photo position — gallery card (nth-child order matches trustees array) */
 .trustee-showcase .trustee-card:nth-child(1) .trustee-photo img{object-position:center 8%}
