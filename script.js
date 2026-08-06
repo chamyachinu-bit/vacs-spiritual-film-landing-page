@@ -57,7 +57,7 @@ const formDefinitions = {
 };
 
 const offeringGrid=document.querySelector("#offering-grid");
-offerings.forEach((item,index)=>{const article=document.createElement("article");article.className="offering-card reveal";article.style.setProperty("--delay",`${(index%3)*55}ms`);article.innerHTML=`<button type="button" aria-expanded="false"><span class="offering-head"><img src="assets/icons/${item.icon}" width="116" height="116" alt=""></span><h3>${item.name}</h3><p>${item.text.split(". ")[0]}.</p><span class="offering-more"><span><p>${item.text}</p></span></span><span class="offering-action">Read more <i>+</i></span></button>`;const button=article.querySelector("button");button.addEventListener("click",()=>{const open=article.classList.toggle("open");button.setAttribute("aria-expanded",String(open));button.querySelector(".offering-action").firstChild.textContent=open?"Read less ":"Read more "});offeringGrid.append(article)});
+offerings.forEach((item,index)=>{const article=document.createElement("article");article.className="offering-card reveal";article.style.setProperty("--delay",`${(index%3)*55}ms`);article.innerHTML=`<span class="offering-head"><img src="assets/icons/${item.icon}" width="116" height="116" alt=""></span><h3>${item.name}</h3><p>${item.text}</p>`;offeringGrid.append(article)});
 
 const trusteeGrid=document.querySelector("#trustee-grid");
 const detail=document.querySelector("#trustee-detail");
