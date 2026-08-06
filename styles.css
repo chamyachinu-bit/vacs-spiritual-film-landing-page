@@ -499,3 +499,23 @@ blockquote{margin-top:24px;padding-top:16px;font-size:1.08rem}
 .value-intro h3 span{display:inline;margin:0 0 0 8px;color:var(--cream);font-size:.9rem}
 .value-intro>p:last-child{position:absolute;z-index:3;left:42px;bottom:16px;margin:0;color:rgba(255,248,241,.72);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase}
 @media(max-width:520px){.value-intro{min-height:300px}.value-intro .eyebrow{left:16px;top:16px}.value-intro h3{left:16px;right:16px;bottom:30px;max-width:calc(100% - 32px);font-size:1.25rem}.value-intro>p:last-child{left:30px;bottom:13px}.value-art{inset:5%;width:90%;height:90%}}
+
+/* ── Design-review pass ─────────────────────────────────────────────────
+   1. h1: relax letter-spacing to remove f/i crowding within "film";
+      open line-height so ascenders don't graze adjacent lines.
+   2. Hero logo: ~35 % larger than the previous compact baseline.
+   3. Initiatives heading: constrain line length and refine vertical rhythm.
+   4. Pillar card h3: allow graceful wrapping for longer new titles.
+   5. Safety: hide any stale hero-mark tagline node if it somehow persists.
+   ────────────────────────────────────────────────────────────────────── */
+h1{line-height:1.18;letter-spacing:-.032em}
+.hero-logo{width:min(472px,88%)}
+.hero-mark p{display:none}
+@media(max-width:800px){.hero-mark{width:min(64vw,276px)}}
+@media(max-width:520px){.hero-mark{width:72vw}}
+.offerings .section-heading{margin-bottom:58px}
+.offerings .section-heading h2{max-width:555px;margin-inline:auto}
+.offerings .section-heading p:not(.eyebrow){max-width:498px;margin-inline:auto}
+.pillars h3{font-size:1.3rem;line-height:1.22;text-wrap:balance}
+@media(max-width:800px){.pillars h3{font-size:1.1rem}}
+@media(max-width:520px){.pillars h3{font-size:.95rem}}

@@ -81,7 +81,7 @@ function showTrustee(index,shouldScroll=false){
 }
 showTrustee(0);
 
-document.querySelectorAll(".value-button").forEach(button=>button.addEventListener("click",()=>{document.querySelectorAll(".value-button").forEach(item=>item.classList.remove("active"));button.classList.add("active");const title=document.querySelector("#active-value-name"),art=document.querySelector("#active-value-art");title.style.opacity="0";title.style.transform="translateY(5px)";art.classList.add("is-changing");setTimeout(()=>{title.innerHTML=`${button.dataset.devanagari} <span>${button.dataset.name}</span>`;document.querySelector("#active-value-meaning").textContent=button.dataset.meaning;art.src=`assets/values/${button.dataset.image}`;title.style.opacity="1";title.style.transform="none";art.classList.remove("is-changing")},180)}));
+document.querySelectorAll(".value-button").forEach(button=>button.addEventListener("click",()=>{document.querySelectorAll(".value-button").forEach(item=>item.classList.remove("active"));button.classList.add("active");const art=document.querySelector("#active-value-art");art.classList.add("is-changing");setTimeout(()=>{art.src=`assets/values/${button.dataset.image}`;art.classList.remove("is-changing")},180)}));
 
 const menu=document.querySelector("#nav-links"),menuButton=document.querySelector(".menu-toggle");
 menuButton.addEventListener("click",()=>{const open=menu.classList.toggle("open");menuButton.setAttribute("aria-expanded",String(open))});
