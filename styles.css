@@ -508,6 +508,11 @@ blockquote{margin-top:24px;padding-top:16px;font-size:1.08rem}
 .offering-card p{font-size:.9rem;line-height:1.65;color:var(--ink);margin:0}
 @media(prefers-reduced-motion:reduce){.opening-rule,.opening-logo{transition-duration:.2s!important;transition-delay:0s!important}}
 
+/* Values sub-section heading: visual break between Vision/Mission cards and the seven values. */
+.values-sub-heading{margin-top:clamp(56px,7vw,88px)!important;margin-bottom:36px!important}
+.values-sub-heading h2{font-size:clamp(2rem,3.4vw,3.4rem)}
+.values-wrap{margin-top:0!important}
+
 /* Supplied value illustrations become the active visual language of the seven-values panel. */
 .value-intro{position:relative;isolation:isolate;overflow:hidden;min-height:360px;padding:0;background:radial-gradient(circle at 50% 48%,#fffaf4,#f8e7d4 72%,#efd8c0)}
 .value-intro:after{content:"";position:absolute;z-index:1;inset:0;background:linear-gradient(180deg,rgba(255,248,241,.08) 45%,rgba(42,27,24,.12) 72%,rgba(42,27,24,.62));pointer-events:none}
@@ -588,7 +593,7 @@ h1{line-height:1.18;letter-spacing:-.032em}
 .trustee-showcase .trustee-card:nth-child(3) .trustee-photo img{object-position:center top}
 .trustee-showcase .trustee-card:nth-child(4) .trustee-photo img{object-position:center 10%}
 .trustee-showcase .trustee-card:nth-child(5) .trustee-photo img{object-position:center top}
-.trustee-showcase .trustee-card:nth-child(6) .trustee-photo img{object-position:center 18%}
+.trustee-showcase .trustee-card:nth-child(6) .trustee-photo img{object-position:center 48%}
 .trustee-showcase .trustee-card:nth-child(7) .trustee-photo img{object-position:center 8%}
 
 /* Per-trustee detail portrait position (src substring match) */
@@ -597,7 +602,7 @@ h1{line-height:1.18;letter-spacing:-.032em}
 .trustee-showcase .trustee-detail-portrait img[src*="kajal"]{object-position:center top}
 .trustee-showcase .trustee-detail-portrait img[src*="addinath"]{object-position:center 10%}
 .trustee-showcase .trustee-detail-portrait img[src*="aaditi"]{object-position:center top}
-.trustee-showcase .trustee-detail-portrait img[src*="shaan"]{object-position:center 18%}
+.trustee-showcase .trustee-detail-portrait img[src*="shaan"]{object-position:center 44%}
 .trustee-showcase .trustee-detail-portrait img[src*="maitreyi"]{object-position:center 8%}
 
 /* On mobile the panel is flex-column so no fixed height — bio scrolls freely */
