@@ -508,6 +508,11 @@ blockquote{margin-top:24px;padding-top:16px;font-size:1.08rem}
 .offering-card p{font-size:.9rem;line-height:1.65;color:var(--ink);margin:0}
 @media(prefers-reduced-motion:reduce){.opening-rule,.opening-logo{transition-duration:.2s!important;transition-delay:0s!important}}
 
+/* Mission sub-points list inside the purpose card. */
+.mission-points{margin:10px 0 0;padding-left:18px;color:var(--muted);font-size:.78rem;line-height:1.65}
+.mission-points li{margin-bottom:2px}
+@media(max-width:800px){.mission-points{font-size:.72rem}}
+
 /* Values sub-section heading: visual break between Vision/Mission cards and the seven values. */
 .values-sub-heading{margin-top:clamp(56px,7vw,88px)!important;margin-bottom:36px!important}
 .values-sub-heading h2{font-size:clamp(2rem,3.4vw,3.4rem)}
