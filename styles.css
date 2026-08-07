@@ -537,7 +537,7 @@ blockquote{margin-top:24px;padding-top:16px;font-size:1.08rem}
    4. Pillar card h3: allow graceful wrapping for longer new titles.
    5. Safety: hide any stale hero-mark tagline node if it somehow persists.
    ────────────────────────────────────────────────────────────────────── */
-h1{line-height:1.18;letter-spacing:-.032em}
+h1{line-height:1.18;letter-spacing:-.032em;font-variant-ligatures:no-common-ligatures}
 .hero-logo{width:min(640px,100%)}
 .hero-mark{min-width:min(52vw,640px)}
 .hero-mark p{display:none}
