@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Inter:wght@300;400;500;600&family=Noto+Serif+Devanagari:wght@500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=25">
+  <link rel="stylesheet" href="styles.css?v=26">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Vaishvik Adhyatmik Chitranagari Samiti","alternateName":"VACS","url":"https://www.vacstrust.org/","email":"acc.vacs27@gmail.com","telephone":"+91-7400118626","description":"Global Spiritual Film & Entertainment Association","address":{"@type":"PostalAddress","streetAddress":"Ground Floor, Office No. 03, Sai Pride CHS, Plot No. 219, Sector 21, Kamothe","addressLocality":"Navi Mumbai","addressRegion":"Maharashtra","postalCode":"410209","addressCountry":"IN"}}</script>
 </head>
 <body>
@@ -125,16 +125,18 @@
         <div class="section-heading centered reveal values-sub-heading">
           <h2>Our Values</h2>
         </div>
-        <div class="values-wrap reveal">
-          <div class="value-intro"><img class="value-art" id="active-value-art" src="assets/values/truth.webp" width="900" height="900" alt="" aria-hidden="true"></div>
-          <div class="value-list" role="list" aria-label="Organisational values">
-            <button class="value-button active" data-devanagari="सत्य" data-name="Satya" data-meaning="Truth" data-image="truth.webp" type="button"><i class="val-num">I</i> सत्य <span>Truth</span></button>
-            <button class="value-button" data-devanagari="धर्म" data-name="Dharma" data-meaning="Righteousness" data-image="righteousness.webp" type="button"><i class="val-num">II</i> धर्म <span>Righteousness</span></button>
-            <button class="value-button" data-devanagari="मैत्री" data-name="Maitri" data-meaning="True Friendship" data-image="true-friendship.webp" type="button"><i class="val-num">III</i> मैत्री <span>True friendship</span></button>
-            <button class="value-button" data-devanagari="शांति" data-name="Shanti" data-meaning="Peace" data-image="peace.webp" type="button"><i class="val-num">IV</i> शांति <span>Peace</span></button>
-            <button class="value-button" data-devanagari="प्रेम" data-name="Prem" data-meaning="Unconditional Love" data-image="unconditional-love.webp" type="button"><i class="val-num">V</i> प्रेम <span>Unconditional love</span></button>
-            <button class="value-button" data-devanagari="संबंध" data-name="Sambandh" data-meaning="Bond with the Divine" data-image="bond-with-divine.webp" type="button"><i class="val-num">VI</i> संबंध <span>Bond with the Divine</span></button>
-            <button class="value-button" data-devanagari="एक परिवार" data-name="Ek Parivaar" data-meaning="One Family" data-image="one-family.webp" type="button"><i class="val-num">VII</i> एक परिवार <span>One family</span></button>
+        <div class="mala-scene reveal" role="region" aria-label="Our Values">
+          <div class="mala-thread" aria-hidden="true"></div>
+          <div class="mala-ring" id="mala-ring"></div>
+          <div class="mala-center" aria-live="polite" aria-atomic="true">
+            <div class="mala-art-wrap">
+              <img class="mala-art" id="mala-art" src="assets/values/truth.webp" width="900" height="900" alt="" aria-hidden="true">
+            </div>
+            <div class="mala-label">
+              <span class="mala-numeral" id="mala-numeral">I</span>
+              <p class="mala-deva" id="mala-deva">सत्य</p>
+              <p class="mala-meaning" id="mala-meaning">Truth</p>
+            </div>
           </div>
         </div>
       </div>
@@ -201,6 +203,6 @@
       <form id="intent-form" novalidate><input id="intent" name="intent" type="hidden"><div class="form-grid"><label>Full name <span>*</span><input name="name" autocomplete="name" required></label><label>Email address <span>*</span><input name="email" type="email" autocomplete="email" required></label><label>Phone number <span>*</span><input name="phone" type="tel" autocomplete="tel" required></label><label>City <span>*</span><input name="city" autocomplete="address-level2" required></label></div><div class="intent-fields" id="intent-fields"></div><label>Message<textarea name="message" rows="4"></textarea></label><label class="consent"><input name="consent" type="checkbox" required><span>I consent to being contacted about this enquiry.</span></label><button class="button form-submit" type="submit" disabled>Submissions opening soon</button></form>
     </div>
   </dialog>
-  <script src="config.js"></script><script src="script.js?v=23"></script>
+  <script src="config.js"></script><script src="script.js?v=26"></script>
 </body>
 </html>

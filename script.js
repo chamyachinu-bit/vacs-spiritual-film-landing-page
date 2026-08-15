@@ -93,7 +93,61 @@ tModalClose.addEventListener("click",closeTrusteeModal);
 tModalBg.addEventListener("click",closeTrusteeModal);
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!tModal.hidden)closeTrusteeModal()});
 
-document.querySelectorAll(".value-button").forEach(button=>button.addEventListener("click",()=>{document.querySelectorAll(".value-button").forEach(item=>item.classList.remove("active"));button.classList.add("active");const art=document.querySelector("#active-value-art");art.classList.add("is-changing");setTimeout(()=>{art.src=`assets/values/${button.dataset.image}`;art.classList.remove("is-changing")},180)}));
+// ── Mala values: seven beads on a circular path ──
+const MALA_VALUES=[
+  {devanagari:"सत्य",  numeral:"I",   meaning:"Truth",               image:"truth.webp"},
+  {devanagari:"धर्म",  numeral:"II",  meaning:"Righteousness",       image:"righteousness.webp"},
+  {devanagari:"मैत्री",numeral:"III", meaning:"True Friendship",     image:"true-friendship.webp"},
+  {devanagari:"शांति", numeral:"IV",  meaning:"Peace",               image:"peace.webp"},
+  {devanagari:"प्रेम", numeral:"V",   meaning:"Unconditional Love",  image:"unconditional-love.webp"},
+  {devanagari:"संबंध", numeral:"VI",  meaning:"Bond with the Divine",image:"bond-with-divine.webp"},
+  {devanagari:"एक परिवार",numeral:"VII",meaning:"One Family",        image:"one-family.webp"},
+];
+const malaRingEl=document.querySelector("#mala-ring");
+const malaArtEl=document.querySelector("#mala-art");
+const malaDevaEl=document.querySelector("#mala-deva");
+const malaMeaningEl=document.querySelector("#mala-meaning");
+const malaNumeralEl=document.querySelector("#mala-numeral");
+const malaBeads=[];
+let malaActive=0,malaTimer=null;
+if(malaRingEl){
+  MALA_VALUES.forEach((v,i)=>{
+    const b=document.createElement("button");
+    b.type="button";
+    b.className="mala-bead"+(i===0?" active":"");
+    b.setAttribute("aria-label",`${v.devanagari} — ${v.meaning}`);
+    b.textContent=v.numeral;
+    b.addEventListener("click",()=>{clearTimeout(malaTimer);setMala(i);scheduleMala();});
+    malaRingEl.appendChild(b);
+    malaBeads.push(b);
+  });
+}
+function positionMalaBeads(){
+  const scene=document.querySelector(".mala-scene");
+  if(!scene||!scene.offsetWidth)return;
+  const R=scene.offsetWidth*0.415,cx=scene.offsetWidth/2,cy=scene.offsetHeight/2;
+  malaBeads.forEach((b,i)=>{
+    const a=(270+i*(360/MALA_VALUES.length))*Math.PI/180;
+    b.style.left=(cx+R*Math.cos(a))+"px";
+    b.style.top=(cy+R*Math.sin(a))+"px";
+  });
+}
+function setMala(idx){
+  malaBeads.forEach((b,i)=>b.classList.toggle("active",i===idx));
+  malaActive=idx;
+  const v=MALA_VALUES[idx];
+  [malaArtEl,malaDevaEl,malaMeaningEl,malaNumeralEl].forEach(el=>el&&el.classList.add("is-changing"));
+  setTimeout(()=>{
+    if(malaArtEl)malaArtEl.src=`assets/values/${v.image}`;
+    if(malaDevaEl)malaDevaEl.textContent=v.devanagari;
+    if(malaMeaningEl)malaMeaningEl.textContent=v.meaning;
+    if(malaNumeralEl)malaNumeralEl.textContent=v.numeral;
+    [malaArtEl,malaDevaEl,malaMeaningEl,malaNumeralEl].forEach(el=>el&&el.classList.remove("is-changing"));
+  },350);
+}
+function scheduleMala(){malaTimer=setTimeout(()=>{setMala((malaActive+1)%MALA_VALUES.length);scheduleMala();},5000);}
+window.addEventListener("load",()=>{positionMalaBeads();scheduleMala();});
+window.addEventListener("resize",positionMalaBeads);
 
 const menu=document.querySelector("#nav-links"),menuButton=document.querySelector(".menu-toggle");
 menuButton.addEventListener("click",()=>{const open=menu.classList.toggle("open");menuButton.setAttribute("aria-expanded",String(open))});
