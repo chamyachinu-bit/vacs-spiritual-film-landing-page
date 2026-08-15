@@ -658,14 +658,14 @@ h1{line-height:1.18;letter-spacing:-.032em;font-variant-ligatures:no-common-liga
 .t-portrait-card:nth-child(1) .t-portrait-frame img{object-position:center 12%;transform-origin:center 12%}
 .t-portrait-card:nth-child(2){--zoom:1.45}
 .t-portrait-card:nth-child(2) .t-portrait-frame img{object-position:center top;transform-origin:center top}
-.t-portrait-card:nth-child(3){--zoom:1.6}
-.t-portrait-card:nth-child(3) .t-portrait-frame img{object-position:center top;transform-origin:center top}
-.t-portrait-card:nth-child(4){--zoom:1.6}
-.t-portrait-card:nth-child(4) .t-portrait-frame img{object-position:center top;transform-origin:center top}
+.t-portrait-card:nth-child(3){--zoom:1.55}
+.t-portrait-card:nth-child(3) .t-portrait-frame img{object-position:center 8%;transform-origin:center 8%}
+.t-portrait-card:nth-child(4){--zoom:1.55}
+.t-portrait-card:nth-child(4) .t-portrait-frame img{object-position:center 8%;transform-origin:center 8%}
 .t-portrait-card:nth-child(5){--zoom:1.0}
 .t-portrait-card:nth-child(5) .t-portrait-frame img{object-position:center 18%;transform-origin:center 18%}
-.t-portrait-card:nth-child(6){--zoom:1.7}
-.t-portrait-card:nth-child(6) .t-portrait-frame img{object-position:center top;transform-origin:center top}
+.t-portrait-card:nth-child(6){--zoom:1.6}
+.t-portrait-card:nth-child(6) .t-portrait-frame img{object-position:center 28%;transform-origin:center 28%}
 .t-portrait-card:nth-child(7){--zoom:1.0}
 .t-portrait-card:nth-child(7) .t-portrait-frame img{object-position:center top;transform-origin:center top}
 
