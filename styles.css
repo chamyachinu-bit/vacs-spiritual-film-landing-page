@@ -515,8 +515,13 @@ blockquote{margin-top:24px;padding-top:16px;font-size:1.08rem}
 
 /* Values sub-section heading: visual break between Vision/Mission cards and the seven values. */
 .values-sub-heading{margin-top:clamp(56px,7vw,88px)!important;margin-bottom:36px!important}
-.values-sub-heading h2{font-size:clamp(2rem,3.4vw,3.4rem)}
+.values-sub-heading h2{font-size:clamp(2.4rem,4.2vw,4.8rem);letter-spacing:-.04em}
 .values-wrap{margin-top:0!important}
+
+/* Roman numerals on value buttons */
+.val-num{font-style:normal;font-family:"Cormorant Garamond",var(--serif);font-weight:500;font-size:1.15em;color:var(--gold);opacity:.72;margin-right:4px;letter-spacing:.04em;display:inline-block;min-width:1.6em;text-align:center}
+.value-button.active .val-num{opacity:1}
+@media(max-width:520px){.val-num{font-size:1em;min-width:1.4em}}
 
 /* Supplied value illustrations become the active visual language of the seven-values panel. */
 .value-intro{position:relative;isolation:isolate;overflow:hidden;min-height:360px;padding:0;background:radial-gradient(circle at 50% 48%,#fffaf4,#f8e7d4 72%,#efd8c0)}
@@ -589,23 +594,26 @@ h1{line-height:1.18;letter-spacing:-.032em;font-variant-ligatures:no-common-liga
 .trustee-showcase .trustee-identity{flex:none}
 .trustee-showcase .trustee-biography{overflow:visible;padding-right:0}
 
-/* Per-trustee portrait photo position — gallery card (nth-child order matches trustees array) */
-.trustee-showcase .trustee-card:nth-child(1) .trustee-photo img{object-position:center 8%}
-.trustee-showcase .trustee-card:nth-child(2) .trustee-photo img{object-position:center 12%}
-.trustee-showcase .trustee-card:nth-child(3) .trustee-photo img{object-position:center top}
-.trustee-showcase .trustee-card:nth-child(4) .trustee-photo img{object-position:center 10%}
+/* Per-trustee portrait photo position — new order: Makarand(1) Shaan(2) Smita(3) Saundarya(4) Kajal(5) Addinath(6) Aaditi(7) */
+.trustee-showcase .trustee-card:nth-child(1) .trustee-photo img{object-position:center 10%}
+.trustee-showcase .trustee-card:nth-child(2) .trustee-photo img{object-position:center 38%}
+.trustee-showcase .trustee-card:nth-child(3) .trustee-photo img{object-position:center 8%}
+.trustee-showcase .trustee-card:nth-child(4) .trustee-photo img{object-position:center 8%}
 .trustee-showcase .trustee-card:nth-child(5) .trustee-photo img{object-position:center top}
-.trustee-showcase .trustee-card:nth-child(6) .trustee-photo img{object-position:center 48%}
-.trustee-showcase .trustee-card:nth-child(7) .trustee-photo img{object-position:center 8%}
+.trustee-showcase .trustee-card:nth-child(6) .trustee-photo img{object-position:center 8%}
+.trustee-showcase .trustee-card:nth-child(7) .trustee-photo img{object-position:center top}
 
 /* Per-trustee detail portrait position (src substring match) */
-.trustee-showcase .trustee-detail-portrait img[src*="smita"]{object-position:center 10%}
-.trustee-showcase .trustee-detail-portrait img[src*="makarand"]{object-position:center 14%}
-.trustee-showcase .trustee-detail-portrait img[src*="kajal"]{object-position:center top}
-.trustee-showcase .trustee-detail-portrait img[src*="addinath"]{object-position:center 10%}
-.trustee-showcase .trustee-detail-portrait img[src*="aaditi"]{object-position:center top}
-.trustee-showcase .trustee-detail-portrait img[src*="shaan"]{object-position:center 44%}
+.trustee-showcase .trustee-detail-portrait img[src*="makarand"]{object-position:center 12%}
+.trustee-showcase .trustee-detail-portrait img[src*="shaan"]{object-position:center 36%}
+.trustee-showcase .trustee-detail-portrait img[src*="smita"]{object-position:center 8%}
 .trustee-showcase .trustee-detail-portrait img[src*="maitreyi"]{object-position:center 8%}
+.trustee-showcase .trustee-detail-portrait img[src*="kajal"]{object-position:center top}
+.trustee-showcase .trustee-detail-portrait img[src*="addinath"]{object-position:center 8%}
+.trustee-showcase .trustee-detail-portrait img[src*="aaditi"]{object-position:center top}
+
+/* Mitra Kian subtitle line in trustee detail */
+.trustee-kian{margin:4px 0 18px!important;color:var(--gold)!important;font-size:.65rem!important;font-weight:600;letter-spacing:.18em;text-transform:uppercase}
 
 /* On mobile the panel is flex-column so no fixed height — bio scrolls freely */
 @media(max-width:700px){
