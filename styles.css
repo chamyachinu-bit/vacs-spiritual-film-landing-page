@@ -632,3 +632,107 @@ h1{line-height:1.18;letter-spacing:-.032em;font-variant-ligatures:no-common-liga
 .member-placeholder h3{position:static!important;z-index:auto;left:auto!important;right:auto!important;bottom:auto!important;margin:8px 0 0!important;padding:0 2px;color:var(--brown)!important;font-family:var(--sans)!important;font-size:.66rem!important;font-weight:500;letter-spacing:.04em;line-height:1.25;text-shadow:none!important}
 @media(max-width:900px){.member-grid{grid-template-columns:repeat(4,1fr)!important;width:min(640px,100%)!important;gap:11px!important}}
 @media(max-width:640px){.member-grid{grid-template-columns:repeat(3,1fr)!important;gap:9px!important;width:100%!important}.member-placeholder h3{font-size:.6rem!important;margin-top:6px!important}}
+
+/* ══════════════════════════════════════════════════════════════
+   TRUSTEES v5 — Editorial Portrait Gallery + Modal
+   Layout: 3-1-3 (Makarand·Shaan·Smita / Saundarya / Kajal·Addinath·Aaditi)
+   ══════════════════════════════════════════════════════════════ */
+.trustees-gallery{display:grid;grid-template-columns:repeat(6,1fr);gap:clamp(10px,1.4vw,20px);row-gap:clamp(22px,3.2vw,40px);width:min(1080px,100%);margin-inline:auto}
+.t-portrait-card{border:0;background:none;padding:0;cursor:pointer;text-align:left;display:block}
+.t-portrait-card:nth-child(1){grid-column:1/3}
+.t-portrait-card:nth-child(2){grid-column:3/5}
+.t-portrait-card:nth-child(3){grid-column:5/7}
+.t-portrait-card:nth-child(4){grid-column:3/5}
+.t-portrait-card:nth-child(5){grid-column:1/3}
+.t-portrait-card:nth-child(6){grid-column:3/5}
+.t-portrait-card:nth-child(7){grid-column:5/7}
+
+.t-portrait-frame{position:relative;display:block;margin:0;aspect-ratio:4/5;overflow:hidden;background:var(--night)}
+.t-portrait-frame img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 10%;filter:saturate(.68);transition:transform .55s var(--ease-out),filter .45s ease;will-change:transform}
+.t-portrait-frame:after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,transparent,rgba(247,153,54,.65),transparent);opacity:0;transition:opacity .3s ease}
+
+/* Per-trustee gallery crop: Makarand(1) Shaan(2) Smita(3) Saundarya(4) Kajal(5) Addinath(6) Aaditi(7) */
+.t-portrait-card:nth-child(1) .t-portrait-frame img{object-position:center 10%}
+.t-portrait-card:nth-child(2) .t-portrait-frame img{object-position:center 34%}
+.t-portrait-card:nth-child(3) .t-portrait-frame img{object-position:center 8%}
+.t-portrait-card:nth-child(4) .t-portrait-frame img{object-position:center 8%}
+.t-portrait-card:nth-child(5) .t-portrait-frame img{object-position:center top}
+.t-portrait-card:nth-child(6) .t-portrait-frame img{object-position:center 8%}
+.t-portrait-card:nth-child(7) .t-portrait-frame img{object-position:center top}
+
+.t-portrait-meta{padding:12px 2px 0}
+.t-portrait-meta h3{font-family:var(--serif);font-size:clamp(.9rem,1.25vw,1.2rem);font-weight:500;color:var(--ink);margin:0 0 3px;line-height:1.18;letter-spacing:-.02em;transition:color .22s ease}
+.t-portrait-meta>p{margin:0 0 5px;color:var(--muted);font-size:.58rem;letter-spacing:.13em;text-transform:uppercase}
+.t-view-cue{display:inline-block;color:var(--orange);font-size:.57rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;opacity:0;transform:translateX(-5px);transition:opacity .22s ease,transform .22s var(--ease-out)}
+
+@media(hover:hover) and (pointer:fine){
+  .t-portrait-card:hover .t-portrait-frame img{transform:scale(1.04);filter:saturate(.98)}
+  .t-portrait-card:hover .t-portrait-frame:after{opacity:1}
+  .t-portrait-card:hover .t-portrait-meta h3{color:var(--orange)}
+  .t-portrait-card:hover .t-view-cue{opacity:1;transform:none}
+}
+
+/* Tablet: 2-column pairs */
+@media(max-width:900px){
+  .trustees-gallery{grid-template-columns:repeat(4,1fr)}
+  .t-portrait-card:nth-child(1){grid-column:1/3}
+  .t-portrait-card:nth-child(2){grid-column:3/5}
+  .t-portrait-card:nth-child(3){grid-column:1/3}
+  .t-portrait-card:nth-child(4){grid-column:3/5}
+  .t-portrait-card:nth-child(5){grid-column:1/3}
+  .t-portrait-card:nth-child(6){grid-column:3/5}
+  .t-portrait-card:nth-child(7){grid-column:2/4}
+}
+
+/* Mobile: 2-column uniform */
+@media(max-width:560px){
+  .trustees-gallery{grid-template-columns:repeat(2,1fr);gap:10px;row-gap:18px}
+  .t-portrait-card:nth-child(n){grid-column:auto}
+  .t-portrait-meta h3{font-size:.88rem}
+  .t-portrait-meta>p{font-size:.52rem}
+  .t-view-cue{display:none}
+}
+
+/* ── Trustee Profile Modal ── */
+.t-modal{position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;padding:20px}
+.t-modal[hidden]{display:none}
+.t-modal-bg{position:absolute;inset:0;background:rgba(20,12,10,.88);backdrop-filter:blur(7px);cursor:pointer}
+.t-modal-panel{position:relative;z-index:1;display:grid;grid-template-columns:min(320px,38%) 1fr;width:min(860px,100%);max-height:calc(100svh - 40px);overflow:hidden;background-image:linear-gradient(135deg,rgba(42,27,24,.97),rgba(55,30,22,.96)),url("assets/extracted/card-paper-texture.webp");background-size:auto,680px auto;background-blend-mode:normal,soft-light;animation:tModalIn .36s var(--ease-out) both}
+@keyframes tModalIn{from{opacity:0;transform:scale(.96) translateY(14px)}to{opacity:1;transform:none}}
+.t-modal-close{position:absolute;top:14px;right:14px;z-index:3;width:38px;height:38px;border:1px solid rgba(255,248,241,.25);border-radius:50%;background:transparent;color:rgba(255,248,241,.75);font-size:1.25rem;line-height:1;cursor:pointer;transition:background .18s ease,border-color .18s ease,color .18s ease}
+.t-modal-close:hover{background:var(--orange);border-color:var(--orange);color:#fff}
+.t-modal-portrait{margin:0;overflow:hidden;background:var(--night)}
+.t-modal-portrait img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 10%;filter:saturate(.88)}
+/* Per-trustee modal portrait crop */
+.t-modal-portrait img[src*="makarand"]{object-position:center 10%}
+.t-modal-portrait img[src*="shaan"]{object-position:center 32%}
+.t-modal-portrait img[src*="smita"]{object-position:center 8%}
+.t-modal-portrait img[src*="maitreyi"]{object-position:center 8%}
+.t-modal-portrait img[src*="kajal"]{object-position:center top}
+.t-modal-portrait img[src*="addinath"]{object-position:center 8%}
+.t-modal-portrait img[src*="aaditi"]{object-position:center top}
+.t-modal-bio{padding:clamp(28px,5vw,52px);overflow-y:auto;color:var(--cream)}
+.t-modal-bio .eyebrow{color:var(--gold);margin-bottom:10px}
+.t-modal-bio h2{font-size:clamp(1.65rem,2.8vw,2.55rem);color:var(--cream);margin:0 0 8px;letter-spacing:-.03em}
+.t-modal-role{margin:0 0 3px;color:var(--gold);font-size:.66rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+.t-modal-kian{margin:0 0 22px;color:rgba(247,153,54,.62);font-size:.61rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase}
+.t-bio-text p{color:rgba(255,248,241,.7);font-size:.86rem;line-height:1.72;margin:0 0 1rem}
+.t-bio-text p:last-child{margin-bottom:0}
+.t-modal-bio blockquote{margin:18px 0 0;padding:14px 0 0 18px;border-color:var(--orange);color:var(--cream);font-size:1rem;line-height:1.52}
+/* Separator between role and bio */
+.t-modal-bio .t-bio-text{margin-top:20px;padding-top:20px;border-top:1px solid rgba(255,248,241,.12)}
+
+/* Modal responsive */
+@media(max-width:640px){
+  .t-modal{padding:12px}
+  .t-modal-panel{grid-template-columns:1fr;grid-template-rows:min(58vw,250px) 1fr;max-height:calc(100svh - 24px)}
+  .t-modal-portrait{max-height:min(58vw,250px)}
+  .t-modal-bio{padding:20px 18px 28px}
+  .t-modal-bio h2{font-size:clamp(1.5rem,8vw,2rem)}
+  .t-bio-text p{font-size:.82rem}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .t-modal-panel{animation:none}
+  .t-portrait-frame img,.t-portrait-meta h3,.t-view-cue,.t-portrait-frame:after{transition:none}
+}

@@ -60,25 +60,38 @@ const offeringGrid=document.querySelector("#offering-grid");
 offerings.forEach((item,index)=>{const article=document.createElement("article");article.className="offering-card reveal";article.style.setProperty("--delay",`${(index%3)*55}ms`);article.innerHTML=`<span class="offering-head"><img src="assets/icons/${item.icon}" width="116" height="116" alt=""></span><h3>${item.name}</h3><p>${item.text}</p>`;offeringGrid.append(article)});
 
 const trusteeGrid=document.querySelector("#trustee-grid");
-const detail=document.querySelector("#trustee-detail");
-let activeTrustee=0;
-trustees.forEach((person,index)=>{const button=document.createElement("button");button.className="trustee-card reveal";button.type="button";button.setAttribute("aria-controls","trustee-detail");button.setAttribute("aria-label",`View ${person.name}'s trustee profile`);button.style.setProperty("--delay",`${(index%4)*55}ms`);button.innerHTML=`<span class="trustee-photo"><img src="assets/images/${person.image}" width="900" height="1200" loading="lazy" alt="${person.name}"></span><span class="trustee-meta"><h3>${person.name}</h3><p>${person.role}${person.kian?` · ${person.kian}`:""}</p></span>`;button.addEventListener("click",()=>showTrustee(index,true));trusteeGrid.append(button)});
-trusteeGrid.querySelectorAll("img").forEach(image=>image.src+=image.src.includes("?")?"&pdf=2":"?pdf=2");
-function showTrustee(index,shouldScroll=false){
-  const movement=index===activeTrustee?0:index>activeTrustee?1:-1;
-  activeTrustee=(index+trustees.length)%trustees.length;
-  const person=trustees[activeTrustee];
-  const profileIntro=person.profile.split("|||").map(p=>"<p>"+p+"</p>").join(""),profileMore="";
-  trusteeGrid.querySelectorAll("button").forEach((item,itemIndex)=>{const half=Math.floor(trustees.length/2);const offset=((itemIndex-activeTrustee+trustees.length+half)%trustees.length)-half;const distance=Math.abs(offset);item.classList.toggle("active",itemIndex===activeTrustee);item.setAttribute("aria-current",itemIndex===activeTrustee?"true":"false");item.style.setProperty("--arc-x",`${offset*88}%`);item.style.setProperty("--arc-y",`${distance*24}px`);item.style.setProperty("--arc-turn",`${offset*-9}deg`);item.style.setProperty("--arc-scale",String(1-distance*.075));item.style.setProperty("--arc-opacity",String(1-distance*.16));item.style.zIndex=String(10-distance)});
-  detail.classList.remove("profile-enter");void detail.offsetWidth;
-  detail.dataset.direction=movement<0?"previous":"next";
-  detail.innerHTML=`<figure class="trustee-detail-portrait"><img src="assets/images/${person.image}" width="900" height="1200" alt="${person.name}"></figure><div class="trustee-detail-copy"><div class="trustee-identity"><h3>${person.name}</h3><p class="trustee-role">${person.role}</p>${person.kian?`<p class="trustee-kian">${person.kian}</p>`:""}</div><div class="trustee-biography">${profileIntro}${profileMore||person.quote?`<details><summary>Read full profile</summary>${profileMore?`<p>${profileMore}</p>`:""}${person.quote?`<blockquote>"${person.quote}"</blockquote>`:""}</details>`:""}</div></div>`;
-  detail.querySelector("img").src+="?pdf=2";
-  detail.querySelector("details")?.setAttribute("open","");
-  detail.classList.add("profile-enter");
-  if(shouldScroll&&matchMedia("(max-width: 900px)").matches)detail.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"center"});
+const tModal=document.querySelector("#trustee-modal");
+const tModalBg=document.querySelector("#t-modal-bg");
+const tModalClose=document.querySelector("#t-modal-close");
+const tModalPortrait=document.querySelector("#t-modal-portrait");
+const tModalBio=document.querySelector("#t-modal-bio");
+
+trustees.forEach((person,index)=>{
+  const card=document.createElement("button");
+  card.className="t-portrait-card reveal";
+  card.type="button";
+  card.setAttribute("aria-label",`View ${person.name}'s profile`);
+  card.style.setProperty("--delay",`${Math.floor(index/3)*80+(index%3)*55}ms`);
+  card.innerHTML=`<figure class="t-portrait-frame"><img src="assets/images/${person.image}" width="900" height="1200" loading="lazy" alt="${person.name}"></figure><div class="t-portrait-meta"><h3>${person.name}</h3><p>${person.role}</p><span class="t-view-cue" aria-hidden="true">View profile →</span></div>`;
+  card.addEventListener("click",()=>openTrusteeModal(person));
+  trusteeGrid.append(card);
+});
+
+function openTrusteeModal(person){
+  const paras=person.profile.split("|||").map(p=>`<p>${p}</p>`).join("");
+  tModalPortrait.innerHTML=`<img src="assets/images/${person.image}?v=20" width="900" height="1200" alt="${person.name}">`;
+  tModalBio.innerHTML=`<p class="eyebrow">Board of Trustees</p><h2 id="t-modal-name">${person.name}</h2><p class="t-modal-role">${person.role}</p>${person.kian?`<p class="t-modal-kian">${person.kian}</p>`:""}<div class="t-bio-text">${paras}</div>${person.quote?`<blockquote>"${person.quote}"</blockquote>`:""}`;
+  tModal.hidden=false;
+  document.body.classList.add("dialog-open");
+  tModalClose.focus({preventScroll:true});
 }
-showTrustee(0);
+function closeTrusteeModal(){
+  tModal.hidden=true;
+  document.body.classList.remove("dialog-open");
+}
+tModalClose.addEventListener("click",closeTrusteeModal);
+tModalBg.addEventListener("click",closeTrusteeModal);
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!tModal.hidden)closeTrusteeModal()});
 
 document.querySelectorAll(".value-button").forEach(button=>button.addEventListener("click",()=>{document.querySelectorAll(".value-button").forEach(item=>item.classList.remove("active"));button.classList.add("active");const art=document.querySelector("#active-value-art");art.classList.add("is-changing");setTimeout(()=>{art.src=`assets/values/${button.dataset.image}`;art.classList.remove("is-changing")},180)}));
 

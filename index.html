@@ -145,7 +145,10 @@
     </section>
 
     <section class="section trustees" id="trustees">
-      <div class="shell"><div class="section-heading centered reveal"><h2>Board of Trustees</h2></div><div class="trustee-showcase"><div class="trustee-grid" id="trustee-grid" aria-label="Select a trustee profile"></div><div class="trustee-detail" id="trustee-detail" tabindex="-1"></div></div></div>
+      <div class="shell">
+        <div class="section-heading centered reveal"><h2>Board of Trustees</h2></div>
+        <div class="trustees-gallery" id="trustee-grid" aria-label="Board of Trustees"></div>
+      </div>
     </section>
 
     <section class="section members" id="members">
@@ -184,11 +187,20 @@
 
   <footer class="footer"><div class="shell footer-grid"><div><img class="footer-logo" src="assets/brand/vacs-logo.svg" width="276" height="253" alt="Vaishvik Adhyatmik Chitranagari Samiti"><p>A Global Spiritual Film &amp; Entertainment Association guided by Maitreya Dadashreeji.</p></div><div><h2>Explore</h2><a href="#about">About us</a><a href="#dadashreeji">Dadashreeji</a><a href="#values">Vision &amp; Values</a><a href="#offerings">Initiatives</a><a href="#trustees">Trustees</a><a href="#members">Members</a></div><div><h2>Contact</h2><a href="mailto:acc.vacs27@gmail.com">acc.vacs27@gmail.com</a><a href="tel:+917400118626">+91 74001 18626</a><span>Reg. 2025/8/IV/905</span><span style="font-size:.63rem;line-height:1.5;color:rgba(255,248,241,.45)">Registered: B-1/6, First Floor,<br>Ashok Vihar, Delhi – 110052</span><span style="font-size:.63rem;line-height:1.5;color:rgba(255,248,241,.45)">Correspondence: Office No. 03, Sai Pride CHS,<br>Plot No. 219, Sector 21, Kamothe,<br>Navi Mumbai – 410209</span></div></div><div class="shell footer-bottom"><span>© <span id="year"></span> Vaishvik Adhyatmik Chitranagari Samiti.</span><span>One World · One Family · One Truth</span></div></footer>
 
+  <div class="t-modal" id="trustee-modal" role="dialog" aria-modal="true" hidden>
+    <div class="t-modal-bg" id="t-modal-bg"></div>
+    <div class="t-modal-panel">
+      <button class="t-modal-close" id="t-modal-close" type="button" aria-label="Close profile">×</button>
+      <figure class="t-modal-portrait" id="t-modal-portrait"></figure>
+      <div class="t-modal-bio" id="t-modal-bio"></div>
+    </div>
+  </div>
+
   <dialog class="form-dialog" id="intent-dialog" aria-labelledby="dialog-title">
     <div class="dialog-shell"><button class="dialog-close" type="button" aria-label="Close form">×</button><p class="eyebrow">Connect with us</p><h2 id="dialog-title">Become a member</h2><p id="dialog-description">Share a few details with us.</p><div class="form-notice" role="status">Form submissions will open soon. You can review the fields now or write to <a href="mailto:info@vacs.org">info@vacs.org</a>.</div>
       <form id="intent-form" novalidate><input id="intent" name="intent" type="hidden"><div class="form-grid"><label>Full name <span>*</span><input name="name" autocomplete="name" required></label><label>Email address <span>*</span><input name="email" type="email" autocomplete="email" required></label><label>Phone number <span>*</span><input name="phone" type="tel" autocomplete="tel" required></label><label>City <span>*</span><input name="city" autocomplete="address-level2" required></label></div><div class="intent-fields" id="intent-fields"></div><label>Message<textarea name="message" rows="4"></textarea></label><label class="consent"><input name="consent" type="checkbox" required><span>I consent to being contacted about this enquiry.</span></label><button class="button form-submit" type="submit" disabled>Submissions opening soon</button></form>
     </div>
   </dialog>
-  <script src="config.js"></script><script src="script.js?v=20"></script>
+  <script src="config.js"></script><script src="script.js?v=21"></script>
 </body>
 </html>
