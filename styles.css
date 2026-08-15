@@ -654,19 +654,19 @@ h1{line-height:1.18;letter-spacing:-.032em;font-variant-ligatures:no-common-liga
 .t-portrait-frame:after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,transparent,rgba(247,153,54,.65),transparent);opacity:0;transition:opacity .3s ease}
 
 /* Per-trustee crop & zoom: 1=Makarand 2=Smita 3=Kajal 4=Addinath 5=Kiaan 6=Saundarya 7=Aaditi */
-.t-portrait-card:nth-child(1){--zoom:1.18}
-.t-portrait-card:nth-child(1) .t-portrait-frame img{object-position:center 12%;transform-origin:center 12%}
+.t-portrait-card:nth-child(1){--zoom:1.05}
+.t-portrait-card:nth-child(1) .t-portrait-frame img{object-position:100.0% 8.6%;transform-origin:100.0% 8.6%}
 .t-portrait-card:nth-child(2){--zoom:1.45}
-.t-portrait-card:nth-child(2) .t-portrait-frame img{object-position:center top;transform-origin:center top}
+.t-portrait-card:nth-child(2) .t-portrait-frame img{object-position:61.0% top;transform-origin:61.0% top}
 .t-portrait-card:nth-child(3){--zoom:1.55}
-.t-portrait-card:nth-child(3) .t-portrait-frame img{object-position:center 8%;transform-origin:center 8%}
+.t-portrait-card:nth-child(3) .t-portrait-frame img{object-position:55.5% 21.5%;transform-origin:55.5% 21.5%}
 .t-portrait-card:nth-child(4){--zoom:1.55}
-.t-portrait-card:nth-child(4) .t-portrait-frame img{object-position:center 8%;transform-origin:center 8%}
-.t-portrait-card:nth-child(5){--zoom:1.0}
-.t-portrait-card:nth-child(5) .t-portrait-frame img{object-position:center 18%;transform-origin:center 18%}
-.t-portrait-card:nth-child(6){--zoom:1.6}
-.t-portrait-card:nth-child(6) .t-portrait-frame img{object-position:center 28%;transform-origin:center 28%}
-.t-portrait-card:nth-child(7){--zoom:1.0}
+.t-portrait-card:nth-child(4) .t-portrait-frame img{object-position:64.8% 42.3%;transform-origin:64.8% 42.3%}
+.t-portrait-card:nth-child(5){--zoom:1.04}
+.t-portrait-card:nth-child(5) .t-portrait-frame img{object-position:57.9% 2.9%;transform-origin:57.9% 2.9%}
+.t-portrait-card:nth-child(6){--zoom:1.67}
+.t-portrait-card:nth-child(6) .t-portrait-frame img{object-position:45.2% 12.6%;transform-origin:45.2% 12.6%}
+.t-portrait-card:nth-child(7){--zoom:1.00}
 .t-portrait-card:nth-child(7) .t-portrait-frame img{object-position:center top;transform-origin:center top}
 
 .t-portrait-meta{padding:12px 2px 0}
