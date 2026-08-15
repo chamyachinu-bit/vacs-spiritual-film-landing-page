@@ -605,7 +605,7 @@ h1{line-height:1.18;letter-spacing:-.032em;font-variant-ligatures:no-common-liga
 
 /* Per-trustee detail portrait position (src substring match) */
 .trustee-showcase .trustee-detail-portrait img[src*="makarand"]{object-position:center 12%}
-.trustee-showcase .trustee-detail-portrait img[src*="shaan"]{object-position:center 36%}
+.trustee-showcase .trustee-detail-portrait img[src*="kiaan"]{object-position:center 16%}
 .trustee-showcase .trustee-detail-portrait img[src*="smita"]{object-position:center 8%}
 .trustee-showcase .trustee-detail-portrait img[src*="maitreyi"]{object-position:center 8%}
 .trustee-showcase .trustee-detail-portrait img[src*="kajal"]{object-position:center top}
@@ -653,7 +653,7 @@ h1{line-height:1.18;letter-spacing:-.032em;font-variant-ligatures:no-common-liga
 
 /* Per-trustee gallery crop: Makarand(1) Shaan(2) Smita(3) Saundarya(4) Kajal(5) Addinath(6) Aaditi(7) */
 .t-portrait-card:nth-child(1) .t-portrait-frame img{object-position:center 10%}
-.t-portrait-card:nth-child(2) .t-portrait-frame img{object-position:center 34%}
+.t-portrait-card:nth-child(2) .t-portrait-frame img{object-position:center 18%}
 .t-portrait-card:nth-child(3) .t-portrait-frame img{object-position:center 8%}
 .t-portrait-card:nth-child(4) .t-portrait-frame img{object-position:center 8%}
 .t-portrait-card:nth-child(5) .t-portrait-frame img{object-position:center top}
@@ -705,7 +705,7 @@ h1{line-height:1.18;letter-spacing:-.032em;font-variant-ligatures:no-common-liga
 .t-modal-portrait img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 10%;filter:saturate(.88)}
 /* Per-trustee modal portrait crop */
 .t-modal-portrait img[src*="makarand"]{object-position:center 10%}
-.t-modal-portrait img[src*="shaan"]{object-position:center 32%}
+.t-modal-portrait img[src*="kiaan"]{object-position:center 16%}
 .t-modal-portrait img[src*="smita"]{object-position:center 8%}
 .t-modal-portrait img[src*="maitreyi"]{object-position:center 8%}
 .t-modal-portrait img[src*="kajal"]{object-position:center top}
