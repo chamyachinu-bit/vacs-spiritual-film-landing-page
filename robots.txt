@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /work/
+Disallow: /uploads/
+Disallow: /gallery/carousel.html
+Disallow: /gallery/carousel-improved.html
+Disallow: /gallery/index.html
+Disallow: /gallery/index-v2.html
+
+Sitemap: https://www.vacstrust.org/sitemap.xml

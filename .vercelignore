@@ -1,0 +1,17 @@
+.vercel/
+.git/
+.env*
+.DS_Store
+Thumbs.db
+*.log
+work/
+tmp/
+uploads/
+scraps/
+legacy/
+gallery.zip
+trustee-adjuster.html
+export-src.html
+film-gallery-prototype.html
+VACS Landing (standalone).html
+VACS Landing.dc.html

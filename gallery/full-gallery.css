@@ -5,6 +5,45 @@
   column-gap: 12px;
 }
 
+/* Keep the photographic hero inside the mobile viewport. */
+@media (max-width: 560px) {
+  html,
+  body {
+    max-width: 100% !important;
+    overflow-x: clip !important;
+  }
+
+  .gallery-hero h1 {
+    font-size: clamp(2.8rem, 12.5vw, 3.4rem) !important;
+    line-height: 0.91 !important;
+    width: 100% !important;
+    max-width: 340px !important;
+  }
+
+  .gallery-hero,
+  .gallery-hero-copy {
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+
+  .gallery-diamonds {
+    width: 100vw !important;
+    margin-left: 50% !important;
+    transform: translateX(-50%) !important;
+    overflow: hidden !important;
+  }
+
+  .gallery-diamond {
+    width: 32% !important;
+  }
+
+  .gallery-diamond:nth-child(1) { left: 34% !important; top: 1% !important; }
+  .gallery-diamond:nth-child(2) { left: 10% !important; top: 25% !important; }
+  .gallery-diamond:nth-child(3) { left: 34% !important; top: 25% !important; }
+  .gallery-diamond:nth-child(4) { left: 58% !important; top: 25% !important; }
+  .gallery-diamond:nth-child(5) { left: 34% !important; top: 49% !important; }
+}
+
 .photo-card,
 .photo-card.wide,
 .photo-card.tall {
