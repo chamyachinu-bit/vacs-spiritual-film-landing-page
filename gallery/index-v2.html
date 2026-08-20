@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#110d0c"><title>Gallery | Vaishvik Adhyatmik Chitranagari Samiti</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#fff8f1;--gold:#f79936;--night:#110d0c;--serif:"Playfair Display",Georgia,serif;--sans:"Inter",Arial,sans-serif}*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--night);color:var(--cream);font-family:var(--sans)}body{overflow:hidden}.stage{position:relative;min-height:100svh;display:grid;grid-template-rows:auto 1fr auto;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse at 50% 58%,#512b21 0,#241513 39%,#0b0807 79%)}.stage:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(rgba(17,13,12,.7),rgba(17,13,12,.94)),url("../assets/extracted/paper-texture.webp") center/900px auto;mix-blend-mode:soft-light;opacity:.5}.intro{position:relative;z-index:2;width:min(900px,calc(100% - 36px));margin:auto;padding:clamp(24px,4vh,46px) 0 0;text-align:center}.eyebrow{margin:0 0 9px;color:var(--gold);font-size:.61rem;font-weight:500;letter-spacing:.3em;text-transform:uppercase}h1{margin:0;font-family:var(--serif);font-size:clamp(2.1rem,4.5vw,4.7rem);font-weight:500;line-height:1;letter-spacing:-.045em;text-wrap:balance}h1 em{color:#f4a046;font-weight:500}.lede{max-width:530px;margin:12px auto 0;color:rgba(255,248,241,.6);font-size:.75rem;line-height:1.65}.gallery{position:relative;align-self:center;width:100%;height:clamp(430px,62vh,650px);overflow:hidden;cursor:grab;touch-action:pan-y;user-select:none}.gallery.dragging{cursor:grabbing}.gallery:before,.gallery:after{content:"";position:absolute;z-index:2;inset:0 auto 0 0;width:8vw;background:linear-gradient(90deg,#0b0807,transparent);pointer-events:none}.gallery:after{left:auto;right:0;transform:scaleX(-1)}canvas{display:block;width:100%;height:100%}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.footer{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;gap:14px;min-height:62px;padding:0 20px 20px;color:rgba(255,248,241,.45);font-size:.53rem;letter-spacing:.17em;text-transform:uppercase}.footer:before,.footer:after{content:"";width:46px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}.footer:after{transform:scaleX(-1)}@media(max-width:700px){.intro{padding-top:22px}.lede{max-width:330px;font-size:.68rem}.gallery{height:500px}.footer{padding-bottom:15px}}
+</style></head><body><main class="stage"><header class="intro"><p class="eyebrow">The gallery</p><h1>Moments in stillness. <em>Stories in motion.</em></h1><p class="lede">A living film of shared presence, creative expression and inner connection.</p></header><section class="gallery" id="gallery" tabindex="0" aria-label="Continuous cinematic photograph gallery. Use left and right arrow keys to explore."><canvas id="filmCanvas" aria-hidden="true"></canvas><div class="sr-only" id="accessibleGallery"></div><p class="sr-only" id="galleryLive" aria-live="polite"></p></section><div class="footer"><span id="status">Playing · drag to explore</span></div></main>
+<script>
+"use strict";
+/* V2 is the light, minimal brand treatment. The film remains dark brown for authenticity while the surrounding page uses the official cream paper system. */
+const lightTheme=document.createElement("style");
+lightTheme.textContent=`
+  html,body{background:#fff8f1;color:#2b2b2b}
+  .stage{background:
+    radial-gradient(ellipse at 50% 55%,rgba(247,153,54,.12),transparent 46%),
+    linear-gradient(135deg,#fffaf5 0%,#fff8f1 48%,#fdf0e7 100%)}
+  .stage:before{background:
+    linear-gradient(rgba(255,248,241,.62),rgba(255,248,241,.82)),
+    url("../assets/extracted/paper-texture.webp") center/900px auto;
+    mix-blend-mode:multiply;opacity:.52}
+  .eyebrow{color:#df2172}
+  h1{color:#2b2b2b}
+  h1 em{color:#ef5a2a}
+  .lede{color:rgba(43,43,43,.64)}
+  .gallery:before{background:linear-gradient(90deg,#fff8f1 8%,rgba(255,248,241,0))}
+  .gallery:after{background:linear-gradient(90deg,#fff8f1 8%,rgba(255,248,241,0));transform:scaleX(-1)}
+  .footer{color:rgba(43,43,43,.52)}
+  .footer:before,.footer:after{background:linear-gradient(90deg,transparent,#ef5a2a)}
+`;
+document.head.append(lightTheme);
+if(new URLSearchParams(location.search).get("embed")==="1"){
+  const embedTheme=document.createElement("style");
+  embedTheme.textContent=`html,body{height:100%;min-height:0;background:#fff4eb}body{overflow:hidden}.stage{min-height:100%;height:100%;display:grid;grid-template-rows:1fr;background:#fff4eb}.stage:before,.intro,.footer,.gallery:before,.gallery:after{display:none!important}.gallery{height:100%;min-height:0}`;
+  document.head.append(embedTheme);
+}
+const sources=Array.from({length:9},(_,i)=>({src:`Image ${i+1}.jpg`,alt:`Gallery moment ${i+1}`}));
+const gallery=document.querySelector("#gallery"),canvas=document.querySelector("#filmCanvas"),ctx=canvas.getContext("2d"),status=document.querySelector("#status"),accessible=document.querySelector("#accessibleGallery"),live=document.querySelector("#galleryLive"),reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
+const pictures=sources.map((item,i)=>{const img=new Image;img.src=item.src;img.alt=item.alt;const button=document.createElement("button");button.type="button";button.textContent=`Show ${item.alt}`;button.dataset.index=i;accessible.append(button);return img});
+let offset=0,last=0,dragging=false,hovering=false,startX=0,lastMoveTime=0,inertia=0,dpr=1,W=0,H=0,announced=-1;
+
+/* FIX 1 — depth & focusScale as reactive lets so resize() can update them.
+   Previously they were const evaluated once at load time, so switching between
+   mobile and desktop viewport widths mid-session gave wrong projections. */
+let depth=.27,focusScale=.5;
+
+const mod=(n,m)=>((n%m)+m)%m,
+      baseStep=()=>W<700?164:220,
+      filmCoordinate=x=>Math.asinh((x-W/2)*depth/(baseStep()*focusScale))/depth,
+      curveScale=x=>Math.min(1.22,focusScale*Math.cosh(depth*filmCoordinate(x))),
+      centerY=x=>{const q=filmCoordinate(x);return H*.54+Math.min(H*.052,q*q*H*.0025)},
+      filmHeight=x=>(W<700?292:380)*curveScale(x),
+      topAt=x=>centerY(x)-filmHeight(x)/2,
+      bottomAt=x=>centerY(x)+filmHeight(x)/2;
+
+function resize(){
+  const r=gallery.getBoundingClientRect();
+  dpr=Math.min(devicePixelRatio||1,2);
+  W=r.width;H=r.height;
+  /* FIX 1 continued — update on every resize */
+  depth=W<700?.235:.27;
+  focusScale=W<700?.55:.5;
+  canvas.width=Math.round(W*dpr);
+  canvas.height=Math.round(H*dpr);
+  canvas.style.width=W+"px";
+  canvas.style.height=H+"px";
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  draw();
+}
+
+function pathBand(){ctx.beginPath();for(let x=-20;x<=W+20;x+=8){const y=topAt(x);x===-20?ctx.moveTo(x,y):ctx.lineTo(x,y)}for(let x=W+20;x>=-20;x-=8)ctx.lineTo(x,bottomAt(x));ctx.closePath()}
+
+function drawFilmBody(){ctx.save();ctx.shadowColor="rgba(0,0,0,.78)";ctx.shadowBlur=40;ctx.shadowOffsetY=25;pathBand();const body=ctx.createLinearGradient(0,H*.25,0,H*.78);body.addColorStop(0,"#432a22");body.addColorStop(.13,"#211612");body.addColorStop(.34,"#0c0807");body.addColorStop(.7,"#090605");body.addColorStop(.88,"#1c120f");body.addColorStop(1,"#4b2f24");ctx.fillStyle=body;ctx.fill();ctx.restore();pathBand();ctx.strokeStyle="rgba(247,153,54,.35)";ctx.lineWidth=1;ctx.stroke()}
+
+function slotX(q){return W/2+baseStep()*focusScale*Math.sinh(depth*q)/depth}
+
+function frameSlots(){const frac=offset-Math.floor(offset),base=Math.floor(offset),slots=[],overscan=W<700?W*1.4:W*.9;for(let k=-14;k<=14;k++){const q=k-frac,x=slotX(q),prev=slotX(q-1),next=slotX(q+1),left=(prev+x)/2,right=(x+next)/2;if(right<-overscan||left>W+overscan)continue;slots.push({x,left,right,index:mod(base+k,pictures.length)})}return slots}
+
+function warpedPhoto(img,left,right,rail){if(!img.complete||!img.naturalWidth)return;const mid=(left+right)/2,targetW=right-left,targetH=filmHeight(mid)-rail*2,ir=img.naturalWidth/img.naturalHeight,tr=targetW/targetH;let sx=0,sy=0,sw=img.naturalWidth,sh=img.naturalHeight;if(ir>tr){sw=sh*tr;sx=(img.naturalWidth-sw)/2}else{sh=sw/tr;sy=(img.naturalHeight-sh)/2}const slices=Math.max(14,Math.ceil(targetW/5));for(let i=0;i<slices;i++){const p0=i/slices,p1=(i+1)/slices,x0=left+targetW*p0,x1=left+targetW*p1,xm=(x0+x1)/2,localRail=Math.max(25,filmHeight(xm)*.115),y0=topAt(xm)+localRail,y1=bottomAt(xm)-localRail;ctx.drawImage(img,sx+sw*p0,sy,sw*(p1-p0)+.5,sh,x0,y0,x1-x0+1,y1-y0)}}
+
+/* FIX 2 — grayscale + brightness driven by distance from center.
+   ctx.filter is applied before warpedPhoto so every slice inherits it.
+   Center frame: grayscale 0%, brightness 100% (full colour, full light).
+   Edge frames:  grayscale 75%, brightness 68% (cool, dark).
+   The transition follows the same distance metric used for the shade overlay. */
+function drawPhotos(slots){
+  for(const s of slots){
+    const gap=Math.max(3,6*curveScale(s.x)),left=s.left+gap/2,right=s.right-gap/2,
+          rail=Math.max(25,filmHeight(s.x)*.115),
+          top=Math.max(topAt(left),topAt(right))+rail,
+          bottom=Math.min(bottomAt(left),bottomAt(right))-rail;
+    if(right<=left||bottom<=top)continue;
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(left,topAt(left)+rail);ctx.lineTo(right,topAt(right)+rail);
+    ctx.lineTo(right,bottomAt(right)-rail);ctx.lineTo(left,bottomAt(left)-rail);
+    ctx.closePath();ctx.clip();
+    ctx.filter="none";
+    warpedPhoto(pictures[s.index],left,right,rail);
+    ctx.filter="none";
+    const shade=ctx.createLinearGradient(left,0,right,0);
+    shade.addColorStop(0,"rgba(0,0,0,.26)");
+    shade.addColorStop(.18,"rgba(34,14,8,.055)");
+    shade.addColorStop(.55,"rgba(247,153,54,.025)");
+    shade.addColorStop(.84,"rgba(0,0,0,.035)");
+    shade.addColorStop(1,"rgba(0,0,0,.28)");
+    ctx.fillStyle=shade;ctx.fillRect(left,top,right-left,bottom-top);
+    ctx.restore();
+  }
+}
+
+/* FIX 3 — projector gate: a warm vertical glow at screen center
+   and two faint dashed marker lines flanking the active frame window. */
+function drawProjectorGate(){
+  const cw=baseStep()*focusScale*.88;
+  /* warm radial bloom */
+  const g=ctx.createLinearGradient(W/2-cw,0,W/2+cw,0);
+  g.addColorStop(0,"transparent");
+  g.addColorStop(.2,`rgba(255,238,190,.018)`);
+  g.addColorStop(.5,`rgba(255,245,210,.055)`);
+  g.addColorStop(.8,`rgba(255,238,190,.018)`);
+  g.addColorStop(1,"transparent");
+  ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  /* gate marker lines */
+  ctx.save();
+  ctx.strokeStyle="rgba(247,153,54,.18)";
+  ctx.lineWidth=1;
+  ctx.setLineDash([4,4]);
+  const gx=cw*.68,ty=topAt(W/2)-10,by=bottomAt(W/2)+10;
+  ctx.beginPath();
+  ctx.moveTo(W/2-gx,ty);ctx.lineTo(W/2-gx,by);
+  ctx.moveTo(W/2+gx,ty);ctx.lineTo(W/2+gx,by);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.restore();
+}
+
+/* FIX 4 — frame number labels rendered in the top rail strip.
+   Opacity fades toward edges so they don't fight the sprocket holes.
+   Receives the slots array from draw() to avoid recalculating. */
+function drawRails(slots){
+  const holeStep=.105,start=Math.floor(offset/holeStep)-90,end=start+180;
+  ctx.save();ctx.fillStyle="#020101";ctx.strokeStyle="rgba(247,153,54,.42)";ctx.lineWidth=.8;
+  for(let n=start;n<=end;n++){
+    const q=n*holeStep-offset,x=slotX(q);
+    if(x<-40||x>W+40)continue;
+    const s=curveScale(x),holeW=11*s,holeH=6*s;
+    for(const y of [topAt(x)+filmHeight(x)*.065,bottomAt(x)-filmHeight(x)*.065]){
+      ctx.beginPath();ctx.ellipse(x,y,holeW/2,holeH/2,0,0,Math.PI*2);ctx.fill();ctx.stroke();
+    }
+  }
+  ctx.restore();
+  for(const rail of ["top","bottom"]){
+    ctx.beginPath();
+    for(let x=0;x<=W;x+=6){const y=rail==="top"?topAt(x)+filmHeight(x)*.13:bottomAt(x)-filmHeight(x)*.13;x?ctx.lineTo(x,y):ctx.moveTo(x,y)}
+    ctx.strokeStyle=rail==="top"?"rgba(255,255,255,.12)":"rgba(247,153,54,.3)";
+    ctx.lineWidth=1;ctx.stroke();
+  }
+  /* frame number labels in top rail */
+  if(slots&&slots.length){
+    const fs=Math.max(7,Math.round(filmHeight(W/2)*.05));
+    ctx.save();
+    ctx.font=`${fs}px "Courier New",monospace`;
+    ctx.textAlign="center";ctx.textBaseline="middle";
+    for(const s of slots){
+      const dist=Math.min(1,Math.abs((s.x-W/2)/(W*.48)));
+      ctx.fillStyle=`rgba(247,153,54,${(.55-dist*.38).toFixed(2)})`;
+      ctx.fillText(String(s.index+1).padStart(2,"0"),s.x,topAt(s.x)+filmHeight(s.x)*.068);
+    }
+    ctx.restore();
+  }
+}
+
+function drawGlow(){const g=ctx.createRadialGradient(W/2,H*.55,20,W/2,H*.55,W*.48);g.addColorStop(0,"rgba(247,153,54,.08)");g.addColorStop(.55,"rgba(239,90,42,.025)");g.addColorStop(1,"transparent");ctx.fillStyle=g;ctx.fillRect(0,0,W,H)}
+
+/* draw order: glow → film body → photos (with filter) → gate overlay → rails + labels */
+function draw(){
+  if(!W)return;
+  ctx.clearRect(0,0,W,H);
+  drawGlow();
+  drawFilmBody();
+  const slots=frameSlots();
+  drawPhotos(slots);
+  drawRails();
+}
+
+function announce(){const index=mod(Math.round(offset),sources.length);if(index!==announced){announced=index;live.textContent=`${sources[index].alt} in view`}}
+
+function tick(t){const dt=Math.min(34,t-last||16);last=t;if(!dragging&&!document.hidden&&!reduce){offset+=.14*dt/1000+inertia*dt;inertia*=Math.pow(.9,dt/16.67);if(Math.abs(inertia)<.00002)inertia=0}announce();draw();requestAnimationFrame(tick)}
+
+gallery.addEventListener("pointerleave",()=>{dragging=false;gallery.classList.remove("dragging")});
+gallery.addEventListener("pointerdown",e=>{dragging=true;inertia=0;startX=e.clientX;lastMoveTime=e.timeStamp;gallery.setPointerCapture(e.pointerId);gallery.classList.add("dragging")});
+gallery.addEventListener("pointermove",e=>{if(!dragging)return;const dt=Math.max(8,e.timeStamp-lastMoveTime),delta=-(e.clientX-startX)/(W<700?120:170);offset+=delta;inertia=Math.max(-.018,Math.min(.018,delta/dt));startX=e.clientX;lastMoveTime=e.timeStamp;draw()});
+gallery.addEventListener("pointerup",()=>{dragging=false;gallery.classList.remove("dragging")});
+gallery.addEventListener("keydown",e=>{if(e.key!=="ArrowLeft"&&e.key!=="ArrowRight")return;e.preventDefault();inertia=0;offset+=e.key==="ArrowRight"?1:-1;announce();draw()});
+accessible.addEventListener("click",e=>{const button=e.target.closest("button");if(!button)return;const target=Number(button.dataset.index),current=mod(Math.round(offset),sources.length),delta=mod(target-current+sources.length/2,sources.length)-sources.length/2;offset+=delta;announce();draw()});
+addEventListener("resize",resize,{passive:true});
+resize();
+requestAnimationFrame(tick);
+</script></body></html>

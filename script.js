@@ -33,10 +33,10 @@ const offerings = [
   {name:"Heart-Centred Yog by Maitri Oorja",icon:"inner-awareness.png",text:"A dedicated space specially for members of the film and entertainment industry to slow down, reconnect, and return within. Combining mindful movement, conscious breathing, and effective meditation techniques, the sessions help cultivate body awareness, release tension, and deepen the connection to the present moment."},
   {name:"Skills Training Programs",icon:"creative-expression.png",text:"Diverse range of skill-based training programs, immersive sessions, and exclusive masterclasses designed to nurture talent and build professional excellence. These programs are conducted by invited faculty, industry experts, and accomplished professionals who bring with them rich experience, practical insights, and real-world knowledge. These programs help develop and strengthen skills in various creative disciplines and empower with confidence, craft, and competence required to grow in the chosen field."},
   {name:"Value Based Performances, Plays and Films",icon:"storytelling.png",text:"A platform to bring together established and upcoming, like-hearted individuals from the fraternity to collaborate on meaningful plays, films and performances which are rooted in strong values to encourage positivity and a deeper sense of purpose in the audience. We present stories which awaken hearts, inspire friendships and nurtures a better more compassionate and values-driven society."},
-  {name:"Fellowship Program",icon:"emotional-harmony.png",text:"In a world full of competition and chaos an upcoming artist often finds it to be intimidating and demotivating to continue to express their art. This fellowship programme inspires, helps and supports true artists to stay motivated towards their journey of creating art and expressing their talent."},
+  {name:"Fellowship Program",icon:"cultural-roots.png",text:"In a world full of competition and chaos an upcoming artist often finds it to be intimidating and demotivating to continue to express their art. This fellowship programme inspires, helps and supports true artists to stay motivated towards their journey of creating art and expressing their talent."},
   {name:"VACS Events",icon:"film-media.png",text:"Bringing together individuals from various fields of the industry through events such as movie screenings and discussions, creating opportunities to connect and bond over the true essence of art. Our aim is to return to the roots, stay grounded in the truth and ensure that amidst the material world we stay connected in the deeper artistic as well as human values."},
-  {name:"VACS Awards",icon:"film-media.png",text:"Recognising and honouring individuals, artists and groups who create meaningful art that has a positive impact on the human mind, crediting those who produce work which not only reflects excellence in the craft but also inspires society in a constructive and uplifting way. We celebrate artists who perform and express their art in a unique manner while contributing positively to the cultural fabric of society."},
-  {name:"VACS Collaborations",icon:"emotional-harmony.png",text:"Meaningful collaborations with esteemed institutions of the film and entertainment industry to integrate our offerings for the wellbeing of their faculty."}
+  {name:"VACS Awards",icon:"emotional-harmony.png",text:"Recognising and honouring individuals, artists and groups who create meaningful art that has a positive impact on the human mind, crediting those who produce work which not only reflects excellence in the craft but also inspires society in a constructive and uplifting way. We celebrate artists who perform and express their art in a unique manner while contributing positively to the cultural fabric of society."},
+  {name:"VACS Collaborations",icon:"community.png",text:"Meaningful collaborations with esteemed institutions of the film and entertainment industry to integrate our offerings for the wellbeing of their faculty."}
 ];
 
 const trustees = [
@@ -44,9 +44,9 @@ const trustees = [
   {name:"Smita Jayakar",role:"Actor & Spiritual Healer",image:"smita-jayakar.webp",profile:"Smita Jayakar has been a part of the Indian Film Industry for over 35 years. She has worked in 23 blockbuster Bollywood films, contributing pivotal roles in Devdas, Hum Dil De Chuke Sanam, Sarfarosh, Mujhse Dosti Karoge, Ek Vivaah Aisa Bhi, and Ajab Prem Ki Ghazab Kahani. She is the author of three life-changing books and a transformative speaker, inspiring countless lives through her wisdom and presence. Her life’s purpose is to support the vision of Maitreya Dadashreeji, in transforming humanity.",quote:"As actors we are always wearing masks of the characters we play. We never get to really meet ourselves. We get lost in the roles and paparazzi. We only meet ourselves when we get older or when there is no work. By then it is very difficult to deal with that situation when people don’t recognise you anymore, people don’t give you work anymore… So you need to meet yourself at the right time, early on and this happens only on the spiritual path. Spirituality is most essential for actors to be true to themselves and deal with, not just the highs but also to face the lows of this career path."},
   {name:"Kajal Aggarwal",role:"Actor & Entrepreneur",image:"kajal-aggrawal.webp",profile:"Kajal Aggarwal is a leading Indian film actor known for her work across Telugu, Tamil and Hindi cinema. With a career spanning nearly two decades, and more than 70 movies, she has built a reputation for versatility, grace, and strong screen presence. She seamlessly balances mainstream success with meaningful, character-driven roles. Beyond films, Kajal is admired for her elegance, discipline, and grounded worldview. She is also an entrepreneur and a voice for mindful living and conscious choices. As an artist, she believes cinema should entertain, reflect society, and carry emotional truth.",quote:"Films don’t just entertain, they teach us how to feel, love, and become. Without sanskārs – values, art turns into content. With them, cinema becomes conscience. And in returning to our roots, we don’t go back, we go deeper!"},
   {name:"Addinath Kothare",role:"Actor, Writer & Director",image:"addinath-kothare.webp",profile:"Addinath M. Kothare is an Indian actor, director, writer and producer who predominantly works in the Marathi and Hindi feature films, web series, TV shows and theatre industry. He has received numerous accolades, including a National Film Award, a Maharashtra State Film Award, three Filmfare Marathi Awards and four Zee Chitra Gaurav Puraskar.",quote:"Creativity is heavily dependant on the most miraculous piece of machinery called the mind. To evolve in our creativity we first need to evolve our mind. The most user friendly application that I have come across to help me achieve this is – Spirituality! The spiritual path guided by Maitreya Dadashreeji has helped me open the doors and windows of my mind to the universe which has helped me harness my creative flow. If creativity is like the Earth then spirituality is the Sun to our Earth."},
-  {name:"Kiaan Uttamsingh",role:"Entrepreneur",kian:"Mitra Kian",image:"kiaan-uttamsingh.webp",profile:"Kiaan Uttamsingh is an entrepreneur deeply involved in the media and entertainment industry. He is the grandson of the pioneer GP Sippy, and building on this legacy, Kiaan has helped shape the evolution of trademark and intellectual property rights within the film industry. His formative years were spent in the United States, after which he returned to India to complete his graduation and further connect with the culture and values of the country.|||He has led and managed companies such as Sippy Films Pvt. Ltd. and Sholay Media & Entertainment Pvt. Ltd., contributing toward vision, growth, and long-term value creation. With over 26 years of experience in building and running companies in the industry, he has played a significant role in creating, protecting, and strengthening valuable intellectual properties.|||Alongside his professional journey, he has remained deeply engaged in philanthropic and spiritual initiatives. He has been associated with Maitreya Dadashreeji since 2013 and is currently presiding over multiple trusts, reflecting his commitment to selfless service, leadership, and an objective perspective toward collective growth. His approach is rooted in bringing people and purpose together through thoughtful guidance and responsible stewardship. He continues to inspire collaborative progress by balancing vision with integrity and action with compassion."},
+  {name:"Aaditi Pohankar",role:"Actor",image:"aaditi-pohankar.webp",profile:"Aaditi Pohankar is a talented Indian actress celebrated for her powerful and nuanced performances. She marked her screen debut with the Marathi blockbuster Lai Bhaari. Her breakthrough came with the acclaimed Netflix series She, where she won praise for her compelling portrayal of Bhumi. Known for her fearless choices and authentic screen presence, she stands out among her peers. Aaditi continues to emerge as one of the most promising and dynamic talents in India’s digital and film landscape.",quote:"The struggle ends. The struggle to win, to be famous, to be rich. When you meet your higher self within and realize that your life’s purpose is beyond this maze—where it is easy to get lost, lose confidence, and where your integrity is constantly tested—you are left with no guidance. That’s when a strong value system helps you realize that I am just an actor and this is my work, but there is more to my life’s purpose."},
   {name:"Maitreyi Saundarya",role:"Spiritual Guide & Speaker",image:"maitreyi-saundarya.webp",profile:"Maitreyi Saundarya is a Spiritual Guide and Speaker at MaitriBodh Parivaar. Her journey of self-exploration and finding her purpose of life led her towards the spiritual path and later to meet Maitreya Dadashreeji in 2013, a meeting which changed the course of her life.|||Under Dadashreeji’s guidance, her inner potential was unlocked leading to a tremendous positive shift. Through the development of the bond with the inner Divine (Higher Sacred Self) and strengthening of her inner voice she discovered her true calling or purpose of life. Ever since, she has devoted herself to Dadashreeji’s mission to Transform Humanity and establish One World One Family, One Truth by spreading true knowledge which frees an individual from within enabling them lead a wholesome life.|||Maitreyi Saundarya has been guiding influencers, leaders, celebrities, professionals, youth and individuals from all walks of life to incorporate spirituality as a very powerful means to an end. She has been invited to conduct sessions on national and international platforms such as TEDx, the CiO Klub, Tibet Hope Centre, Cathedral & John Connon school, Ficci Flo and more. Through her guidance, people have found their own paths, addressed and overcome blocks, mended relationships, incorporated the right lifestyle, and experienced a state of internal peace, positivity and happiness.",quote:"Spirituality is not a separate path of life but an added strength to live the same life in a better way."},
-  {name:"Aaditi Pohankar",role:"Actor",image:"aaditi-pohankar.webp",profile:"Aaditi Pohankar is a talented Indian actress celebrated for her powerful and nuanced performances. She marked her screen debut with the Marathi blockbuster Lai Bhaari. Her breakthrough came with the acclaimed Netflix series She, where she won praise for her compelling portrayal of Bhumi. Known for her fearless choices and authentic screen presence, she stands out among her peers. Aaditi continues to emerge as one of the most promising and dynamic talents in India’s digital and film landscape.",quote:"The struggle ends. The struggle to win, to be famous, to be rich. When you meet your higher self within and realize that your life’s purpose is beyond this maze—where it is easy to get lost, lose confidence, and where your integrity is constantly tested—you are left with no guidance. That’s when a strong value system helps you realize that I am just an actor and this is my work, but there is more to my life’s purpose."}
+  {name:"Shaan Uttamsingh",role:"Entrepreneur",kian:"Mitra Kiaan",image:"kiaan-uttamsingh.webp",profile:"Kiaan Uttamsingh is an entrepreneur deeply involved in the media and entertainment industry. He is the grandson of the pioneer GP Sippy, and building on this legacy, Kiaan has helped shape the evolution of trademark and intellectual property rights within the film industry. His formative years were spent in the United States, after which he returned to India to complete his graduation and further connect with the culture and values of the country.|||He has led and managed companies such as Sippy Films Pvt. Ltd. and Sholay Media & Entertainment Pvt. Ltd., contributing toward vision, growth, and long-term value creation. With over 26 years of experience in building and running companies in the industry, he has played a significant role in creating, protecting, and strengthening valuable intellectual properties.|||Alongside his professional journey, he has remained deeply engaged in philanthropic and spiritual initiatives. He has been associated with Maitreya Dadashreeji since 2013 and is currently presiding over multiple trusts, reflecting his commitment to selfless service, leadership, and an objective perspective toward collective growth. His approach is rooted in bringing people and purpose together through thoughtful guidance and responsible stewardship. He continues to inspire collaborative progress by balancing vision with integrity and action with compassion."}
 ];
 
 const formDefinitions = {
@@ -93,61 +93,47 @@ tModalClose.addEventListener("click",closeTrusteeModal);
 tModalBg.addEventListener("click",closeTrusteeModal);
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!tModal.hidden)closeTrusteeModal()});
 
-// ── Mala values: seven beads on a circular path ──
-const MALA_VALUES=[
-  {devanagari:"सत्य",  numeral:"I",   meaning:"Truth",               image:"truth.webp"},
-  {devanagari:"धर्म",  numeral:"II",  meaning:"Righteousness",       image:"righteousness.webp"},
-  {devanagari:"मैत्री",numeral:"III", meaning:"True Friendship",     image:"true-friendship.webp"},
-  {devanagari:"शांति", numeral:"IV",  meaning:"Peace",               image:"peace.webp"},
-  {devanagari:"प्रेम", numeral:"V",   meaning:"Unconditional Love",  image:"unconditional-love.webp"},
-  {devanagari:"संबंध", numeral:"VI",  meaning:"Bond with the Divine",image:"bond-with-divine.webp"},
-  {devanagari:"एक परिवार",numeral:"VII",meaning:"One Family",        image:"one-family.webp"},
+// ── Values section ──
+const VALUES=[
+  {numeral:"I",   deva:"सत्य",               english:"Truth",                image:"truth.webp"},
+  {numeral:"II",  deva:"धर्म",               english:"Righteousness",        image:"righteousness.webp"},
+  {numeral:"III", deva:"सच्ची मित्रता",      english:"True Friendship",      image:"true-friendship.webp"},
+  {numeral:"IV",  deva:"शांति",              english:"Peace",                image:"peace.webp"},
+  {numeral:"V",   deva:"निःशर्त प्रेम",     english:"Unconditional Love",   image:"unconditional-love.webp"},
+  {numeral:"VI",  deva:"परमात्मा से बंधन",  english:"Bond with the Divine", image:"bond-with-divine.webp"},
+  {numeral:"VII", deva:"एक परिवार",          english:"One Family",           image:"one-family.webp"},
 ];
-const malaRingEl=document.querySelector("#mala-ring");
-const malaArtEl=document.querySelector("#mala-art");
-const malaDevaEl=document.querySelector("#mala-deva");
-const malaMeaningEl=document.querySelector("#mala-meaning");
-const malaNumeralEl=document.querySelector("#mala-numeral");
-const malaBeads=[];
-let malaActive=0,malaTimer=null;
-if(malaRingEl){
-  MALA_VALUES.forEach((v,i)=>{
-    const b=document.createElement("button");
-    b.type="button";
-    b.className="mala-bead"+(i===0?" active":"");
-    b.setAttribute("aria-label",`${v.devanagari} — ${v.meaning}`);
-    b.textContent=v.numeral;
-    b.addEventListener("click",()=>{clearTimeout(malaTimer);setMala(i);scheduleMala();});
-    malaRingEl.appendChild(b);
-    malaBeads.push(b);
+const valueListEl=document.querySelector("#value-list");
+const valueArtEl=document.querySelector("#value-art");
+let valueActive=0;
+if(valueListEl){
+  VALUES.forEach((v,i)=>{
+    const btn=document.createElement("button");
+    btn.type="button";
+    btn.className="value-button"+(i===0?" active":"");
+    btn.setAttribute("role","listitem");
+    btn.setAttribute("aria-pressed",i===0?"true":"false");
+    btn.innerHTML=`<span class="val-num">${v.numeral}</span><span class="value-copy"><span class="value-deva">${v.deva}</span><span class="value-english">${v.english}</span></span>`;
+    btn.addEventListener("click",()=>setValueActive(i));
+    valueListEl.appendChild(btn);
   });
 }
-function positionMalaBeads(){
-  const scene=document.querySelector(".mala-scene");
-  if(!scene||!scene.offsetWidth)return;
-  const R=scene.offsetWidth*0.415,cx=scene.offsetWidth/2,cy=scene.offsetHeight/2;
-  malaBeads.forEach((b,i)=>{
-    const a=(270+i*(360/MALA_VALUES.length))*Math.PI/180;
-    b.style.left=(cx+R*Math.cos(a))+"px";
-    b.style.top=(cy+R*Math.sin(a))+"px";
+function setValueActive(idx){
+  valueActive=idx;
+  const v=VALUES[idx];
+  document.querySelectorAll(".value-button").forEach((b,i)=>{
+    b.classList.toggle("active",i===idx);
+    b.setAttribute("aria-pressed",i===idx?"true":"false");
   });
+  if(valueArtEl){
+    valueArtEl.classList.add("is-changing");
+    setTimeout(()=>{
+      valueArtEl.src=`assets/values/${v.image}`;
+      valueArtEl.alt=v.english;
+      valueArtEl.classList.remove("is-changing");
+    },180);
+  }
 }
-function setMala(idx){
-  malaBeads.forEach((b,i)=>b.classList.toggle("active",i===idx));
-  malaActive=idx;
-  const v=MALA_VALUES[idx];
-  [malaArtEl,malaDevaEl,malaMeaningEl,malaNumeralEl].forEach(el=>el&&el.classList.add("is-changing"));
-  setTimeout(()=>{
-    if(malaArtEl)malaArtEl.src=`assets/values/${v.image}`;
-    if(malaDevaEl)malaDevaEl.textContent=v.devanagari;
-    if(malaMeaningEl)malaMeaningEl.textContent=v.meaning;
-    if(malaNumeralEl)malaNumeralEl.textContent=v.numeral;
-    [malaArtEl,malaDevaEl,malaMeaningEl,malaNumeralEl].forEach(el=>el&&el.classList.remove("is-changing"));
-  },350);
-}
-function scheduleMala(){malaTimer=setTimeout(()=>{setMala((malaActive+1)%MALA_VALUES.length);scheduleMala();},5000);}
-window.addEventListener("load",()=>{positionMalaBeads();scheduleMala();});
-window.addEventListener("resize",positionMalaBeads);
 
 const menu=document.querySelector("#nav-links"),menuButton=document.querySelector(".menu-toggle");
 menuButton.addEventListener("click",()=>{const open=menu.classList.toggle("open");menuButton.setAttribute("aria-expanded",String(open))});

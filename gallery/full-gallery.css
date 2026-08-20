@@ -1,0 +1,40 @@
+/* The complete gallery respects each photograph's original composition. */
+.photo-grid {
+  display: block !important;
+  columns: 3;
+  column-gap: 12px;
+}
+
+.photo-card,
+.photo-card.wide,
+.photo-card.tall {
+  display: block !important;
+  width: 100% !important;
+  margin: 0 0 12px !important;
+  break-inside: avoid;
+  aspect-ratio: auto !important;
+  grid-column: auto !important;
+  background: rgba(233, 218, 206, 0.42);
+}
+
+.photo-card img {
+  width: 100% !important;
+  height: auto !important;
+  object-fit: contain !important;
+}
+
+.photo-card:hover img { transform: none !important; }
+
+@media (max-width: 850px) {
+  .photo-grid { columns: 2; }
+}
+
+@media (max-width: 560px) {
+  .photo-grid { columns: 1; }
+
+  .photo-card,
+  .photo-card.wide,
+  .photo-card.tall {
+    aspect-ratio: auto !important;
+  }
+}

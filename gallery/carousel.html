@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#110d0c">
+  <title>Gallery | Vaishvik Adhyatmik Chitranagari Samiti</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root{--cream:#fff8f1;--gold:#f79936;--night:#110d0c;--serif:"Playfair Display",Georgia,serif;--sans:"Inter",Arial,sans-serif}
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{margin:0;height:100%;background:var(--night);color:var(--cream);font-family:var(--sans)}
+    body{overflow:hidden}
+
+    /* ── Stage ── */
+    .stage{
+      position:relative;min-height:100svh;
+      display:grid;grid-template-rows:auto 1fr auto;
+      overflow:hidden;isolation:isolate;
+      background:radial-gradient(ellipse at 50% 57%,#48271e 0,#211513 39%,#0c0908 78%)
+    }
+    .stage::before{
+      content:"";position:absolute;inset:0;z-index:-1;
+      background:linear-gradient(rgba(17,13,12,.75),rgba(17,13,12,.94)),
+                 url("../assets/extracted/paper-texture.webp") center/900px auto;
+      mix-blend-mode:soft-light;opacity:.48
+    }
+
+    /* ── Header ── */
+    .intro{position:relative;z-index:10;width:min(900px,calc(100% - 36px));margin:auto;padding:clamp(20px,3.5vh,42px) 0 0;text-align:center}
+    .eyebrow{margin:0 0 9px;color:var(--gold);font-size:.61rem;font-weight:500;letter-spacing:.3em;text-transform:uppercase}
+    h1{margin:0;font-family:var(--serif);font-size:clamp(2rem,4.5vw,4.7rem);font-weight:500;line-height:1;letter-spacing:-.045em;text-wrap:balance}
+    h1 em{color:#f4a046;font-weight:500}
+    .lede{max-width:530px;margin:10px auto 0;color:rgba(255,248,241,.58);font-size:.73rem;line-height:1.65}
+
+    /* ── 3D Scene ──
+       Technique from codepen.io/thebabydino/pen/dPXVyqN:
+       All cards share grid-area 1/1 (stacked), each positioned via:
+         rotatey(i * 360/N deg)   ← spread around Y axis
+         translatez(-radius)       ← push outward into prism
+       radius = (half-card-width + half-gap) / tan(half-angle-per-card)
+
+       Key fixes vs v1:
+       – perspective raised to 62em so cylinder fits within viewport
+       – clip-path:inset(0) forces browsers to actually clip 3D overflow
+         (overflow:hidden alone does NOT clip preserve-3d children in all browsers)
+       – mask widens fade zone so side cards dissolve before the clip boundary
+    */
+    .scene{
+      display:grid;place-items:center;
+      overflow:hidden;
+      clip-path:inset(0);            /* hard clip for 3D overflow */
+      perspective:72em;              /* raised further to handle the larger N=18 radius */
+      mask:linear-gradient(90deg,#0000,red 22% 78%,#0000);
+      -webkit-mask:linear-gradient(90deg,#0000,red 22% 78%,#0000);
+      cursor:grab;user-select:none;touch-action:pan-y
+    }
+    .scene.dragging{cursor:grabbing}
+
+    /* 3D ring — rotation applied via JS: a3d.style.rotate = "y Xdeg" */
+    .a3d{
+      display:grid;place-self:center;
+      transform-style:preserve-3d
+    }
+
+    /* ── Film frame card ── */
+    .card{
+      /* N=18 cards at 20° each — narrower so radius stays viewport-safe */
+      --w:clamp(145px,13.5vw,185px);
+      --h:clamp(210px,32vh,300px);
+      --gap:0.45em;
+      --ba:calc(1turn / var(--n));
+
+      grid-area:1/1;            /* all cards stacked in same grid cell */
+      width:var(--w);
+      height:var(--h);
+      display:flex;flex-direction:column;
+      cursor:pointer;
+
+      background:linear-gradient(180deg,#38251f,#17100f 15%,#0d0908 50%,#1a1210 86%,#40291f);
+      box-shadow:
+        inset 0 1px rgba(255,255,255,.16),
+        inset 0 -1px rgba(247,153,54,.45),
+        0 28px 65px rgba(0,0,0,.55);
+
+      backface-visibility:hidden;   /* hide cards on back half of cylinder */
+
+      /* Polygon prism formula — identical to CodePen reference */
+      transform:
+        rotatey(calc(var(--i) * var(--ba)))
+        translatez(calc(-1 * (.5 * var(--w) + var(--gap)) / tan(.5 * var(--ba))));
+
+      transition:box-shadow .4s ease
+    }
+    .card:hover{
+      box-shadow:
+        inset 0 1px rgba(255,255,255,.22),
+        inset 0 -1px rgba(247,153,54,.62),
+        0 0 0 1px rgba(247,153,54,.42),
+        0 0 44px rgba(247,153,54,.18),
+        0 30px 70px rgba(0,0,0,.62)
+    }
+    .card:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+
+    /* ── Sprocket strip ── */
+    .spr{
+      flex:0 0 clamp(17px,2.8vh,24px);
+      background-color:#281a17;
+      background-image:radial-gradient(
+        ellipse 6px 4px at 9px 50%,
+        #070505 65%,rgba(247,153,54,.32) 70%,transparent 78%
+      );
+      background-size:18px 12px;
+      background-repeat:repeat-x;
+      background-position:left center;
+      box-shadow:0 1px rgba(255,255,255,.11),inset 0 0 8px rgba(0,0,0,.75)
+    }
+    .spr.spr-b{
+      transform:scaleY(-1);
+      box-shadow:0 -1px rgba(255,255,255,.06),inset 0 0 8px rgba(0,0,0,.75)
+    }
+
+    /* ── Frame-edge label strip ── */
+    .lbl{
+      flex:0 0 clamp(11px,1.6vh,14px);
+      background:#090604;
+      display:flex;align-items:center;padding:0 8px;overflow:hidden
+    }
+    .lbl span{
+      font-size:.28rem;font-weight:500;letter-spacing:.13em;
+      color:rgba(247,153,54,.38);text-transform:uppercase;
+      font-family:var(--sans);white-space:nowrap
+    }
+    .lbl.lbl-b{justify-content:flex-end}
+
+    /* ── Gate: image window ── */
+    .gate{
+      flex:1;position:relative;overflow:hidden;
+      background:#070505;
+      border:1px solid rgba(247,153,54,.38);
+      box-shadow:inset 0 0 0 5px #0d0908,inset 0 0 28px rgba(0,0,0,.65)
+    }
+    .gate::after{
+      content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+      background:
+        linear-gradient(110deg,transparent 30%,rgba(255,235,190,.17) 49%,transparent 63%),
+        linear-gradient(0deg,rgba(0,0,0,.22),transparent 40%)
+    }
+
+    /* Full color — no grayscale filter */
+    .gate img{
+      display:block;width:100%;height:100%;object-fit:cover;
+      filter:brightness(.88) contrast(1.06) saturate(1.08);
+      transform:scale(1.03);
+      transition:filter .4s ease,transform .7s cubic-bezier(.2,.8,.2,1)
+    }
+    .card:hover .gate img{
+      filter:brightness(1) contrast(1.04) saturate(1.12);
+      transform:scale(1.07)
+    }
+    .card:hover .gate{border-color:rgba(255,190,88,.85)}
+
+    /* Glimmer sweep on hover */
+    .card:hover .gate::before{
+      content:"";position:absolute;z-index:3;inset:-35%;
+      background:linear-gradient(
+        108deg,
+        transparent 38%,rgba(255,238,187,.08) 45%,
+        rgba(255,255,255,.48) 50%,transparent 58%
+      );
+      animation:glimmer 5s ease-in-out infinite;pointer-events:none
+    }
+    @keyframes glimmer{
+      0%,58%{translate:-120%;opacity:0}
+      66%{opacity:1}
+      86%,100%{translate:120%;opacity:0}
+    }
+
+    /* ── Footer ── */
+    .footer{
+      position:relative;z-index:10;
+      display:flex;align-items:center;justify-content:center;gap:14px;
+      min-height:58px;padding:0 20px 18px;
+      color:rgba(255,248,241,.42);font-size:.53rem;letter-spacing:.17em;text-transform:uppercase
+    }
+    .footer::before,.footer::after{
+      content:"";width:46px;height:1px;
+      background:linear-gradient(90deg,transparent,var(--gold))
+    }
+    .footer::after{rotate:180deg}
+
+    /* ── Mobile ── */
+    @media(max-width:600px){
+      .lede{max-width:300px;font-size:.68rem}
+      .card{--w:clamp(105px,28vw,140px);--h:clamp(170px,32vh,220px)}
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      /* Reduce spin speed handled in JS via reduced flag */
+    }
+    /* Equal visual weight: hover never promotes one photograph above the set. */
+    .card:hover{box-shadow:inset 0 1px rgba(255,255,255,.16),inset 0 -1px rgba(247,153,54,.45),0 28px 65px rgba(0,0,0,.55)}
+    .card:hover .gate img{filter:brightness(.88) contrast(1.06) saturate(1.08);transform:scale(1.03)}
+    .card:hover .gate{border-color:rgba(247,153,54,.38)}
+    .card:hover .gate::before{display:none}
+  </style>
+</head>
+<body>
+<main class="stage">
+  <header class="intro">
+    <p class="eyebrow">The gallery</p>
+    <h1>Moments in stillness. <em>Stories in motion.</em></h1>
+    <p class="lede">A living film of shared presence, creative expression and inner connection.</p>
+  </header>
+
+  <div class="scene" id="scene">
+    <div class="a3d" id="a3d"></div>
+  </div>
+
+  <div class="footer"><span id="status">Rotating · drag to explore</span></div>
+</main>
+
+<script>
+"use strict";
+
+const IMAGES = 9;  // unique source images
+const N      = 18; // two full laps → ~9 frames visible at once, 3 fade into each edge
+const LABELS = ['KO▲','▽KO','KO◆','◇KO','KO△','▲KO','KO▽','▼KO','KO□'];
+
+const scene   = document.getElementById('scene');
+const a3d     = document.getElementById('a3d');
+const status  = document.getElementById('status');
+const reduced = matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+/* ── Build cards (N=18: images 1-9 twice) ── */
+a3d.style.setProperty('--n', N);
+
+for (let i = 0; i < N; i++) {
+  const imgIdx = (i % IMAGES) + 1;          // 1-9, wraps
+  const num    = String(imgIdx).padStart(2, '0');
+  const label  = LABELS[i % LABELS.length];
+  const card   = document.createElement('button');
+  card.className = 'card';
+  card.type = 'button';
+  card.style.setProperty('--i', i);
+  card.setAttribute('aria-label', 'Gallery moment ' + imgIdx);
+  card.innerHTML =
+    '<div class="spr"></div>' +
+    '<div class="lbl"><span>' + num + ' ▲ ' + label + '</span></div>' +
+    '<div class="gate">' +
+      '<img src="Image ' + imgIdx + '.jpg"' +
+      ' width="1600" height="1067"' +
+      ' alt="Gallery moment ' + imgIdx + '"' +
+      (i >= 6 ? ' loading="lazy"' : '') +
+    '></div>' +
+    '<div class="lbl lbl-b"><span>○ ' + num + ' ○</span></div>' +
+    '<div class="spr spr-b"></div>';
+  a3d.appendChild(card);
+}
+
+/* ── Rotation engine with momentum ──
+
+   spinVelocity is the CURRENT rotation speed in deg/ms.
+   – Auto-rotation: target speed is DEG_NORMAL or DEG_SLOW.
+     spinVelocity lerps toward the target each frame, so
+     speed changes (hover, drag release) happen smoothly.
+   – During drag: pointermove computes instantaneous velocity
+     from the drag delta and writes it directly to spinVelocity.
+   – After drag: the lerp decays that velocity back toward
+     auto-rotation speed, giving natural momentum.
+*/
+const DEG_NORMAL  = 360 / 30000;   // 30 s / rev
+const DEG_SLOW    = 360 / 90000;   // 90 s / rev (hover)
+const DEG_REDUCED = 360 / 120000;  // 120 s / rev
+
+let angle        = 0;
+let spinVelocity = reduced ? DEG_REDUCED : DEG_NORMAL;
+let prevTs       = null;
+
+let hovering     = false;
+let dragging     = false;
+let dragStartX   = 0;
+let dragStartAng = 0;
+let dragPrevX    = 0;
+let dragPrevTs   = 0;
+
+function frame(ts) {
+  const dt = prevTs !== null ? Math.min(ts - prevTs, 50) : 16;
+  prevTs = ts;
+
+  if (!dragging) {
+    /* target speed: slower when hovering, very slow for reduced-motion */
+    const target = reduced ? DEG_REDUCED : hovering ? DEG_SLOW : DEG_NORMAL;
+    /* lerp spinVelocity → target; factor 0.025 per ms = ~33% per frame @60fps */
+    spinVelocity += (target - spinVelocity) * (1 - Math.pow(0.975, dt));
+    angle += spinVelocity * dt;
+  }
+
+  a3d.style.rotate = 'y ' + angle + 'deg';
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+/* ── Pointer events ── */
+scene.addEventListener('pointerenter', () => {
+  hovering = true;
+  status.textContent = 'Slow motion · drag to explore';
+});
+scene.addEventListener('pointerleave', () => {
+  hovering = false;
+  dragging = false;
+  scene.classList.remove('dragging');
+  status.textContent = 'Rotating · drag to explore';
+});
+
+scene.addEventListener('pointerdown', e => {
+  dragging     = true;
+  dragStartX   = e.clientX;
+  dragStartAng = angle;
+  dragPrevX    = e.clientX;
+  dragPrevTs   = performance.now();
+  scene.setPointerCapture(e.pointerId);
+  scene.classList.add('dragging');
+});
+
+scene.addEventListener('pointermove', e => {
+  if (!dragging) return;
+  const now = performance.now();
+  const dx  = e.clientX - dragStartX;
+  const newAngle = dragStartAng + dx * 0.38; /* 0.38 deg per pixel */
+
+  /* track instantaneous velocity so momentum carries on after release */
+  const dt = now - dragPrevTs;
+  if (dt > 0) {
+    spinVelocity = (newAngle - angle) / dt;
+  }
+  dragPrevX  = e.clientX;
+  dragPrevTs = now;
+  angle      = newAngle;
+});
+
+scene.addEventListener('pointerup', () => {
+  dragging = false;
+  scene.classList.remove('dragging');
+  /* spinVelocity is already set to the last drag velocity;
+     the lerp in frame() will smoothly blend it back to auto-speed */
+});
+
+/* ── Click to snap card to front ──
+   Card i faces viewer when ring rotation = -i * (360/N) mod 360.
+   We find the shortest arc from the current angle to that target.
+*/
+a3d.addEventListener('click', e => {
+  if (Math.abs(spinVelocity) > DEG_NORMAL * 8) return; /* ignore fast fling */
+  const card = e.target.closest('.card');
+  if (!card) return;
+  const i      = parseInt(card.style.getPropertyValue('--i'), 10);
+  const target = -(i * 360 / N); /* N=18 keeps snap aligned to 20° slots */
+  let delta    = ((target - angle) % 360 + 540) % 360 - 180;
+  /* animate snap by boosting spinVelocity toward target, not jumping */
+  /* short-cut: just set angle directly for instant snap */
+  angle += delta;
+  spinVelocity = 0;
+});
+</script>
+</body>
+</html>
