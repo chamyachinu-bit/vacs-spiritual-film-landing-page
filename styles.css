@@ -1056,21 +1056,21 @@ h1{line-height:1.18;letter-spacing:-.032em;font-variant-ligatures:no-common-liga
   .hero-photo-matrix .hero-diamond{opacity:1;animation:none}
 }
 
-/* Compact footer seal: smaller support disc, larger readable brand mark. */
+/* Footer seal: white circle with icon-only logo */
 .footer-logo-badge{
-  width:116px;
-  height:116px;
+  width:110px;
+  height:110px;
   margin:0 0 20px;
   display:grid;
   place-items:center;
   overflow:hidden;
   border-radius:50%;
-  background:#fff4eb;
-  box-shadow:0 10px 24px rgba(0,0,0,.16),inset 0 0 0 1px rgba(247,153,54,.2);
+  background:#ffffff;
+  box-shadow:0 10px 24px rgba(0,0,0,.18),inset 0 0 0 1px rgba(247,153,54,.2);
 }
 .footer .footer-logo{
-  width:122px;
-  height:112px;
+  width:86px;
+  height:86px;
   max-width:none;
   margin:0;
   padding:0;
@@ -1079,12 +1079,11 @@ h1{line-height:1.18;letter-spacing:-.032em;font-variant-ligatures:no-common-liga
   background:transparent;
   box-shadow:none;
   object-fit:contain;
-  transform:translateY(-2px) scale(1.62);
-  transform-origin:center;
+  transform:none;
 }
 @media(max-width:560px){
-  .footer-logo-badge{width:104px;height:104px;margin-bottom:16px}
-  .footer .footer-logo{width:110px;height:101px;padding:0;transform:translateY(-2px) scale(1.58)}
+  .footer-logo-badge{width:96px;height:96px;margin-bottom:16px}
+  .footer .footer-logo{width:74px;height:74px}
 }
 
 /* Initiatives heading: stronger editorial scale with a tighter card handoff. */
