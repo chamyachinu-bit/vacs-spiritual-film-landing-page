@@ -80,7 +80,7 @@ trustees.forEach((person,index)=>{
 function openTrusteeModal(person){
   const paras=person.profile.split("|||").map(p=>`<p>${p}</p>`).join("");
   tModalPortrait.innerHTML=`<img src="assets/images/${person.image}?v=20" width="900" height="1200" alt="${person.name}">`;
-  tModalBio.innerHTML=`<p class="eyebrow">Board of Trustees</p><h2 id="t-modal-name">${person.name}</h2><p class="t-modal-role">${person.role}</p>${person.kian?`<p class="t-modal-kian">${person.kian}</p>`:""}<div class="t-bio-text">${paras}</div>${person.quote?`<blockquote>"${person.quote}"</blockquote>`:""}`;
+  tModalBio.innerHTML=`<p class="eyebrow">Trustee</p><h2 id="t-modal-name">${person.name}</h2><p class="t-modal-role">${person.role}</p>${person.kian?`<p class="t-modal-kian">${person.kian}</p>`:""}<div class="t-bio-text">${paras}</div>${person.quote?`<blockquote>"${person.quote}"</blockquote>`:""}`;
   tModal.hidden=false;
   document.body.classList.add("dialog-open");
   tModalClose.focus({preventScroll:true});

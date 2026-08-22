@@ -1317,3 +1317,25 @@ h1{line-height:1.18;letter-spacing:-.032em;font-variant-ligatures:no-common-liga
   }
   .t-modal-bio::-webkit-scrollbar{display:none}
 }
+
+/* The gallery is currently a visual film-reel passage, without promotional copy. */
+.gallery-reel-only{padding-block:0!important}
+.gallery-reel-only .gallery-slideshow-frame{margin-block:0}
+
+/* Keep the complete footer logo readable inside its supporting seal. */
+.footer-logo-badge{width:124px;height:124px}
+.footer .footer-logo{width:112px;height:104px;object-fit:contain;transform:none}
+@media(max-width:560px){
+  .footer-logo-badge{width:112px;height:112px}
+  .footer .footer-logo{width:100px;height:94px}
+}
+.footer-nav-action{
+  border:0;
+  padding:0;
+  background:transparent;
+  color:inherit;
+  font:inherit;
+  text-align:left;
+  cursor:pointer;
+}
+.footer-nav-action:hover{color:var(--gold)}

@@ -28,7 +28,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Inter:wght@300;400;500;600&family=Noto+Serif+Devanagari:wght@500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=78">
+  <link rel="stylesheet" href="styles.css?v=80">
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.vacstrust.org/#organization","name":"Vaishvik Adhyatmik Chitranagari Samiti","alternateName":"Global Spiritual Film & Entertainment Association","url":"https://www.vacstrust.org/","logo":{"@type":"ImageObject","url":"https://www.vacstrust.org/assets/extracted/social-logo.webp"},"email":"info@vacstrust.org","telephone":"+91-7400118626","description":"An association supporting the physical, mental, emotional and spiritual wellbeing of India's film and entertainment fraternity.","areaServed":{"@type":"Country","name":"India"},"contactPoint":{"@type":"ContactPoint","contactType":"general enquiries","email":"info@vacstrust.org","telephone":"+91-7400118626","availableLanguage":["English","Hindi"]},"address":{"@type":"PostalAddress","streetAddress":"Ground Floor, Office No. 03, Sai Pride CHS, Plot No. 219, Sector 21, Kamothe","addressLocality":"Navi Mumbai","addressRegion":"Maharashtra","postalCode":"410209","addressCountry":"IN"}},{"@type":"WebSite","@id":"https://www.vacstrust.org/#website","url":"https://www.vacstrust.org/","name":"Vaishvik Adhyatmik Chitranagari Samiti","publisher":{"@id":"https://www.vacstrust.org/#organization"},"inLanguage":"en-IN"},{"@type":"WebPage","@id":"https://www.vacstrust.org/#webpage","url":"https://www.vacstrust.org/","name":"Film Industry Wellbeing & Spiritual Growth Association","isPartOf":{"@id":"https://www.vacstrust.org/#website"},"about":{"@id":"https://www.vacstrust.org/#organization"},"inLanguage":"en-IN"}]}</script>
 </head>
 <body>
@@ -60,8 +60,8 @@
       </a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links"><span></span><span></span><span></span><span class="sr-only">Open navigation</span></button>
       <div class="nav-links" id="nav-links">
-        <a href="#about">About</a><a href="#values">Values</a><a href="#gallery-preview">Gallery</a><a href="#offerings">Offerings</a><a href="#members">Members</a>
-        <button class="button button-small form-trigger" type="button" data-intent="member">Become a member</button>
+        <a href="#about">About Us</a><a href="#gallery-preview">Gallery</a><a href="#offerings">Our Initiatives</a><a href="#members">Our Members</a>
+        <button class="button button-small form-trigger" type="button" data-intent="member">Join Us</button>
       </div>
     </nav>
   </header>
@@ -155,15 +155,11 @@
       </div>
     </section>
 
-    <section class="section gallery-invitation" id="gallery-preview" aria-labelledby="gallery-preview-title">
+    <section class="section gallery-invitation gallery-reel-only" id="gallery-preview" aria-label="Community film reel">
       <div class="shell gallery-invitation-shell">
-        <div class="gallery-invitation-heading">
-          <h2 id="gallery-preview-title">Our Gallery</h2>
-        </div>
         <div class="gallery-slideshow-frame reveal">
           <iframe src="gallery/index-v2.html?embed=1&amp;v=5" title="Animated community photograph slideshow" loading="lazy"></iframe>
         </div>
-        <div class="gallery-invitation-action reveal"><a class="button" href="gallery/all.html">Explore gallery <span aria-hidden="true">→</span></a></div>
       </div>
     </section>
 
@@ -215,17 +211,17 @@
     <div class="shell footer-grid">
       <div class="footer-brand">
         <div class="footer-logo-badge">
-          <img class="footer-logo" src="assets/brand/favicon-circle.png" width="512" height="512" alt="Vaishvik Adhyatmik Chitranagari Samiti">
+          <img class="footer-logo" src="assets/brand/vacs-logo.svg" width="276" height="253" alt="Vaishvik Adhyatmik Chitranagari Samiti">
         </div>
         <p>A Global Spiritual Film &amp; Entertainment Association guided by Maitreya Dadashreeji.</p>
       </div>
       <div class="footer-nav">
         <h2>Explore</h2>
-        <a href="#about">About us</a>
-        <a href="#dadashreeji">Dadashreeji</a>
-        <a href="#values">Vision &amp; Values</a>
-        <a href="#offerings">Initiatives</a>
-        <a href="#members">Members</a>
+        <a href="#about">About Us</a>
+        <a href="#gallery-preview">Gallery</a>
+        <a href="#offerings">Our Initiatives</a>
+        <a href="#members">Our Members</a>
+        <button class="footer-nav-action form-trigger" type="button" data-intent="member">Join Us</button>
       </div>
       <div class="footer-contact">
         <h2>Contact</h2>
@@ -265,6 +261,6 @@
       <form id="intent-form" novalidate><input id="intent" name="intent" type="hidden"><div class="form-grid"><label>Full name <span>*</span><input name="name" autocomplete="name" required></label><label>Email address <span>*</span><input name="email" type="email" autocomplete="email" required></label><label>Phone number <span>*</span><input name="phone" type="tel" autocomplete="tel" required></label><label>City <span>*</span><input name="city" autocomplete="address-level2" required></label></div><div class="intent-fields" id="intent-fields"></div><label>Message<textarea name="message" rows="4"></textarea></label><label class="consent"><input name="consent" type="checkbox" required><span>I consent to being contacted about this enquiry.</span></label><button class="button form-submit" type="submit" disabled>Submissions opening soon</button></form>
     </div>
   </dialog>
-  <script src="config.js"></script><script src="script.js?v=37"></script>
+  <script src="config.js"></script><script src="script.js?v=38"></script>
 </body>
 </html>

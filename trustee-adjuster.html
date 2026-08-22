@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Trustee Photo Adjuster</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,sans-serif;background:#1a1210;color:#e8ddd5;min-height:100vh;padding:20px}
+h1{text-align:center;font-size:1.1rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#c9a96e;margin-bottom:6px}
+p.hint{text-align:center;font-size:.78rem;color:#8a7a70;margin-bottom:20px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:1100px;margin:0 auto 20px}
+.card{background:#251810;border-radius:6px;overflow:hidden;border:2px solid transparent;cursor:pointer;transition:border-color .2s}
+.card.active{border-color:#c9a96e}
+.card-label{padding:8px 10px;font-size:.7rem;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#a08060}
+.frame{aspect-ratio:4/5;overflow:hidden;position:relative;background:#111;cursor:grab;user-select:none}
+.frame.dragging{cursor:grabbing}
+.frame .photo{position:absolute;inset:0;background-repeat:no-repeat;background-attachment:local}
+.row2{display:grid;grid-template-columns:repeat(3,1fr) 3fr;gap:12px;max-width:1100px;margin:0 auto 20px}
+.controls{background:#251810;border-radius:8px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;justify-content:center}
+.ctrl-row{display:flex;align-items:center;gap:10px;font-size:.72rem;color:#a08060}
+.ctrl-row label{min-width:70px}
+.ctrl-row input[type=range]{flex:1;accent-color:#c9a96e}
+.ctrl-row span{min-width:38px;text-align:right;font-variant-numeric:tabular-nums;color:#e8ddd5}
+.btn{padding:8px 16px;border-radius:4px;border:1px solid #c9a96e;background:transparent;color:#c9a96e;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .2s,color .2s}
+.btn:hover{background:#c9a96e;color:#1a1210}
+.btn.primary{background:#c9a96e;color:#1a1210}
+.btn.primary:hover{background:#e0ba80}
+.output-wrap{max-width:1100px;margin:0 auto}
+.output-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.output-header h2{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:#c9a96e}
+textarea#css-out{width:100%;height:260px;background:#0d0908;border:1px solid #3a2a20;border-radius:6px;color:#a8d8a8;font-family:"Courier New",monospace;font-size:.72rem;padding:12px;resize:vertical;line-height:1.6}
+.actions{display:flex;gap:8px;margin-top:8px}
+.selected-name{font-size:.85rem;color:#e8ddd5;font-weight:500}
+</style>
+</head>
+<body>
+<h1>Trustee Photo Adjuster</h1>
+<p class="hint">Drag inside each photo to reposition · Zoom slider scales in · Click a card to select it · Copy CSS when done</p>
+
+<div class="grid" id="top-row"></div>
+<div class="row2" id="bot-row"></div>
+
+<div class="output-wrap">
+  <div class="output-header">
+    <h2>CSS Output — paste into styles.css</h2>
+    <div class="actions">
+      <button class="btn" onclick="resetSelected()">Reset selected</button>
+      <button class="btn primary" onclick="copyCss()">Copy all CSS</button>
+    </div>
+  </div>
+  <textarea id="css-out" readonly></textarea>
+</div>
+
+<script>
+const DATA = [
+  {name:"Makarand Deshpande", img:"assets/images/makarand-deshpande-portrait.webp", px:50, py:12, zoom:1.18},
+  {name:"Smita Jayakar",      img:"assets/images/smita-jayakar.webp",               px:50, py:0,  zoom:1.45},
+  {name:"Kajal Aggarwal",     img:"assets/images/kajal-aggrawal.webp",              px:50, py:8,  zoom:1.55},
+  {name:"Addinath Kothare",   img:"assets/images/addinath-kothare.webp",            px:50, py:8,  zoom:1.55},
+  {name:"Kiaan Uttamsingh",   img:"assets/images/kiaan-uttamsingh.webp",            px:50, py:18, zoom:1.0},
+  {name:"Maitreyi Saundarya", img:"assets/images/maitreyi-saundarya.webp",          px:50, py:28, zoom:1.6},
+  {name:"Aaditi Pohankar",    img:"assets/images/aaditi-pohankar.webp",             px:50, py:0,  zoom:1.0},
+];
+
+// Clone originals for reset
+const ORIG = DATA.map(d=>({px:d.px,py:d.py,zoom:d.zoom}));
+
+const state = DATA.map(d=>({px:d.px, py:d.py, zoom:d.zoom}));
+
+let selectedIdx = 0;
+const cards = [];
+
+function clamp(v,mn,mx){return Math.max(mn,Math.min(mx,v))}
+
+function applyPhoto(el, i){
+  const s = state[i];
+  // background-size = zoom*100% to mimic scale; background-position = direct percent
+  el.style.backgroundImage = `url("${DATA[i].img}")`;
+  el.style.backgroundSize  = `${(s.zoom*100).toFixed(1)}%`;
+  el.style.backgroundPosition = `${s.px.toFixed(1)}% ${s.py.toFixed(1)}%`;
+}
+
+function buildCard(i, container){
+  const wrap = document.createElement("div");
+  wrap.className = "card" + (i===0?" active":"");
+  wrap.innerHTML = `<div class="frame"><div class="photo" id="photo-${i}"></div></div><div class="card-label">${DATA[i].name}</div>`;
+  container.appendChild(wrap);
+  cards.push(wrap);
+
+  const frame = wrap.querySelector(".frame");
+  const photo = wrap.querySelector(".photo");
+  applyPhoto(photo, i);
+
+  // Drag
+  let dragging=false, lastX=0, lastY=0;
+  frame.addEventListener("mousedown", e=>{
+    dragging=true; lastX=e.clientX; lastY=e.clientY;
+    frame.classList.add("dragging");
+    selectCard(i);
+    e.preventDefault();
+  });
+  window.addEventListener("mousemove", e=>{
+    if(!dragging) return;
+    const dx = e.clientX - lastX;
+    const dy = e.clientY - lastY;
+    lastX=e.clientX; lastY=e.clientY;
+    // Sensitivity: bigger frame = less sensitive. ~0.15% per px feels right
+    const W = frame.offsetWidth, H = frame.offsetHeight;
+    // Dragging RIGHT → image moves right → we see more of the LEFT → px decreases
+    // Dragging DOWN  → image moves down  → we see more of the TOP  → py decreases
+    // (panning the image, not the viewport)
+    state[i].px = clamp(state[i].px - dx*(100/W)*0.6, 0, 100);
+    state[i].py = clamp(state[i].py - dy*(100/H)*0.6, 0, 100);
+    applyPhoto(photo, i);
+    refreshControls();
+    updateOutput();
+  });
+  window.addEventListener("mouseup", ()=>{ if(dragging){dragging=false; frame.classList.remove("dragging");} });
+
+  // Touch
+  let lastTX=0, lastTY=0;
+  frame.addEventListener("touchstart",e=>{
+    const t=e.touches[0]; lastTX=t.clientX; lastTY=t.clientY;
+    selectCard(i); e.preventDefault();
+  },{passive:false});
+  frame.addEventListener("touchmove",e=>{
+    const t=e.touches[0];
+    const dx=t.clientX-lastTX, dy=t.clientY-lastTY;
+    lastTX=t.clientX; lastTY=t.clientY;
+    const W=frame.offsetWidth, H=frame.offsetHeight;
+    state[i].px=clamp(state[i].px-dx*(100/W)*0.6,0,100);
+    state[i].py=clamp(state[i].py-dy*(100/H)*0.6,0,100);
+    applyPhoto(photo,i); refreshControls(); updateOutput();
+    e.preventDefault();
+  },{passive:false});
+
+  wrap.addEventListener("click",()=>selectCard(i));
+}
+
+// Build controls panel (right side of bottom row)
+function buildControls(){
+  const panel = document.createElement("div");
+  panel.className = "controls";
+  panel.id = "ctrl-panel";
+  panel.innerHTML = `
+    <div class="selected-name" id="sel-name">Makarand Deshpande</div>
+    <div class="ctrl-row">
+      <label>Zoom</label>
+      <input type="range" id="ctrl-zoom" min="1.0" max="3.0" step="0.01" value="1.18">
+      <span id="lbl-zoom">1.18×</span>
+    </div>
+    <div class="ctrl-row">
+      <label>Horizontal</label>
+      <input type="range" id="ctrl-px" min="0" max="100" step="0.5" value="50">
+      <span id="lbl-px">50%</span>
+    </div>
+    <div class="ctrl-row">
+      <label>Vertical</label>
+      <input type="range" id="ctrl-py" min="0" max="100" step="0.5" value="12">
+      <span id="lbl-py">12%</span>
+    </div>
+    <div style="font-size:.65rem;color:#6a5a50;line-height:1.5">
+      Drag photo to pan · slider for fine control<br>
+      Vertical 0% = top of image · 100% = bottom
+    </div>
+  `;
+  document.getElementById("bot-row").appendChild(panel);
+
+  document.getElementById("ctrl-zoom").addEventListener("input", e=>{
+    state[selectedIdx].zoom = parseFloat(e.target.value);
+    document.getElementById("lbl-zoom").textContent = state[selectedIdx].zoom.toFixed(2)+"×";
+    applyPhoto(document.getElementById(`photo-${selectedIdx}`), selectedIdx);
+    updateOutput();
+  });
+  document.getElementById("ctrl-px").addEventListener("input", e=>{
+    state[selectedIdx].px = parseFloat(e.target.value);
+    document.getElementById("lbl-px").textContent = state[selectedIdx].px.toFixed(1)+"%";
+    applyPhoto(document.getElementById(`photo-${selectedIdx}`), selectedIdx);
+    updateOutput();
+  });
+  document.getElementById("ctrl-py").addEventListener("input", e=>{
+    state[selectedIdx].py = parseFloat(e.target.value);
+    document.getElementById("lbl-py").textContent = state[selectedIdx].py.toFixed(1)+"%";
+    applyPhoto(document.getElementById(`photo-${selectedIdx}`), selectedIdx);
+    updateOutput();
+  });
+}
+
+function refreshControls(){
+  const s = state[selectedIdx];
+  document.getElementById("sel-name").textContent = DATA[selectedIdx].name;
+  const zEl=document.getElementById("ctrl-zoom");
+  const pxEl=document.getElementById("ctrl-px");
+  const pyEl=document.getElementById("ctrl-py");
+  if(zEl){
+    zEl.value=s.zoom; document.getElementById("lbl-zoom").textContent=s.zoom.toFixed(2)+"×";
+    pxEl.value=s.px;  document.getElementById("lbl-px").textContent=s.px.toFixed(1)+"%";
+    pyEl.value=s.py;  document.getElementById("lbl-py").textContent=s.py.toFixed(1)+"%";
+  }
+}
+
+function selectCard(i){
+  selectedIdx=i;
+  cards.forEach((c,j)=>c.classList.toggle("active",j===i));
+  refreshControls();
+}
+
+function resetSelected(){
+  const o=ORIG[selectedIdx];
+  state[selectedIdx]={px:o.px, py:o.py, zoom:o.zoom};
+  applyPhoto(document.getElementById(`photo-${selectedIdx}`), selectedIdx);
+  refreshControls();
+  updateOutput();
+}
+
+function updateOutput(){
+  const lines = state.map((s,i)=>{
+    const py = s.py===0?"top":`${s.py.toFixed(1)}%`;
+    const px = s.px===50?"center":`${s.px.toFixed(1)}%`;
+    const pos = `${px} ${py}`;
+    return `.t-portrait-card:nth-child(${i+1}){--zoom:${s.zoom.toFixed(2)}}\n.t-portrait-card:nth-child(${i+1}) .t-portrait-frame img{object-position:${pos};transform-origin:${pos}}`;
+  });
+  document.getElementById("css-out").value = lines.join("\n");
+}
+
+function copyCss(){
+  const ta = document.getElementById("css-out");
+  ta.select();
+  document.execCommand("copy");
+  const btn = event.target;
+  btn.textContent="Copied!";
+  setTimeout(()=>btn.textContent="Copy all CSS",1800);
+}
+
+// Init
+const topRow = document.getElementById("top-row");
+const botRow = document.getElementById("bot-row");
+
+// Row 1: first 4
+for(let i=0;i<4;i++) buildCard(i, topRow);
+// Row 2: next 3 + controls
+for(let i=4;i<7;i++) buildCard(i, botRow);
+buildControls();
+
+selectCard(0);
+updateOutput();
+</script>
+</body>
+</html>
