@@ -396,12 +396,12 @@ h1{font-size:clamp(2.1rem,3.6vw,3.4rem);letter-spacing:-.03em}
 h2{font-size:clamp(1.65rem,2.6vw,2.4rem);letter-spacing:-.025em}
 h3{font-size:1.15rem}
 .section{padding:clamp(2.4rem,4vw,3.4rem) 0}
-.site-header .nav{height:62px}
-.site-header .nav-brand img{width:60px;height:56px;transform:scale(1.416);transform-origin:left center}
+.site-header .nav{height:72px}
+.site-header .nav-brand img{width:60px;height:56px;transform:scale(1.65);transform-origin:left center}
 .nav-brand strong{font-size:.78rem}.nav-brand small{font-size:.5rem}
 .button{min-height:42px;padding:0 24px;font-size:.68rem}
 .button-small{min-height:36px;padding-inline:16px;font-size:.62rem}
-.hero{min-height:calc(100svh - 97px);padding:28px 0 38px}
+.hero{min-height:calc(100svh - 107px);padding:28px 0 38px}
 .hero-grid{gap:clamp(24px,4vw,52px)}
 .hero-logo{width:min(300px,78%)}
 .hero-lede{margin:12px 0 18px;font-size:.95rem}
@@ -423,17 +423,17 @@ blockquote{margin-top:14px;padding-top:12px;font-size:.98rem}
 @media(max-width:800px){
   :root{--shell:min(100% - 32px,680px)}
   body{font-size:15px;line-height:1.55}
-  html{scroll-padding-top:68px}
+  html{scroll-padding-top:76px}
   h1{font-size:clamp(2.25rem,10vw,3.05rem)}
   h2{font-size:clamp(1.95rem,8vw,2.6rem)}
   h3{font-size:1.2rem}
   .section{padding:3.4rem 0}
-  .site-header .nav{height:68px}
-  .site-header .nav-brand img{width:64px;height:60px;transform:scale(1.584)}
-  .nav-links{top:68px}
+  .site-header .nav{height:76px}
+  .site-header .nav-brand img{width:64px;height:60px;transform:scale(1.72)}
+  .nav-links{top:76px}
   .button{min-height:46px;padding-inline:22px;font-size:.66rem}
   .eyebrow{margin-bottom:.8rem;font-size:.62rem}
-  .hero{min-height:calc(100svh - 68px);padding:30px 0 42px}
+  .hero{min-height:calc(100svh - 76px);padding:30px 0 42px}
   .hero-grid{gap:16px}
   .hero-lede{margin:14px 0 18px;font-size:.9rem;line-height:1.55}
   .hero-actions{gap:9px;justify-content:center}
