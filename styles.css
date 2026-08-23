@@ -1339,3 +1339,107 @@ h1{line-height:1.18;letter-spacing:-.032em;font-variant-ligatures:no-common-liga
   cursor:pointer;
 }
 .footer-nav-action:hover{color:var(--gold)}
+
+/* Compact initiative cards open the complete approved copy in a focused modal. */
+.offering-card{min-height:0!important;padding:0!important;overflow:hidden;cursor:pointer}
+.offering-card .offering-toggle{padding:22px 22px 20px}
+.offering-card .offering-head img{width:46px;height:46px}
+.offering-card h3{margin:15px 0 8px!important;font-size:1.15rem;line-height:1.25}
+.offering-card .offering-preview{
+  display:block;
+  width:100%;
+  overflow:hidden;
+  color:var(--muted);
+  font-size:.78rem!important;
+  line-height:1.5!important;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.offering-card .offering-action{justify-content:flex-start;margin-top:16px}
+.offering-card .offering-action>span{transition:transform 180ms var(--ease-out)}
+@media(hover:hover) and (pointer:fine){.offering-card:hover .offering-action>span{transform:translateX(4px)}}
+@media(max-width:560px){
+  .offering-card .offering-toggle{padding:19px 18px 17px}
+}
+
+.initiative-dialog{
+  width:min(680px,calc(100% - 28px));
+  max-height:calc(100svh - 32px);
+  padding:0;
+  border:1px solid rgba(247,153,54,.34);
+  background:#fff8f1;
+  color:var(--ink);
+  box-shadow:0 32px 100px rgba(31,23,20,.32);
+  opacity:0;
+  transform:translateY(14px) scale(.975);
+  transition:opacity 210ms ease,transform 260ms var(--ease-out),display 260ms allow-discrete;
+}
+.initiative-dialog[open]{opacity:1;transform:none}
+.initiative-dialog::backdrop{
+  background:rgba(31,23,20,.58);
+  backdrop-filter:blur(11px) saturate(.78);
+  -webkit-backdrop-filter:blur(11px) saturate(.78);
+}
+.initiative-dialog-shell{
+  position:relative;
+  overflow:auto;
+  max-height:calc(100svh - 34px);
+  padding:clamp(32px,6vw,62px);
+  background-image:linear-gradient(rgba(255,248,241,.9),rgba(255,248,241,.94)),url("assets/extracted/card-paper-texture.webp");
+  background-size:auto,620px auto;
+}
+.initiative-dialog-close{
+  position:absolute;
+  top:20px;
+  right:20px;
+  width:44px;
+  height:44px;
+  border:1px solid rgba(96,56,19,.16);
+  border-radius:50%;
+  background:rgba(255,248,241,.9);
+  color:var(--ink);
+  font-size:1.55rem;
+  line-height:1;
+  cursor:pointer;
+}
+.initiative-dialog-icon{width:64px;height:64px;object-fit:contain;margin:0 0 24px}
+.initiative-dialog .eyebrow{margin-bottom:12px}
+.initiative-dialog h2{max-width:560px;padding-right:34px;font-size:clamp(2rem,5vw,3.45rem)}
+.initiative-dialog-rule{width:74px;height:2px;margin:26px 0;background:linear-gradient(90deg,var(--orange),var(--gold))}
+.initiative-dialog-copy{margin:0;color:var(--secondary);font-size:clamp(.92rem,1.5vw,1.03rem);line-height:1.82}
+@starting-style{.initiative-dialog[open]{opacity:0;transform:translateY(14px) scale(.975)}}
+@media(max-width:560px){
+  .initiative-dialog{width:calc(100% - 22px);max-height:calc(100svh - 22px)}
+  .initiative-dialog-shell{max-height:calc(100svh - 24px);padding:34px 24px 30px}
+  .initiative-dialog-close{top:14px;right:14px}
+  .initiative-dialog-icon{width:54px;height:54px;margin-bottom:20px}
+  .initiative-dialog h2{padding-right:30px;font-size:2rem}
+}
+@media(prefers-reduced-motion:reduce){.initiative-dialog{transition-duration:.01ms}}
+
+/* Production hero: official logo lockup; photo collage is archived for later. */
+.hero-logo-stage{
+  width:min(560px,100%);
+  min-width:0;
+  justify-self:center;
+  isolation:isolate;
+}
+.hero-logo-stage .hero-halo{
+  width:108%;
+  height:108%;
+  background:radial-gradient(circle,rgba(247,153,54,.25),rgba(223,33,114,.065) 48%,transparent 72%);
+}
+.hero-logo-stage .hero-primary-logo{
+  width:min(430px,78%);
+  height:auto;
+  object-fit:contain;
+  filter:drop-shadow(0 18px 34px rgba(96,56,19,.13));
+}
+@media(max-width:800px){
+  .hero-logo-stage{width:min(470px,78vw)}
+  .hero-logo-stage .hero-primary-logo{width:min(390px,82%)}
+}
+@media(max-width:560px){
+  .hero-logo-stage{width:76vw;margin-top:10px}
+  .hero-logo-stage .hero-primary-logo{width:86%}
+}

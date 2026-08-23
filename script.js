@@ -57,7 +57,44 @@ const formDefinitions = {
 };
 
 const offeringGrid=document.querySelector("#offering-grid");
-offerings.forEach((item,index)=>{const article=document.createElement("article");article.className="offering-card reveal";article.style.setProperty("--delay",`${(index%3)*55}ms`);article.innerHTML=`<span class="offering-head"><img src="assets/icons/${item.icon}" width="116" height="116" alt=""></span><h3>${item.name}</h3><p>${item.text}</p>`;offeringGrid.append(article)});
+const initiativeDialog=document.querySelector("#initiative-dialog");
+const initiativeDialogClose=initiativeDialog?.querySelector(".initiative-dialog-close");
+const initiativeDialogIcon=document.querySelector("#initiative-dialog-icon");
+const initiativeDialogTitle=document.querySelector("#initiative-dialog-title");
+const initiativeDialogCopy=document.querySelector("#initiative-dialog-copy");
+let lastInitiativeTrigger=null;
+
+function openInitiativeDialog(item,trigger){
+  if(!initiativeDialog)return;
+  lastInitiativeTrigger=trigger;
+  initiativeDialogIcon.src=`assets/icons/${item.icon}`;
+  initiativeDialogTitle.textContent=item.name;
+  initiativeDialogCopy.textContent=item.text;
+  document.body.classList.add("dialog-open");
+  initiativeDialog.showModal();
+  initiativeDialogClose.focus({preventScroll:true});
+}
+function closeInitiativeDialog(){
+  if(!initiativeDialog?.open)return;
+  initiativeDialog.close();
+}
+offerings.forEach((item,index)=>{
+  const article=document.createElement("article");
+  article.className="offering-card reveal";
+  article.style.setProperty("--delay",`${(index%3)*55}ms`);
+  article.innerHTML=`<button class="offering-toggle" type="button" aria-haspopup="dialog"><span class="offering-head"><img src="assets/icons/${item.icon}" width="116" height="116" alt=""></span><h3>${item.name}</h3><p class="offering-preview">${item.text}</p><span class="offering-action">Read more <span aria-hidden="true">→</span></span></button>`;
+  const trigger=article.querySelector(".offering-toggle");
+  trigger.addEventListener("click",()=>openInitiativeDialog(item,trigger));
+  offeringGrid.append(article);
+});
+if(initiativeDialog){
+  initiativeDialogClose.addEventListener("click",closeInitiativeDialog);
+  initiativeDialog.addEventListener("click",event=>{if(event.target===initiativeDialog)closeInitiativeDialog()});
+  initiativeDialog.addEventListener("close",()=>{
+    document.body.classList.remove("dialog-open");
+    lastInitiativeTrigger?.focus({preventScroll:true});
+  });
+}
 
 const trusteeGrid=document.querySelector("#trustee-grid");
 const tModal=document.querySelector("#trustee-modal");
