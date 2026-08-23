@@ -194,7 +194,16 @@ document.addEventListener("visibilitychange",()=>document.body.classList.toggle(
 
 const dialog=document.querySelector("#intent-dialog"),form=document.querySelector("#intent-form"),intentFields=document.querySelector("#intent-fields"),closeDialog=document.querySelector(".dialog-close");let lastTrigger=null;
 document.querySelectorAll(".form-trigger").forEach(trigger=>trigger.addEventListener("click",()=>openForm(trigger.dataset.intent,trigger)));
-function openForm(intent,trigger){lastTrigger=trigger;const definition=formDefinitions[intent],notice=dialog.querySelector(".form-notice");form.reset();notice.classList.remove("success");notice.innerHTML='Form submissions will open soon. You can review the fields now or write to <a href="mailto:info@vacstrust.org">info@vacstrust.org</a>.';document.querySelector("#intent").value=intent;document.querySelector("#dialog-title").textContent=definition.title;document.querySelector("#dialog-description").textContent=definition.description;intentFields.innerHTML=definition.fields.map(field=>{if(field.type==="textarea")return `<label>${field.label} <span>*</span><textarea name="${field.name}" rows="3" required></textarea></label>`;if(field.type==="select")return `<label>${field.label} <span>*</span><select name="${field.name}" required><option value="">Select one</option>${field.options.map(option=>`<option>${option}</option>`).join("")}</select></label>`;return `<label>${field.label} <span>*</span><input name="${field.name}" type="${field.type}" required></label>`}).join("");dialog.showModal();document.body.classList.add("dialog-open")}
+function openForm(intent,trigger){
+  lastTrigger=trigger;
+  const definition=formDefinitions[intent],notice=dialog.querySelector(".form-notice"),submit=form.querySelector(".form-submit"),config=window.VACS_FORM_CONFIG||{};
+  form.reset();notice.classList.remove("success");
+  notice.innerHTML=config.enabled&&config.endpoint?'Your information will be sent securely to our team.':'Form submissions will open soon. You can write to <a href="mailto:info@vacstrust.org">info@vacstrust.org</a>.';
+  submit.disabled=!(config.enabled&&config.endpoint);submit.textContent=submit.disabled?"Submissions opening soon":"Send enquiry";
+  document.querySelector("#intent").value=intent;document.querySelector("#dialog-title").textContent=definition.title;document.querySelector("#dialog-description").textContent=definition.description;
+  intentFields.innerHTML=definition.fields.map(field=>{if(field.type==="textarea")return `<label>${field.label} <span>*</span><textarea name="${field.name}" rows="3" required></textarea></label>`;if(field.type==="select")return `<label>${field.label} <span>*</span><select name="${field.name}" required><option value="">Select one</option>${field.options.map(option=>`<option>${option}</option>`).join("")}</select></label>`;return `<label>${field.label} <span>*</span><input name="${field.name}" type="${field.type}" required></label>`}).join("");
+  dialog.showModal();document.body.classList.add("dialog-open");
+}
 function dismissDialog(){dialog.close();document.body.classList.remove("dialog-open");lastTrigger?.focus()}
 closeDialog.addEventListener("click",dismissDialog);dialog.addEventListener("click",event=>{if(event.target===dialog)dismissDialog()});dialog.addEventListener("close",()=>document.body.classList.remove("dialog-open"));
 function buildSubmissionPayload(){
