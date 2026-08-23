@@ -1417,6 +1417,12 @@ h1{line-height:1.18;letter-spacing:-.032em;font-variant-ligatures:no-common-liga
 }
 @media(prefers-reduced-motion:reduce){.initiative-dialog{transition-duration:.01ms}}
 
+.form-notice.success{
+  border-left-color:#4f8a5b;
+  background:#edf7ed;
+  color:#285a32;
+}
+
 /* Production hero: official logo lockup; photo collage is archived for later. */
 .hero-logo-stage{
   width:min(560px,100%);

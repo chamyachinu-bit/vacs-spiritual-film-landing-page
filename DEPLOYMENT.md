@@ -10,16 +10,17 @@ Before launch, replace the canonical and Open Graph URLs in `index.html` if the 
 
 ## Apps Script form connection
 
-All four form variants post the following common field names:
+The production-ready receiver is in `apps-script/Code.gs`. It accepts JSON from all four form variants, validates common fields, creates separate sheets automatically, generates safe sequential submission IDs, and emails `info@vacstrust.org` after a row is saved.
 
-`intent`, `name`, `email`, `phone`, `city`, `message`, `consent`
+1. Create a Google Sheet for website enquiries.
+2. From that Sheet, open **Extensions → Apps Script**.
+3. Replace the editor contents with `apps-script/Code.gs`.
+4. Select **Deploy → New deployment → Web app**.
+5. Set **Execute as** to **Me** and **Who has access** to **Anyone**.
+6. Deploy, authorize the script, and copy the URL ending in `/exec`.
+7. Open the `/exec` URL in a browser. It should return `Connect With Us API is running.`
 
-Intent-specific fields:
-
-- Member: `industry_role`, `experience`, `areas_of_interest`
-- Volunteer: `skills`, `availability`, `preferred_contribution`
-- Collaborate: `organization`, `collaboration_type`, `proposal_summary`
-- Support: `support_type`, `preferred_contact_method`
+The first submission of each type creates its sheet automatically: `Members`, `Volunteers`, `Collaborations`, or `Support`.
 
 To enable submission, edit `config.js`:
 
@@ -35,4 +36,4 @@ window.VACS_FORM_CONFIG = Object.freeze({
 
 The showreel, events, impact, testimonials and partner structures remain inside a hidden container in `index.html`. Approved content should first be added to the corresponding entry in `siteFeatures` in `script.js`; only then should the feature be enabled and rendered. Never use provisional statistics, attributed quotations or partner marks in production.
 
-The Apps Script endpoint must accept browser form-data POST requests and return a successful 2xx response with appropriate CORS behaviour. Keep `enabled: false` until that endpoint has been tested.
+The frontend sends JSON as `text/plain` to avoid an unnecessary browser preflight while allowing Apps Script to parse `e.postData.contents`. Keep `enabled: false` until the `/exec` endpoint has been tested with all four form types.

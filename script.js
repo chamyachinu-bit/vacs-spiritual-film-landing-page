@@ -194,10 +194,46 @@ document.addEventListener("visibilitychange",()=>document.body.classList.toggle(
 
 const dialog=document.querySelector("#intent-dialog"),form=document.querySelector("#intent-form"),intentFields=document.querySelector("#intent-fields"),closeDialog=document.querySelector(".dialog-close");let lastTrigger=null;
 document.querySelectorAll(".form-trigger").forEach(trigger=>trigger.addEventListener("click",()=>openForm(trigger.dataset.intent,trigger)));
-function openForm(intent,trigger){lastTrigger=trigger;const definition=formDefinitions[intent];form.reset();document.querySelector("#intent").value=intent;document.querySelector("#dialog-title").textContent=definition.title;document.querySelector("#dialog-description").textContent=definition.description;intentFields.innerHTML=definition.fields.map(field=>{if(field.type==="textarea")return `<label>${field.label} <span>*</span><textarea name="${field.name}" rows="3" required></textarea></label>`;if(field.type==="select")return `<label>${field.label} <span>*</span><select name="${field.name}" required><option value="">Select one</option>${field.options.map(option=>`<option>${option}</option>`).join("")}</select></label>`;return `<label>${field.label} <span>*</span><input name="${field.name}" type="${field.type}" required></label>`}).join("");dialog.showModal();document.body.classList.add("dialog-open")}
+function openForm(intent,trigger){lastTrigger=trigger;const definition=formDefinitions[intent],notice=dialog.querySelector(".form-notice");form.reset();notice.classList.remove("success");notice.innerHTML='Form submissions will open soon. You can review the fields now or write to <a href="mailto:info@vacstrust.org">info@vacstrust.org</a>.';document.querySelector("#intent").value=intent;document.querySelector("#dialog-title").textContent=definition.title;document.querySelector("#dialog-description").textContent=definition.description;intentFields.innerHTML=definition.fields.map(field=>{if(field.type==="textarea")return `<label>${field.label} <span>*</span><textarea name="${field.name}" rows="3" required></textarea></label>`;if(field.type==="select")return `<label>${field.label} <span>*</span><select name="${field.name}" required><option value="">Select one</option>${field.options.map(option=>`<option>${option}</option>`).join("")}</select></label>`;return `<label>${field.label} <span>*</span><input name="${field.name}" type="${field.type}" required></label>`}).join("");dialog.showModal();document.body.classList.add("dialog-open")}
 function dismissDialog(){dialog.close();document.body.classList.remove("dialog-open");lastTrigger?.focus()}
 closeDialog.addEventListener("click",dismissDialog);dialog.addEventListener("click",event=>{if(event.target===dialog)dismissDialog()});dialog.addEventListener("close",()=>document.body.classList.remove("dialog-open"));
-form.addEventListener("submit",async event=>{event.preventDefault();const config=window.VACS_FORM_CONFIG||{};if(!config.enabled||!config.endpoint)return;if(!form.reportValidity())return;const submit=form.querySelector(".form-submit");submit.disabled=true;submit.textContent="Sending…";try{const response=await fetch(config.endpoint,{method:config.method||"POST",body:new FormData(form)});if(!response.ok)throw new Error("Submission failed");submit.textContent="Enquiry sent"}catch{submit.disabled=false;submit.textContent="Try again"}});
+function buildSubmissionPayload(){
+  const values=Object.fromEntries(new FormData(form).entries());
+  return {
+    formType:values.intent==="collaborate"?"collaboration":values.intent,
+    fullName:(values.name||"").trim(),email:(values.email||"").trim(),phone:(values.phone||"").trim(),city:(values.city||"").trim(),
+    industryRole:values.industry_role||"",yearsExperience:values.experience||"",areasOfInterest:values.areas_of_interest||"",
+    skills:values.skills||"",availability:values.availability||"",preferredContribution:values.preferred_contribution||"",
+    organisation:values.organization||"",collaborationType:values.collaboration_type||"",proposalSummary:values.proposal_summary||"",
+    typeOfSupport:values.support_type||"",preferredContactMethod:values.preferred_contact_method||"",
+    message:values.message||"",consent:Boolean(form.elements.consent?.checked)
+  };
+}
+form.addEventListener("submit",async event=>{
+  event.preventDefault();
+  const config=window.VACS_FORM_CONFIG||{};
+  if(!config.enabled||!config.endpoint||!form.reportValidity())return;
+  const submit=form.querySelector(".form-submit"),notice=dialog.querySelector(".form-notice");
+  submit.disabled=true;submit.textContent="Sending…";
+  try{
+    const response=await fetch(config.endpoint,{
+      method:config.method||"POST",
+      headers:{"Content-Type":"text/plain;charset=utf-8"},
+      body:JSON.stringify(buildSubmissionPayload()),
+      redirect:"follow"
+    });
+    if(!response.ok)throw new Error("Submission failed");
+    const result=await response.json();
+    if(!result.success)throw new Error(result.error||"Submission failed");
+    notice.textContent=`Thank you. Your enquiry has been received. Reference: ${result.submissionId}`;
+    notice.classList.add("success");
+    form.reset();submit.textContent="Enquiry sent";
+  }catch(error){
+    notice.textContent=error.message||"We could not send your enquiry. Please try again or email info@vacstrust.org.";
+    notice.classList.remove("success");
+    submit.disabled=false;submit.textContent="Try again";
+  }
+});
 const config=window.VACS_FORM_CONFIG||{};if(config.enabled&&config.endpoint){const submit=form.querySelector(".form-submit");submit.disabled=false;submit.textContent="Send enquiry"}
 
 // Keep the public-facing brand name in the approved long form; the acronym remains only in technical configuration.
