@@ -1200,17 +1200,20 @@ h1{line-height:1.18;letter-spacing:-.032em;font-variant-ligatures:no-common-liga
 }
 .purpose-card span{
   align-self:flex-start;
-  padding:7px 11px 6px;
-  border:1px solid rgba(239,90,42,.24);
-  border-radius:999px;
-  background:rgba(255,248,241,.54);
-  font-size:.62rem!important;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  color:var(--orange);
+  font-size:1rem!important;
+  font-weight:700;
+  line-height:1.1;
   letter-spacing:.2em;
 }
 .purpose-card h3{
-  margin:14px 0 10px!important;
-  font-size:clamp(1.55rem,1.8vw,1.9rem)!important;
-  line-height:1.08;
+  margin:16px 0 10px!important;
+  font-size:clamp(1.2rem,1.4vw,1.45rem)!important;
+  line-height:1.16;
 }
 .purpose-card p{
   max-width:600px;
@@ -1231,8 +1234,8 @@ h1{line-height:1.18;letter-spacing:-.032em;font-variant-ligatures:no-common-liga
   .purpose-card{grid-template-columns:118px minmax(0,1fr)!important;min-height:245px;border-radius:16px}
   .purpose-card img{height:100%!important;min-height:245px!important;padding:18px 8px!important}
   .purpose-card>div{padding:24px 18px!important}
-  .purpose-card span{padding:6px 8px 5px;font-size:.56rem!important}
-  .purpose-card h3{margin:11px 0 8px!important;font-size:1.35rem!important}
+  .purpose-card span{padding:0;font-size:.84rem!important}
+  .purpose-card h3{margin:13px 0 8px!important;font-size:1.12rem!important}
   .purpose-card p{font-size:.8rem!important;line-height:1.52!important}
 }
 
@@ -1324,10 +1327,10 @@ h1{line-height:1.18;letter-spacing:-.032em;font-variant-ligatures:no-common-liga
 
 /* Keep the complete footer logo readable inside its supporting seal. */
 .footer-logo-badge{width:124px;height:124px}
-.footer .footer-logo{width:112px;height:104px;object-fit:contain;transform:none}
+.footer .footer-logo{width:142px;height:130px;max-width:none;object-fit:contain;transform:translateX(-7px)}
 @media(max-width:560px){
   .footer-logo-badge{width:112px;height:112px}
-  .footer .footer-logo{width:100px;height:94px}
+  .footer .footer-logo{width:128px;height:118px}
 }
 .footer-nav-action{
   border:0;
@@ -1425,7 +1428,7 @@ h1{line-height:1.18;letter-spacing:-.032em;font-variant-ligatures:no-common-liga
 
 /* Production hero: official logo lockup; photo collage is archived for later. */
 .hero-logo-stage{
-  width:min(560px,100%);
+  width:min(640px,100%);
   min-width:0;
   justify-self:center;
   isolation:isolate;
@@ -1436,16 +1439,16 @@ h1{line-height:1.18;letter-spacing:-.032em;font-variant-ligatures:no-common-liga
   background:radial-gradient(circle,rgba(247,153,54,.25),rgba(223,33,114,.065) 48%,transparent 72%);
 }
 .hero-logo-stage .hero-primary-logo{
-  width:min(430px,78%);
+  width:min(520px,92%);
   height:auto;
   object-fit:contain;
   filter:drop-shadow(0 18px 34px rgba(96,56,19,.13));
 }
 @media(max-width:800px){
-  .hero-logo-stage{width:min(470px,78vw)}
-  .hero-logo-stage .hero-primary-logo{width:min(390px,82%)}
+  .hero-logo-stage{width:min(520px,86vw)}
+  .hero-logo-stage .hero-primary-logo{width:min(460px,92%)}
 }
 @media(max-width:560px){
-  .hero-logo-stage{width:76vw;margin-top:10px}
-  .hero-logo-stage .hero-primary-logo{width:86%}
+  .hero-logo-stage{width:84vw;margin-top:10px}
+  .hero-logo-stage .hero-primary-logo{width:92%}
 }

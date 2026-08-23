@@ -134,10 +134,10 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!tModal.hidden)clos
 const VALUES=[
   {numeral:"I",   deva:"सत्य",               english:"Truth",                image:"truth.webp"},
   {numeral:"II",  deva:"धर्म",               english:"Righteousness",        image:"righteousness.webp"},
-  {numeral:"III", deva:"सच्ची मित्रता",      english:"True Friendship",      image:"true-friendship.webp"},
+  {numeral:"III", deva:"मैत्री",             english:"True Friendship",      image:"true-friendship.webp"},
   {numeral:"IV",  deva:"शांति",              english:"Peace",                image:"peace.webp"},
-  {numeral:"V",   deva:"निःशर्त प्रेम",     english:"Unconditional Love",   image:"unconditional-love.webp"},
-  {numeral:"VI",  deva:"परमात्मा से बंधन",  english:"Bond with the Divine", image:"bond-with-divine.webp"},
+  {numeral:"V",   deva:"निःस्वार्थ प्रेम",  english:"Unconditional Love",   image:"unconditional-love.webp"},
+  {numeral:"VI",  deva:"संबंध",             english:"Bond with the Divine", image:"bond-with-divine.webp"},
   {numeral:"VII", deva:"एक परिवार",          english:"One Family",           image:"one-family.webp"},
 ];
 const valueListEl=document.querySelector("#value-list");
