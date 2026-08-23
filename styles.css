@@ -397,7 +397,7 @@ h2{font-size:clamp(1.65rem,2.6vw,2.4rem);letter-spacing:-.025em}
 h3{font-size:1.15rem}
 .section{padding:clamp(2.4rem,4vw,3.4rem) 0}
 .site-header .nav{height:62px}
-.site-header .nav-brand img{width:60px;height:56px;transform:scale(1.18);transform-origin:left center}
+.site-header .nav-brand img{width:60px;height:56px;transform:scale(1.416);transform-origin:left center}
 .nav-brand strong{font-size:.78rem}.nav-brand small{font-size:.5rem}
 .button{min-height:42px;padding:0 24px;font-size:.68rem}
 .button-small{min-height:36px;padding-inline:16px;font-size:.62rem}
@@ -429,7 +429,7 @@ blockquote{margin-top:14px;padding-top:12px;font-size:.98rem}
   h3{font-size:1.2rem}
   .section{padding:3.4rem 0}
   .site-header .nav{height:68px}
-  .site-header .nav-brand img{width:64px;height:60px;transform:scale(1.32)}
+  .site-header .nav-brand img{width:64px;height:60px;transform:scale(1.584)}
   .nav-links{top:68px}
   .button{min-height:46px;padding-inline:22px;font-size:.66rem}
   .eyebrow{margin-bottom:.8rem;font-size:.62rem}
@@ -561,6 +561,12 @@ h1{line-height:1.18;letter-spacing:-.032em;font-variant-ligatures:no-common-liga
 .pillars h3{font-size:1.3rem;line-height:1.22;text-wrap:balance}
 @media(max-width:800px){.pillars h3{font-size:1.1rem}}
 @media(max-width:520px){.pillars h3{font-size:.95rem}}
+.mobile-guiding-link{display:none}
+@media(max-width:800px){
+  .about .about-guiding-link{display:none}
+  .about .mobile-guiding-link{display:block;margin-top:24px}
+  .about .mobile-guiding-link .text-link{margin-top:0}
+}
 
 /* ══════════════════════════════════════════════════════════════
    TRUSTEES v4 — cinematic 4-column portrait gallery
@@ -698,7 +704,6 @@ h1{line-height:1.18;letter-spacing:-.032em;font-variant-ligatures:no-common-liga
   .t-portrait-card:nth-child(5){grid-column:1/3}
   .t-portrait-card:nth-child(6){grid-column:3/5}
   .t-portrait-card:nth-child(7){grid-column:2/4}
-  .t-portrait-card:nth-child(n){--zoom:1}
 }
 
 /* Mobile: 2-column uniform */
@@ -1428,7 +1433,7 @@ h1{line-height:1.18;letter-spacing:-.032em;font-variant-ligatures:no-common-liga
 
 /* Production hero: official logo lockup; photo collage is archived for later. */
 .hero-logo-stage{
-  width:min(640px,100%);
+  width:min(700px,125%);
   min-width:0;
   justify-self:center;
   isolation:isolate;
@@ -1439,16 +1444,54 @@ h1{line-height:1.18;letter-spacing:-.032em;font-variant-ligatures:no-common-liga
   background:radial-gradient(circle,rgba(247,153,54,.25),rgba(223,33,114,.065) 48%,transparent 72%);
 }
 .hero-logo-stage .hero-primary-logo{
-  width:min(520px,92%);
+  width:min(650px,100%);
   height:auto;
   object-fit:contain;
   filter:drop-shadow(0 18px 34px rgba(96,56,19,.13));
 }
 @media(max-width:800px){
-  .hero-logo-stage{width:min(520px,86vw)}
-  .hero-logo-stage .hero-primary-logo{width:min(460px,92%)}
+  .hero-logo-stage{width:min(620px,96vw)}
+  .hero-logo-stage .hero-primary-logo{width:min(575px,100%)}
 }
 @media(max-width:560px){
-  .hero-logo-stage{width:84vw;margin-top:10px}
-  .hero-logo-stage .hero-primary-logo{width:92%}
+  .hero-logo-stage{width:96vw;margin-top:10px}
+  .hero-logo-stage .hero-primary-logo{width:100%}
+}
+
+/* Mobile hero: a concise editorial opening without duplicated actions or logo. */
+@media(max-width:560px){
+  .hero{
+    min-height:calc(100svh - 72px);
+    padding:clamp(38px,9vw,52px) 0 clamp(54px,12vw,70px);
+    align-items:center;
+    background:
+      radial-gradient(circle at 108% 23%,rgba(223,33,114,.11),transparent 35%),
+      radial-gradient(circle at -8% 88%,rgba(247,153,54,.14),transparent 34%),
+      linear-gradient(155deg,#fffaf5 0%,#fdf0e4 58%,#fff8f1 100%);
+  }
+  .hero:after{
+    content:"";
+    position:absolute;
+    z-index:1;
+    left:0;
+    right:0;
+    bottom:0;
+    height:72px;
+    pointer-events:none;
+    background:linear-gradient(transparent,#fff8f1);
+  }
+  .hero-grid{display:block;width:min(calc(100vw - 32px),430px)}
+  .hero-copy{align-items:flex-start;text-align:left}
+  .hero-copy .eyebrow{max-width:32ch;margin-bottom:22px;font-size:.59rem;line-height:1.65;letter-spacing:.24em}
+  .hero h1{max-width:10.7ch;font-size:clamp(2.85rem,12.8vw,3.7rem);line-height:1.015;letter-spacing:-.04em}
+  .hero-lede{max-width:33rem;margin:26px 0 0;font-size:.94rem;line-height:1.7}
+  .hero-actions,.hero-logo-stage{display:none}
+  .about:after{
+    width:100%;
+    opacity:.09;
+    background-position:left center;
+    background-size:cover;
+    -webkit-mask-image:linear-gradient(90deg,#000 0%,rgba(0,0,0,.62) 42%,transparent 88%);
+    mask-image:linear-gradient(90deg,#000 0%,rgba(0,0,0,.62) 42%,transparent 88%);
+  }
 }
