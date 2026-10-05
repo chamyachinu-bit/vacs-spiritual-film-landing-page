@@ -1367,6 +1367,8 @@ h1{line-height:1.18;letter-spacing:-.032em;font-variant-ligatures:no-common-liga
 
 /* The gallery is currently a visual film-reel passage, without promotional copy. */
 .gallery-reel-only{padding-block:0!important}
+.gallery-view-all{text-align:center;padding:clamp(14px,2.4vw,22px) 16px clamp(18px,2.8vw,26px)}
+.gallery-view-all .button{display:inline-flex}
 .gallery-reel-only .gallery-slideshow-frame{margin-block:0}
 
 /* Keep the complete footer logo readable inside its supporting seal. */
