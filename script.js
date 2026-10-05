@@ -173,8 +173,8 @@ const VALUES=[
   {numeral:"II",  deva:"धर्म",           english:"Righteousness",   image:"righteousness.webp"},
   {numeral:"III", deva:"मैत्री",         english:"True Friendship", image:"true-friendship.webp"},
   {numeral:"IV",  deva:"शांति",          english:"Peace",           image:"peace.webp"},
-  {numeral:"V",   deva:"समत्व",          english:"Equality",        image:"equality.webp"},
-  {numeral:"VI",  deva:"निस्वार्थ सेवा", english:"Selfless Service",image:"selfless-service.webp"},
+  {numeral:"V",   deva:"समत्व",          english:"Equality",        image:"equality.png"},
+  {numeral:"VI",  deva:"निस्वार्थ सेवा", english:"Selfless Service",image:"selfless-service.png"},
   {numeral:"VII", deva:"एक परिवार",      english:"One Family",      image:"one-family.webp"},
 ];
 const valueListEl=document.querySelector("#value-list");
