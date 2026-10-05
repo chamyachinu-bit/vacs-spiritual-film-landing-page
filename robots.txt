@@ -1,6 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /gallery/carousel
-Disallow: /gallery/index
 
 Sitemap: https://www.vacstrust.org/sitemap.xml
