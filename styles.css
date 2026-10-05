@@ -725,12 +725,17 @@ h1{line-height:1.18;letter-spacing:-.032em;font-variant-ligatures:no-common-liga
 .mc-portrait-card:nth-child(5){grid-column:4/6}
 .mc-portrait-frame{position:relative;display:block;margin:0 auto;aspect-ratio:1/1;overflow:hidden;border-radius:50%;background:var(--night);box-shadow:0 0 0 2px rgba(247,153,54,.22),0 4px 16px rgba(60,30,12,.12)}
 .mc-portrait-frame img{display:block;width:100%;height:100%;object-fit:cover;object-position:center top;filter:saturate(.68);transition:filter .4s ease,transform .5s var(--ease-out)}
+.mc-portrait-card:nth-child(1) .mc-portrait-frame img{object-position:48.7% top;transform:scale(1.04);transform-origin:48.7% top}
+.mc-portrait-card:nth-child(2) .mc-portrait-frame img{object-position:37.2% 9.2%;transform:scale(1.70);transform-origin:37.2% 9.2%}
+.mc-portrait-card:nth-child(3) .mc-portrait-frame img{object-position:47.5% 31.7%}
+.mc-portrait-card:nth-child(4) .mc-portrait-frame img{object-position:51.4% 1.1%;transform:scale(1.20);transform-origin:51.4% 1.1%}
+.mc-portrait-card:nth-child(5) .mc-portrait-frame img{object-position:51.8% 24.4%}
 .mc-portrait-meta{padding:13px 6px 0;text-align:center}
 .mc-portrait-meta h3{font-family:var(--serif);font-size:clamp(.82rem,1vw,1rem);font-weight:500;color:var(--ink);margin:0 0 3px;line-height:1.18;letter-spacing:-.02em;transition:color .22s ease}
 .mc-portrait-meta>p{margin:0 0 4px;color:var(--muted);font-size:.53rem;letter-spacing:.13em;text-transform:uppercase}
 .mc-view-cue{display:inline-block;color:var(--orange);font-size:.53rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;opacity:0;transform:translateX(-4px);transition:opacity .22s ease,transform .22s var(--ease-out)}
 @media(hover:hover) and (pointer:fine){
-  .mc-portrait-card:hover .mc-portrait-frame img{transform:scale(1.06);filter:saturate(.96)}
+  .mc-portrait-card:hover .mc-portrait-frame img{filter:saturate(.96)}
   .mc-portrait-card:hover .mc-portrait-meta h3{color:var(--orange)}
   .mc-portrait-card:hover .mc-view-cue{opacity:1;transform:none}
 }
