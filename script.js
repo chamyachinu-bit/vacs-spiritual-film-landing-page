@@ -185,8 +185,8 @@ if(valueListEl){
     const btn=document.createElement("button");
     btn.type="button";
     btn.className="value-button"+(i===0?" active":"");
-    btn.setAttribute("role","listitem");
-    btn.setAttribute("aria-pressed",i===0?"true":"false");
+    btn.setAttribute("role","radio");
+    btn.setAttribute("aria-checked",i===0?"true":"false");
     btn.innerHTML=`<span class="val-num">${v.numeral}</span><span class="value-copy"><span class="value-deva">${v.deva}</span><span class="value-english">${v.english}</span></span>`;
     btn.addEventListener("click",()=>setValueActive(i));
     valueListEl.appendChild(btn);
@@ -197,7 +197,7 @@ function setValueActive(idx){
   const v=VALUES[idx];
   document.querySelectorAll(".value-button").forEach((b,i)=>{
     b.classList.toggle("active",i===idx);
-    b.setAttribute("aria-pressed",i===idx?"true":"false");
+    b.setAttribute("aria-checked",i===idx?"true":"false");
   });
   if(valueArtEl){
     valueArtEl.classList.add("is-changing");
