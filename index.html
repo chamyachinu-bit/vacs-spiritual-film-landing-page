@@ -28,7 +28,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Inter:wght@300;400;500;600&family=Noto+Serif+Devanagari:wght@500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=92">
+  <link rel="stylesheet" href="styles.css?v=93">
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.vacstrust.org/#organization","name":"Vaishvik Adhyatmik Chitranagari Samiti","alternateName":"Global Spiritual Film & Entertainment Association","url":"https://www.vacstrust.org/","logo":{"@type":"ImageObject","url":"https://www.vacstrust.org/assets/extracted/social-logo.webp"},"email":"info@vacstrust.org","telephone":"+91-7400118626","description":"An association supporting the physical, mental, emotional and spiritual wellbeing of India's film and entertainment fraternity.","areaServed":{"@type":"Country","name":"India"},"contactPoint":{"@type":"ContactPoint","contactType":"general enquiries","email":"info@vacstrust.org","telephone":"+91-7400118626","availableLanguage":["English","Hindi"]},"address":{"@type":"PostalAddress","streetAddress":"Ground Floor, Office No. 03, Sai Pride CHS, Plot No. 219, Sector 21, Kamothe","addressLocality":"Navi Mumbai","addressRegion":"Maharashtra","postalCode":"410209","addressCountry":"IN"}},{"@type":"WebSite","@id":"https://www.vacstrust.org/#website","url":"https://www.vacstrust.org/","name":"Vaishvik Adhyatmik Chitranagari Samiti","publisher":{"@id":"https://www.vacstrust.org/#organization"},"inLanguage":"en-IN"},{"@type":"WebPage","@id":"https://www.vacstrust.org/#webpage","url":"https://www.vacstrust.org/","name":"Film Industry Wellbeing & Spiritual Growth Association","isPartOf":{"@id":"https://www.vacstrust.org/#website"},"about":{"@id":"https://www.vacstrust.org/#organization"},"inLanguage":"en-IN"}]}</script>
 </head>
 <body>
@@ -131,7 +131,7 @@
         <div class="section-heading centered reveal"><h2>A transformed industry, rooted within.</h2></div>
         <div class="purpose-grid">
           <article class="purpose-card reveal"><img src="assets/images/vision.webp" width="1200" height="1592" loading="lazy" alt="Hand releasing a film strip and doves"><div><span>VISION</span><h3>Uplift consciousness</h3><p>To uplift the consciousness and spiritually transform the film and entertainment fraternity.</p></div></article>
-          <article class="purpose-card reveal"><img src="assets/images/mission.webp" width="1200" height="1592" loading="lazy" alt="Compass, film strip and DNA illustration"><div><span>MISSION</span><h3>One family</h3><p>To lead the Film and Entertainment industry to reach its highest potential as One Family, One Industry (Ek Parivaar) by strengthening the spiritual core, empowering the mind and refining the actions to be a transformed inspirational force forging socio-economic growth.</p></div></article>
+          <article class="purpose-card reveal" id="mission"><img src="assets/images/mission.webp" width="1200" height="1592" loading="lazy" alt="Compass, film strip and DNA illustration"><div><span>MISSION</span><h3>One family</h3><p>To lead the Film and Entertainment industry to reach its highest potential as One Family, One Industry (Ek Parivaar) by strengthening the spiritual core, empowering the mind and refining the actions to be a transformed inspirational force forging socio-economic growth.</p></div></article>
         </div>
         <div class="section-heading centered reveal values-sub-heading"><h2>Our Values</h2></div>
         <div class="values-wrap reveal">
@@ -161,6 +161,8 @@
         <div class="section-heading centered reveal"><h2>Our Members</h2></div>
         <p class="eyebrow members-bot-label reveal">Board of Trustees</p>
         <div class="trustees-gallery" id="trustee-grid" aria-label="Board of Trustees"></div>
+        <p class="eyebrow members-bot-label reveal" style="margin-top:clamp(48px,7vw,80px)">Managing Committee</p>
+        <div class="trustees-gallery" id="mc-grid" aria-label="Managing Committee"></div>
         <div id="vacs-family-section" hidden aria-hidden="true">
           <div class="section-heading centered" style="margin-top:clamp(48px,7vw,80px)"><h3 style="font-size:clamp(1.6rem,2.8vw,2.6rem)">VACS Family</h3></div>
           <div class="member-grid" aria-label="VACS Family members">
@@ -235,12 +237,12 @@
     </div>
   </footer>
 
-  <div class="t-modal" id="trustee-modal" role="dialog" aria-modal="true" hidden>
+  <div class="t-modal" id="trustee-modal" role="dialog" aria-modal="true" aria-labelledby="t-modal-name" hidden>
     <div class="t-modal-bg" id="t-modal-bg"></div>
     <div class="t-modal-panel">
       <button class="t-modal-close" id="t-modal-close" type="button" aria-label="Close profile">×</button>
       <figure class="t-modal-portrait" id="t-modal-portrait"></figure>
-      <div class="t-modal-bio" id="t-modal-bio"></div>
+      <div class="t-modal-bio" id="t-modal-bio" tabindex="0"></div>
     </div>
   </div>
 
@@ -260,6 +262,6 @@
       <form id="intent-form" novalidate><input id="intent" name="intent" type="hidden"><div class="form-grid"><label>Full name <span>*</span><input name="name" autocomplete="name" required></label><label>Email address <span>*</span><input name="email" type="email" autocomplete="email" required></label><label>Phone number <span>*</span><input name="phone" type="tel" autocomplete="tel" required></label><label>City <span>*</span><input name="city" autocomplete="address-level2" required></label></div><div class="intent-fields" id="intent-fields"></div><label>Message<textarea name="message" rows="4"></textarea></label><label class="consent"><input name="consent" type="checkbox" required><span>I consent to being contacted about this enquiry.</span></label><button class="button form-submit" type="submit" disabled>Submissions opening soon</button></form>
     </div>
   </dialog>
-  <script src="config.js?v=2"></script><script src="script.js?v=42"></script>
+  <script src="config.js?v=2"></script><script src="script.js?v=43"></script>
 </body>
 </html>

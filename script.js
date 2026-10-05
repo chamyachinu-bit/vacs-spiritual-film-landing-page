@@ -1,9 +1,10 @@
 "use strict";
 
 if("scrollRestoration" in history)history.scrollRestoration="manual";
-if(location.hash)history.replaceState(null,"",`${location.pathname}${location.search}`);
-scrollTo(0,0);
-addEventListener("pageshow",()=>scrollTo(0,0));
+const initialHashTarget=location.hash&&document.getElementById(location.hash.slice(1));
+if(!initialHashTarget)scrollTo(0,0);
+addEventListener("pageshow",()=>{if(!location.hash)scrollTo(0,0)});
+addEventListener("popstate",()=>{const target=location.hash&&document.getElementById(location.hash.slice(1));if(target)target.scrollIntoView({behavior:"instant"});else if(!location.hash)scrollTo({top:0,behavior:"instant"})});
 
 const siteFeatures = Object.freeze({
   showreel:{enabled:false,items:[]},events:{enabled:false,items:[]},impact:{enabled:false,items:[]},
@@ -16,6 +17,7 @@ function closeOpening(){
   if(openingClosed||!opening)return;
   openingClosed=true;clearTimeout(openingTimer);clearTimeout(openingFailSafe);
   opening.classList.add("is-leaving");document.body.classList.remove("opening-active");opening.setAttribute("aria-hidden","true");
+  if(initialHashTarget&&location.hash===`#${initialHashTarget.id}`)initialHashTarget.scrollIntoView({behavior:"instant"});
   const finish=()=>{opening.hidden=true;document.querySelector(".hero")?.classList.add("opening-complete")};
   setTimeout(finish,1250);
 }
@@ -46,7 +48,15 @@ const trustees = [
   {name:"Addinath Kothare",role:"Actor, Writer & Director",image:"addinath-kothare.webp",profile:"Addinath M. Kothare is an Indian actor, director, writer and producer who predominantly works in the Marathi and Hindi feature films, web series, TV shows and theatre industry. He has received numerous accolades, including a National Film Award, a Maharashtra State Film Award, three Filmfare Marathi Awards and four Zee Chitra Gaurav Puraskar.",quote:"Creativity is heavily dependant on the most miraculous piece of machinery called the mind. To evolve in our creativity we first need to evolve our mind. The most user friendly application that I have come across to help me achieve this is – Spirituality! The spiritual path guided by Maitreya Dadashreeji has helped me open the doors and windows of my mind to the universe which has helped me harness my creative flow. If creativity is like the Earth then spirituality is the Sun to our Earth."},
   {name:"Aaditi Pohankar",role:"Actor",image:"aaditi-pohankar.webp",profile:"Aaditi Pohankar is a talented Indian actress celebrated for her powerful and nuanced performances. She marked her screen debut with the Marathi blockbuster Lai Bhaari. Her breakthrough came with the acclaimed Netflix series She, where she won praise for her compelling portrayal of Bhumi. Known for her fearless choices and authentic screen presence, she stands out among her peers. Aaditi continues to emerge as one of the most promising and dynamic talents in India’s digital and film landscape.",quote:"The struggle ends. The struggle to win, to be famous, to be rich. When you meet your higher self within and realize that your life’s purpose is beyond this maze—where it is easy to get lost, lose confidence, and where your integrity is constantly tested—you are left with no guidance. That’s when a strong value system helps you realize that I am just an actor and this is my work, but there is more to my life’s purpose."},
   {name:"Maitreyi Saundarya",role:"Spiritual Guide & Speaker",image:"maitreyi-saundarya.webp",profile:"Maitreyi Saundarya is a Spiritual Guide and Speaker at MaitriBodh Parivaar. Her journey of self-exploration and finding her purpose of life led her towards the spiritual path and later to meet Maitreya Dadashreeji in 2013, a meeting which changed the course of her life.|||Under Dadashreeji’s guidance, her inner potential was unlocked leading to a tremendous positive shift. Through the development of the bond with the inner Divine (Higher Sacred Self) and strengthening of her inner voice she discovered her true calling or purpose of life. Ever since, she has devoted herself to Dadashreeji’s mission to Transform Humanity and establish One World One Family, One Truth by spreading true knowledge which frees an individual from within enabling them lead a wholesome life.|||Maitreyi Saundarya has been guiding influencers, leaders, celebrities, professionals, youth and individuals from all walks of life to incorporate spirituality as a very powerful means to an end. She has been invited to conduct sessions on national and international platforms such as TEDx, the CiO Klub, Tibet Hope Centre, Cathedral & John Connon school, Ficci Flo and more. Through her guidance, people have found their own paths, addressed and overcome blocks, mended relationships, incorporated the right lifestyle, and experienced a state of internal peace, positivity and happiness.",quote:"Spirituality is not a separate path of life but an added strength to live the same life in a better way."},
-  {name:"Shaan Uttamsingh (Mitra Kiaan)",role:"Entrepreneur",image:"kiaan-uttamsingh.webp",profile:"Shaan Uttamsingh (Mitra Kiaan) is an entrepreneur deeply involved in the media and entertainment industry. He is the grandson of the pioneer GP Sippy, and building on this legacy, he has helped shape the evolution of trademark and intellectual property rights within the film industry. His formative years were spent in the United States, after which he returned to India to complete his graduation and further connect with the culture and values of the country.|||He has led and managed companies such as Sippy Films Pvt. Ltd. and Sholay Media & Entertainment Pvt. Ltd., contributing toward vision, growth, and long-term value creation. With over 26 years of experience in building and running companies in the industry, he has played a significant role in creating, protecting, and strengthening valuable intellectual properties.|||Alongside his professional journey, he has remained deeply engaged in philanthropic and spiritual initiatives. He has been associated with Maitreya Dadashreeji since 2013 and is currently presiding over multiple trusts, reflecting his commitment to selfless service, leadership, and an objective perspective toward collective growth. His approach is rooted in bringing people and purpose together through thoughtful guidance and responsible stewardship. He continues to inspire collaborative progress by balancing vision with integrity and action with compassion."}
+  {name:"Shaan Uttamsingh (Mitra Kiaan)",role:"Entrepreneur",image:"kiaan-uttamsingh-optimized.webp",profile:"Shaan Uttamsingh (Mitra Kiaan) is an entrepreneur deeply involved in the media and entertainment industry. He is the grandson of the pioneer GP Sippy, and building on this legacy, he has helped shape the evolution of trademark and intellectual property rights within the film industry. His formative years were spent in the United States, after which he returned to India to complete his graduation and further connect with the culture and values of the country.|||He has led and managed companies such as Sippy Films Pvt. Ltd. and Sholay Media & Entertainment Pvt. Ltd., contributing toward vision, growth, and long-term value creation. With over 26 years of experience in building and running companies in the industry, he has played a significant role in creating, protecting, and strengthening valuable intellectual properties.|||Alongside his professional journey, he has remained deeply engaged in philanthropic and spiritual initiatives. He has been associated with Maitreya Dadashreeji since 2013 and is currently presiding over multiple trusts, reflecting his commitment to selfless service, leadership, and an objective perspective toward collective growth. His approach is rooted in bringing people and purpose together through thoughtful guidance and responsible stewardship. He continues to inspire collaborative progress by balancing vision with integrity and action with compassion."}
+];
+
+const managingCommittee = [
+  {name:"Sushma Gaikwad",role:"Events & Collaborations",image:"sushma-gaikwad.jpg",profile:"Sushma Gaikwad is an entrepreneur, educationist, leadership coach and skilling professional with nearly three decades of experience across industry, education, entrepreneurship and human capability development.|||As Co-Founder & Director of Ice Global & Wizcraft MIME, she brings over 25 years of industry experience across experiential communication, brand strategy and large-scale execution. Her work in education and learning & development focuses on bridging the gap between academic knowledge and workplace readiness through experiential, industry-led and outcome-oriented learning.|||A Dale Carnegie Certified Trainer, Leadership Coach and NLP Master Practitioner, Sushma has worked with organisations including Mahindra Group, Atlas Copco, DHL, L&T Infotech and Tata Asset Management, developing capabilities in leadership, communication, behavioural effectiveness and professional presence.|||She serves on the Governing Council of the Media & Entertainment Skills Council (MESC) and has contributed to Government-led skilling initiatives for the Live Experiential sector, including presenting industry-aligned curriculum recommendations to the Live Events Development Cell (LEDC) of the Ministry of Information & Broadcasting."},
+  {name:"Trupti Khamkar",role:"Operations & Management",image:"trupti-khamkar.jpg",profile:"Trupti Khamkar is a theatre actor, comedian, and versatile performer who has been working on stage, on screen in films, web series, ad films, short films etc since 1998. She holds a Master's Degree in Theatre and has worked extensively across Marathi, Hindi, Gujarati, Urdu, and English.|||With a rich theatre journey spanning decades, Trupti has performed almost all around the globe with her plays and has taken her stand-up comedy to audiences both in India and internationally. Her audiences may have seen her in some of the longest-running and much-loved productions, including Stories in a Song and Piya Behrupiya.|||Her screen work includes notable Hindi and Marathi films and shows such as Zombivli, Govinda Naam Mera, Crew, Daayra, Beecham House and Girls Hostel. One of the most unique milestones in her career is that she is the only actor in the world to have performed in three different languages at Shakespeare's Globe in London.|||At the heart of everything Trupti does is her love for performing, entertaining and adding value to people's lives in every way possible. She believes that love is the one language everyone understands. Through her art, her laughter, and her work, she hopes to spread love, joy, and peace; one performance and one person at a time."},
+  {name:"Mitra Preet",role:"Brand Strategy & Positioning",image:"mitra-preet.jpg",profile:"Mitra Preet (Dr. Sharad Patel) is a medical professional and Assistant Professor with over nine years of experience in medical and paramedical education. With an M.B.B.S. background and a strong foundation in clinical sciences, he brings a structured, analytical and people-centric approach to his work. His experience in teaching, mentoring and engaging with diverse audiences has shaped his ability to communicate complex ideas with clarity and purpose.|||Following the teachings of Maitreya Dadashreeji and immersing himself in selfless service, he discovered an untapped and uncharted creative potential within. What began as a journey of service gradually unfolded into what he describes as a divine alignment, allowing him to bring together his creativity, communication and experience in service for a united, harmonious and happy world.|||Alongside medicine and academics, Sharad has a strong passion for the digital world, particularly digital communication, content creation, social media and brand building. Over the years, he has explored and mastered a wide range of creative and digital tools, working across content formats, platforms and audiences to help organisations communicate their ideas in meaningful and engaging ways.|||His work extends beyond creating content to understanding how a brand should be perceived, positioned and communicated. He has led digital initiatives, managed social media ecosystems, coordinated creative teams, developed communication strategies and integrated emerging AI-assisted tools into content workflows. His experience brings together strategy, creativity, technology and an understanding of people and their behaviour."},
+  {name:"Nivedita Pohankar",role:"Writer & Filmmaker",image:"nivedita-pohankar.jpg",profile:"Nivedita is a writer and filmmaker whose work explores faith, human experience and the unseen through the lens of magic realism.|||She began her writing career as a copywriter at Ogilvy & Mather, before finding her way into theatre, where she worked as a playwright with Makarand Deshpande. Her journey into cinema followed, with screenwriting credits including the Netflix film Pyaar Prema Kalyanam. Her directorial debut, The Prayer, shot by acclaimed cinematographer Amit Roy and produced by Makarand Deshpande, received appreciation from the Artistic Director of Directors' Fortnight at Cannes.|||She is currently developing her next project for Netflix.|||For Nivedita, cinema is more than a medium of entertainment; it is a space for contemplation and inner exploration. She is drawn to stories that create a moment of stillness amid the noise of everyday life, inviting audiences to pause, look inward and engage with the questions we often leave unasked about who we are, what we believe, and how we make sense of the world around us."},
+  {name:"Argha Banerjee",role:"Creative Director",image:"argha-banerjee.png",profile:"Argha Banerjee is an IMPA-certified Writer, Director and Creative Producer with over two decades of experience across advertising, branded content, films and original entertainment.|||He is the Founder of Aurgannic Films, a Mumbai-based production and brand communication company, where he has been instrumental in creating numerous brand campaigns, television commercials, travel series, music videos, documentaries and corporate films.|||His creative journey spans advertising, filmmaking and brand communication, with extensive experience developing content and promotional strategies for leading brands and corporations across India and internationally. His portfolio includes work for Tata Motors, IDFC FIRST Bank, ITC, Maruti Suzuki, Nissan, P&G, PSA, Sony Music, Aquaguard, Shell India, Anchor Panasonic and Maersk India, among others.|||Beyond advertising and branded content, Argha has also worked as Creative Producer on the Bengali feature film Teenanko, further extending his storytelling experience into mainstream cinema.|||Across formats and mediums, Argha's work is driven by a singular belief: technology and formats may evolve, but compelling storytelling will always begin with a powerful human idea."},
 ];
 
 const formDefinitions = {
@@ -102,6 +112,8 @@ const tModalBg=document.querySelector("#t-modal-bg");
 const tModalClose=document.querySelector("#t-modal-close");
 const tModalPortrait=document.querySelector("#t-modal-portrait");
 const tModalBio=document.querySelector("#t-modal-bio");
+let lastTrusteeTrigger=null;
+let trusteeBackground=[];
 
 trustees.forEach((person,index)=>{
   const card=document.createElement("button");
@@ -110,35 +122,60 @@ trustees.forEach((person,index)=>{
   card.setAttribute("aria-label",`View ${person.name}'s profile`);
   card.style.setProperty("--delay",`${Math.floor(index/3)*80+(index%3)*55}ms`);
   card.innerHTML=`<figure class="t-portrait-frame"><img src="assets/images/${person.image}" width="900" height="1200" loading="lazy" alt="${person.name}"></figure><div class="t-portrait-meta"><h3>${person.name}</h3><p>${person.role}</p><span class="t-view-cue" aria-hidden="true">View profile →</span></div>`;
-  card.addEventListener("click",()=>openTrusteeModal(person));
+  card.addEventListener("click",()=>openTrusteeModal(person,card,"Trustee"));
   trusteeGrid.append(card);
 });
 
-function openTrusteeModal(person){
+const mcGrid=document.querySelector("#mc-grid");
+if(mcGrid){
+  managingCommittee.forEach((person,index)=>{
+    const card=document.createElement("button");
+    card.className="t-portrait-card reveal";
+    card.type="button";
+    card.setAttribute("aria-label",`View ${person.name}'s profile`);
+    card.style.setProperty("--delay",`${Math.floor(index/3)*80+(index%3)*55}ms`);
+    card.innerHTML=`<figure class="t-portrait-frame"><img src="assets/images/${person.image}" width="900" height="1200" loading="lazy" alt="${person.name}"></figure><div class="t-portrait-meta"><h3>${person.name}</h3><p>${person.role}</p><span class="t-view-cue" aria-hidden="true">View profile →</span></div>`;
+    card.addEventListener("click",()=>openTrusteeModal(person,card,"Managing Committee"));
+    mcGrid.append(card);
+  });
+}
+
+function openTrusteeModal(person,trigger,label){
+  lastTrusteeTrigger=trigger;
   const paras=person.profile.split("|||").map(p=>`<p>${p}</p>`).join("");
   tModalPortrait.innerHTML=`<img src="assets/images/${person.image}?v=20" width="900" height="1200" alt="${person.name}">`;
-  tModalBio.innerHTML=`<p class="eyebrow">Trustee</p><h2 id="t-modal-name">${person.name}</h2><p class="t-modal-role">${person.role}</p>${person.kian?`<p class="t-modal-kian">${person.kian}</p>`:""}<div class="t-bio-text">${paras}</div>${person.quote?`<blockquote>"${person.quote}"</blockquote>`:""}`;
+  tModalBio.innerHTML=`<p class="eyebrow">${label||"Trustee"}</p><h2 id="t-modal-name">${person.name}</h2><p class="t-modal-role">${person.role}</p>${person.kian?`<p class="t-modal-kian">${person.kian}</p>`:""}<div class="t-bio-text">${paras}</div>${person.quote?`<blockquote>"${person.quote}"</blockquote>`:""}`;
   tModal.hidden=false;
+  trusteeBackground=[...document.body.children].filter(element=>element!==tModal).map(element=>[element,element.inert]);
+  trusteeBackground.forEach(([element])=>{element.inert=true});
   document.body.classList.add("dialog-open");
   tModalClose.focus({preventScroll:true});
 }
 function closeTrusteeModal(){
   tModal.hidden=true;
+  trusteeBackground.forEach(([element,wasInert])=>{element.inert=wasInert});
+  trusteeBackground=[];
   document.body.classList.remove("dialog-open");
+  lastTrusteeTrigger?.focus({preventScroll:true});
 }
 tModalClose.addEventListener("click",closeTrusteeModal);
 tModalBg.addEventListener("click",closeTrusteeModal);
+tModal.addEventListener("keydown",event=>{
+  if(event.key!=="Tab")return;
+  if(event.shiftKey&&document.activeElement===tModalClose){event.preventDefault();tModalBio.focus({preventScroll:true})}
+  else if(!event.shiftKey&&document.activeElement===tModalBio){event.preventDefault();tModalClose.focus({preventScroll:true})}
+});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!tModal.hidden)closeTrusteeModal()});
 
 // ── Values section ──
 const VALUES=[
-  {numeral:"I",   deva:"सत्य",               english:"Truth",                image:"truth.webp"},
-  {numeral:"II",  deva:"धर्म",               english:"Righteousness",        image:"righteousness.webp"},
-  {numeral:"III", deva:"मैत्री",             english:"True Friendship",      image:"true-friendship.webp"},
-  {numeral:"IV",  deva:"शांति",              english:"Peace",                image:"peace.webp"},
-  {numeral:"V",   deva:"निःस्वार्थ प्रेम",  english:"Unconditional Love",   image:"unconditional-love.webp"},
-  {numeral:"VI",  deva:"संबंध",             english:"Bond with the Divine", image:"bond-with-divine.webp"},
-  {numeral:"VII", deva:"एक परिवार",          english:"One Family",           image:"one-family.webp"},
+  {numeral:"I",   deva:"सत्य",           english:"Truth",           image:"truth.webp"},
+  {numeral:"II",  deva:"धर्म",           english:"Righteousness",   image:"righteousness.webp"},
+  {numeral:"III", deva:"मैत्री",         english:"True Friendship", image:"true-friendship.webp"},
+  {numeral:"IV",  deva:"शांति",          english:"Peace",           image:"peace.webp"},
+  {numeral:"V",   deva:"समत्व",          english:"Equality",        image:"equality.webp"},
+  {numeral:"VI",  deva:"निस्वार्थ सेवा", english:"Selfless Service",image:"selfless-service.webp"},
+  {numeral:"VII", deva:"एक परिवार",      english:"One Family",      image:"one-family.webp"},
 ];
 const valueListEl=document.querySelector("#value-list");
 const valueArtEl=document.querySelector("#value-art");
