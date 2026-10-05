@@ -130,11 +130,11 @@ const mcGrid=document.querySelector("#mc-grid");
 if(mcGrid){
   managingCommittee.forEach((person,index)=>{
     const card=document.createElement("button");
-    card.className="t-portrait-card reveal";
+    card.className="mc-portrait-card reveal";
     card.type="button";
     card.setAttribute("aria-label",`View ${person.name}'s profile`);
     card.style.setProperty("--delay",`${Math.floor(index/3)*80+(index%3)*55}ms`);
-    card.innerHTML=`<figure class="t-portrait-frame"><img src="assets/images/${person.image}" width="900" height="1200" loading="lazy" alt="${person.name}"></figure><div class="t-portrait-meta"><h3>${person.name}</h3><p>${person.role}</p><span class="t-view-cue" aria-hidden="true">View profile →</span></div>`;
+    card.innerHTML=`<figure class="mc-portrait-frame"><img src="assets/images/${person.image}" width="900" height="1200" loading="lazy" alt="${person.name}"></figure><div class="mc-portrait-meta"><h3>${person.name}</h3><p>${person.role}</p><span class="mc-view-cue" aria-hidden="true">View profile →</span></div>`;
     card.addEventListener("click",()=>openTrusteeModal(person,card,"Managing Committee"));
     mcGrid.append(card);
   });
