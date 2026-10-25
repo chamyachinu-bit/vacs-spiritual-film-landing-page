@@ -1350,6 +1350,12 @@ h1{line-height:1.18;letter-spacing:-.032em;font-variant-ligatures:no-common-liga
   .t-modal-portrait{width:min(66vw,224px)}
 }
 
+/* Sushma's original photo is a taller portrait; preserve that framing on phones. */
+@media(max-width:700px){
+  .t-modal-portrait:has(img[src*="sushma-gaikwad"]){aspect-ratio:2/3}
+  .t-modal-portrait img[src*="sushma-gaikwad"]{object-position:center top}
+}
+
 /* Desktop trustee modal: constrain the stage so long biographies can scroll. */
 @media(min-width:701px){
   .t-modal-panel{height:min(680px,calc(100svh - 40px));max-height:calc(100svh - 40px)}
